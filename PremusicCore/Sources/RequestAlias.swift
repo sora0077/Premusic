@@ -9,6 +9,13 @@
 import Foundation
 import AppleMusicKit
 
+typealias GetStorefront = AppleMusicKit.GetStorefront<
+    Entity.Storefront.Attributes>
+typealias GetMultipleStorefronts = AppleMusicKit.GetMultipleStorefronts<
+    Entity.Storefront.Attributes>
+typealias GetAllStorefronts = AppleMusicKit.GetAllStorefronts<
+    Entity.Storefront.Attributes>
+
 typealias GetSong = AppleMusicKit.GetSong<
     Entity.Song.Attributes,
     Entity.Album.Attributes,

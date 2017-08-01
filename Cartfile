@@ -1,2 +1,3 @@
 github "sora0077/AppleMusicKit" "master"
 github "realm/realm-cocoa" "master"
+github "ReactiveX/RxSwift" "master"

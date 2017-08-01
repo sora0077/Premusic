@@ -1,4 +1,5 @@
+github "ReactiveX/RxSwift" "80de9622b9bd1dca409b0e66e3ccc418676e571e"
 github "antitypical/Result" "3.2.3"
 github "ishkawa/APIKit" "36856b0abf1d51d4a9ff3cb07f43b10211049e46"
-github "realm/realm-cocoa" "759b861a27185226af820fcf3207ac06a797730a"
+github "realm/realm-cocoa" "f1e93fa46980c95149651649616f68ea5435c676"
 github "sora0077/AppleMusicKit" "6c730ac3f4984a20130982c5df2de15c6ae6d0c1"

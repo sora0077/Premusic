@@ -15,7 +15,8 @@ extension String: Language {}
 public extension Entity {
     @objc(Storefront)
     public final class Storefront: Object {
-        @objc public private(set) dynamic var identifier: Attributes.Identifier = ""
+        public typealias Identifier = Attributes.Identifier
+        @objc public private(set) dynamic var identifier: Identifier = ""
         @objc public private(set) dynamic var attributes: Attributes?
 
         convenience init<R>(resource: Resource<Attributes, R>, attributes attr: Attributes? = nil) {

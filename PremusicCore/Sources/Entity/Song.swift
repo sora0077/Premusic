@@ -13,7 +13,8 @@ import AppleMusicKit
 public extension Entity {
     @objc(Song)
     public final class Song: Object {
-        @objc public private(set) dynamic var identifier: Attributes.Identifier = ""
+        public typealias Identifier = Attributes.Identifier
+        @objc public private(set) dynamic var identifier: Identifier = ""
         @objc public private(set) dynamic var attributes: Attributes?
 
         convenience init<R>(resource: Resource<Attributes, R>, attributes attr: Attributes? = nil) {

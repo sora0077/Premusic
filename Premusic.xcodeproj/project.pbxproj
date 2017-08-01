@@ -17,6 +17,14 @@
 		D92486961F2F2048006E1C49 /* Artist.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92486951F2F2048006E1C49 /* Artist.swift */; };
 		D92486981F2F20AE006E1C49 /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92486971F2F20AE006E1C49 /* Genre.swift */; };
 		D924869A1F2F2117006E1C49 /* RequestAlias.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92486991F2F2117006E1C49 /* RequestAlias.swift */; };
+		D924869D1F2F38F9006E1C49 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D924869C1F2F38E9006E1C49 /* RxCocoa.framework */; };
+		D924869E1F2F38F9006E1C49 /* RxCocoa.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D924869C1F2F38E9006E1C49 /* RxCocoa.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D924869F1F2F38F9006E1C49 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D924869B1F2F38E9006E1C49 /* RxSwift.framework */; };
+		D92486A01F2F38F9006E1C49 /* RxSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D924869B1F2F38E9006E1C49 /* RxSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D92486A11F2F3900006E1C49 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D924869B1F2F38E9006E1C49 /* RxSwift.framework */; };
+		D92486A51F2F6647006E1C49 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92486A41F2F6647006E1C49 /* Model.swift */; };
+		D92486A71F2F665D006E1C49 /* Songs.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92486A61F2F665D006E1C49 /* Songs.swift */; };
+		D92486A91F2F7214006E1C49 /* Storefronts.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92486A81F2F7214006E1C49 /* Storefronts.swift */; };
 		D9939DAF1F28EEBF00EE9F5A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9939DAE1F28EEBF00EE9F5A /* AppDelegate.swift */; };
 		D9939DB11F28EEBF00EE9F5A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9939DB01F28EEBF00EE9F5A /* ViewController.swift */; };
 		D9939DB41F28EEBF00EE9F5A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D9939DB21F28EEBF00EE9F5A /* Main.storyboard */; };
@@ -89,8 +97,10 @@
 			files = (
 				D9E3EFE11F2900C300B8C2DE /* Realm.framework in Embed Frameworks */,
 				D9E3EFE31F2900C300B8C2DE /* RealmSwift.framework in Embed Frameworks */,
+				D92486A01F2F38F9006E1C49 /* RxSwift.framework in Embed Frameworks */,
 				D9E3EFDF1F2900C300B8C2DE /* AppleMusicKit.framework in Embed Frameworks */,
 				D9E3EFE51F2900C300B8C2DE /* Result.framework in Embed Frameworks */,
+				D924869E1F2F38F9006E1C49 /* RxCocoa.framework in Embed Frameworks */,
 				D9E3EFDD1F2900C300B8C2DE /* APIKit.framework in Embed Frameworks */,
 				D9E3EFF31F2901C900B8C2DE /* iTunesService.framework in Embed Frameworks */,
 				D9939DDB1F28EED800EE9F5A /* PremusicCore.framework in Embed Frameworks */,
@@ -112,6 +122,11 @@
 		D92486951F2F2048006E1C49 /* Artist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Artist.swift; sourceTree = "<group>"; };
 		D92486971F2F20AE006E1C49 /* Genre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genre.swift; sourceTree = "<group>"; };
 		D92486991F2F2117006E1C49 /* RequestAlias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestAlias.swift; sourceTree = "<group>"; };
+		D924869B1F2F38E9006E1C49 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
+		D924869C1F2F38E9006E1C49 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
+		D92486A41F2F6647006E1C49 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		D92486A61F2F665D006E1C49 /* Songs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Songs.swift; sourceTree = "<group>"; };
+		D92486A81F2F7214006E1C49 /* Storefronts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storefronts.swift; sourceTree = "<group>"; };
 		D9939DAB1F28EEBF00EE9F5A /* Premusic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Premusic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9939DAE1F28EEBF00EE9F5A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D9939DB01F28EEBF00EE9F5A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -142,8 +157,10 @@
 			files = (
 				D9E3EFE01F2900C300B8C2DE /* Realm.framework in Frameworks */,
 				D9E3EFE21F2900C300B8C2DE /* RealmSwift.framework in Frameworks */,
+				D924869F1F2F38F9006E1C49 /* RxSwift.framework in Frameworks */,
 				D9E3EFDE1F2900C300B8C2DE /* AppleMusicKit.framework in Frameworks */,
 				D9E3EFE41F2900C300B8C2DE /* Result.framework in Frameworks */,
+				D924869D1F2F38F9006E1C49 /* RxCocoa.framework in Frameworks */,
 				D9E3EFDC1F2900C300B8C2DE /* APIKit.framework in Frameworks */,
 				D9E3EFF21F2901C900B8C2DE /* iTunesService.framework in Frameworks */,
 				D9939DDA1F28EED800EE9F5A /* PremusicCore.framework in Frameworks */,
@@ -154,6 +171,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D92486A11F2F3900006E1C49 /* RxSwift.framework in Frameworks */,
 				D9E3EFD71F2900BB00B8C2DE /* APIKit.framework in Frameworks */,
 				D9E3EFD81F2900BB00B8C2DE /* AppleMusicKit.framework in Frameworks */,
 				D9E3EFD91F2900BB00B8C2DE /* Realm.framework in Frameworks */,
@@ -185,6 +203,8 @@
 		D92486821F2F0617006E1C49 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				D92486A31F2F65A6006E1C49 /* Model */,
+				D92486A21F2F6542006E1C49 /* DataSource */,
 				D92486851F2F066C006E1C49 /* Entity */,
 				D92486991F2F2117006E1C49 /* RequestAlias.swift */,
 			);
@@ -221,6 +241,23 @@
 				D92486911F2F1E30006E1C49 /* PlayParameters.swift */,
 			);
 			path = Attachment;
+			sourceTree = "<group>";
+		};
+		D92486A21F2F6542006E1C49 /* DataSource */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = DataSource;
+			sourceTree = "<group>";
+		};
+		D92486A31F2F65A6006E1C49 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D92486A41F2F6647006E1C49 /* Model.swift */,
+				D92486A81F2F7214006E1C49 /* Storefronts.swift */,
+				D92486A61F2F665D006E1C49 /* Songs.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		D9939DA21F28EEBF00EE9F5A = {
@@ -281,6 +318,8 @@
 		D9E3EFD11F29008500B8C2DE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D924869C1F2F38E9006E1C49 /* RxCocoa.framework */,
+				D924869B1F2F38E9006E1C49 /* RxSwift.framework */,
 				D9E3EFD51F2900B200B8C2DE /* APIKit.framework */,
 				D9E3EFD61F2900B200B8C2DE /* AppleMusicKit.framework */,
 				D9E3EFD21F2900B200B8C2DE /* Realm.framework */,
@@ -493,6 +532,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D92486A71F2F665D006E1C49 /* Songs.swift in Sources */,
 				D92486981F2F20AE006E1C49 /* Genre.swift in Sources */,
 				D92486901F2F1E08006E1C49 /* EditorialNotes.swift in Sources */,
 				D924868B1F2F09A0006E1C49 /* Song.swift in Sources */,
@@ -501,8 +541,10 @@
 				D92486871F2F0679006E1C49 /* Storefront.swift in Sources */,
 				D924869A1F2F2117006E1C49 /* RequestAlias.swift in Sources */,
 				D92486941F2F1FD8006E1C49 /* Album.swift in Sources */,
+				D92486A51F2F6647006E1C49 /* Model.swift in Sources */,
 				D92486961F2F2048006E1C49 /* Artist.swift in Sources */,
 				D92486921F2F1E30006E1C49 /* PlayParameters.swift in Sources */,
+				D92486A91F2F7214006E1C49 /* Storefronts.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
