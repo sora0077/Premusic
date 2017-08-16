@@ -24,7 +24,6 @@
 		D92486A11F2F3900006E1C49 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D924869B1F2F38E9006E1C49 /* RxSwift.framework */; };
 		D9939DAF1F28EEBF00EE9F5A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9939DAE1F28EEBF00EE9F5A /* AppDelegate.swift */; };
 		D9939DB11F28EEBF00EE9F5A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9939DB01F28EEBF00EE9F5A /* ViewController.swift */; };
-		D9939DB41F28EEBF00EE9F5A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D9939DB21F28EEBF00EE9F5A /* Main.storyboard */; };
 		D9939DB61F28EEBF00EE9F5A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D9939DB51F28EEBF00EE9F5A /* Assets.xcassets */; };
 		D9939DB91F28EEBF00EE9F5A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D9939DB71F28EEBF00EE9F5A /* LaunchScreen.storyboard */; };
 		D9939DCE1F28EED800EE9F5A /* PremusicCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9939DC51F28EED700EE9F5A /* PremusicCore.framework */; };
@@ -33,6 +32,8 @@
 		D9939DDA1F28EED800EE9F5A /* PremusicCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9939DC51F28EED700EE9F5A /* PremusicCore.framework */; };
 		D9939DDB1F28EED800EE9F5A /* PremusicCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D9939DC51F28EED700EE9F5A /* PremusicCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D9B21B7E1F43537B009711BB /* PremusicCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B21B7D1F43537B009711BB /* PremusicCore.swift */; };
+		D9B21B821F436C75009711BB /* WindowKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9B21B811F436C6A009711BB /* WindowKit.framework */; };
+		D9B21B831F436C75009711BB /* WindowKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D9B21B811F436C6A009711BB /* WindowKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D9E3EFD71F2900BB00B8C2DE /* APIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9E3EFD51F2900B200B8C2DE /* APIKit.framework */; };
 		D9E3EFD81F2900BB00B8C2DE /* AppleMusicKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9E3EFD61F2900B200B8C2DE /* AppleMusicKit.framework */; };
 		D9E3EFD91F2900BB00B8C2DE /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9E3EFD21F2900B200B8C2DE /* Realm.framework */; };
@@ -102,6 +103,7 @@
 				D9E3EFDD1F2900C300B8C2DE /* APIKit.framework in Embed Frameworks */,
 				D9E3EFF31F2901C900B8C2DE /* iTunesService.framework in Embed Frameworks */,
 				D9939DDB1F28EED800EE9F5A /* PremusicCore.framework in Embed Frameworks */,
+				D9B21B831F436C75009711BB /* WindowKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -125,7 +127,6 @@
 		D9939DAB1F28EEBF00EE9F5A /* Premusic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Premusic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9939DAE1F28EEBF00EE9F5A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D9939DB01F28EEBF00EE9F5A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		D9939DB31F28EEBF00EE9F5A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D9939DB51F28EEBF00EE9F5A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D9939DB81F28EEBF00EE9F5A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D9939DBA1F28EEBF00EE9F5A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -136,6 +137,7 @@
 		D9939DD41F28EED800EE9F5A /* PremusicCoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremusicCoreTests.swift; sourceTree = "<group>"; };
 		D9939DD61F28EED800EE9F5A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D9B21B7D1F43537B009711BB /* PremusicCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremusicCore.swift; sourceTree = "<group>"; };
+		D9B21B811F436C6A009711BB /* WindowKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WindowKit.framework; path = Carthage/Build/iOS/WindowKit.framework; sourceTree = "<group>"; };
 		D9E3EFD21F2900B200B8C2DE /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/iOS/Realm.framework; sourceTree = "<group>"; };
 		D9E3EFD31F2900B200B8C2DE /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/iOS/Result.framework; sourceTree = "<group>"; };
 		D9E3EFD41F2900B200B8C2DE /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/iOS/RealmSwift.framework; sourceTree = "<group>"; };
@@ -160,6 +162,7 @@
 				D9E3EFDC1F2900C300B8C2DE /* APIKit.framework in Frameworks */,
 				D9E3EFF21F2901C900B8C2DE /* iTunesService.framework in Frameworks */,
 				D9939DDA1F28EED800EE9F5A /* PremusicCore.framework in Frameworks */,
+				D9B21B821F436C75009711BB /* WindowKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -199,7 +202,8 @@
 		D92486821F2F0617006E1C49 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				D92486A21F2F6542006E1C49 /* DataSource */,
+				D9B21B801F436091009711BB /* UseCase */,
+				D9B21B7F1F436079009711BB /* Cache */,
 				D92486851F2F066C006E1C49 /* Entity */,
 				D92486991F2F2117006E1C49 /* RequestAlias.swift */,
 				D9B21B7D1F43537B009711BB /* PremusicCore.swift */,
@@ -239,13 +243,6 @@
 			path = Attachment;
 			sourceTree = "<group>";
 		};
-		D92486A21F2F6542006E1C49 /* DataSource */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = DataSource;
-			sourceTree = "<group>";
-		};
 		D9939DA21F28EEBF00EE9F5A = {
 			isa = PBXGroup;
 			children = (
@@ -274,7 +271,6 @@
 			children = (
 				D9939DAE1F28EEBF00EE9F5A /* AppDelegate.swift */,
 				D9939DB01F28EEBF00EE9F5A /* ViewController.swift */,
-				D9939DB21F28EEBF00EE9F5A /* Main.storyboard */,
 				D9939DB51F28EEBF00EE9F5A /* Assets.xcassets */,
 				D9939DB71F28EEBF00EE9F5A /* LaunchScreen.storyboard */,
 				D9939DBA1F28EEBF00EE9F5A /* Info.plist */,
@@ -301,9 +297,24 @@
 			path = PremusicCoreTests;
 			sourceTree = "<group>";
 		};
+		D9B21B7F1F436079009711BB /* Cache */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Cache;
+			sourceTree = "<group>";
+		};
+		D9B21B801F436091009711BB /* UseCase */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = UseCase;
+			sourceTree = "<group>";
+		};
 		D9E3EFD11F29008500B8C2DE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D9B21B811F436C6A009711BB /* WindowKit.framework */,
 				D924869C1F2F38E9006E1C49 /* RxCocoa.framework */,
 				D924869B1F2F38E9006E1C49 /* RxSwift.framework */,
 				D9E3EFD51F2900B200B8C2DE /* APIKit.framework */,
@@ -477,7 +488,6 @@
 			files = (
 				D9939DB91F28EEBF00EE9F5A /* LaunchScreen.storyboard in Resources */,
 				D9939DB61F28EEBF00EE9F5A /* Assets.xcassets in Resources */,
-				D9939DB41F28EEBF00EE9F5A /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -573,14 +583,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		D9939DB21F28EEBF00EE9F5A /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D9939DB31F28EEBF00EE9F5A /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		D9939DB71F28EEBF00EE9F5A /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
