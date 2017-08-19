@@ -14,7 +14,7 @@ extension String: Language {}
 
 public extension Entity {
     @objc(Storefront)
-    public final class Storefront: Object {
+    public final class Storefront: EntityObject {
         public typealias Identifier = Attributes.Identifier
         @objc public private(set) dynamic var identifier: Identifier = ""
         @objc public private(set) dynamic var attributes: Attributes?
@@ -40,7 +40,8 @@ extension Entity.Storefront {
         }
         private let _supportedLanguageTags = List<Entity.StringValue>()
 
-        public convenience init(defaultLanguageTag: String,
+        public convenience init(id: Identifier,
+                                defaultLanguageTag: String,
                                 name: String,
                                 supportedLanguageTags: [String]) throws {
             self.init()

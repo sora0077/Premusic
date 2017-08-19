@@ -19,4 +19,14 @@ public struct Entity {
             self.value = value
         }
     }
+
+    public class EntityObject: Object {
+        public override class func primaryKey() -> String? { return "identifier" }
+
+        @objc private(set) dynamic var cachedAt = Date()
+
+        public class AttributesObject: Object {
+
+        }
+    }
 }

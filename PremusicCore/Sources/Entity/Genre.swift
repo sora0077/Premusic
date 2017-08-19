@@ -12,7 +12,7 @@ import AppleMusicKit
 
 public extension Entity {
     @objc(Genre)
-    public final class Genre: Object {
+    public final class Genre: EntityObject {
         @objc public private(set) dynamic var identifier: Attributes.Identifier = ""
         @objc public private(set) dynamic var attributes: Attributes?
 
@@ -29,7 +29,7 @@ extension Entity.Genre {
     public final class Attributes: Object, AppleMusicKit.Genre {
         public typealias Identifier = String
 
-        public convenience init(name: String) throws {
+        public convenience init(id: Identifier, name: String) throws {
             self.init()
         }
     }

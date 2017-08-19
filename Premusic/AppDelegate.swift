@@ -12,19 +12,21 @@ import PremusicCore
 
 private enum WindowLevel: Int, WindowKit.WindowLevel {
     case main
-    
+
     static let mainWindowLevel: WindowLevel = .main
 }
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+final class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    
+
     private lazy var manager: Manager<WindowLevel> = .init(mainWindow: self.window!)
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        PremusicCore.launch()
+
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = UIViewController()
         window?.makeKeyAndVisible()
