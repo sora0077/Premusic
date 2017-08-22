@@ -21,7 +21,6 @@ public extension Entity {
             self.init()
             identifier = resource.id
             attributes = attr ?? resource.attributes
-            attributes?.identifier = resource.id
         }
     }
 }
@@ -30,7 +29,6 @@ extension Entity.Song {
     @objc(SongAttributes)
     public final class Attributes: AttributesObject, AppleMusicKit.Song {
         public typealias Identifier = String
-
         @objc fileprivate(set) dynamic var identifier: Identifier = ""
 
         var song: Entity.Song { return objects[0] }
@@ -56,6 +54,7 @@ extension Entity.Song {
             url: String,
             workName: String?) throws {
             self.init()
+            self.identifier = id
         }
     }
 }

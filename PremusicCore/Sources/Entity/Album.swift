@@ -30,6 +30,7 @@ extension Entity.Album {
     @objc(AlbumAttributes)
     public final class Attributes: Object, AppleMusicKit.Album {
         public typealias Identifier = String
+        @objc fileprivate(set) dynamic var identifier: Identifier = ""
 
         public convenience init(
             id: Identifier,
@@ -47,6 +48,7 @@ extension Entity.Album {
             trackCount: Int,
             url: String) throws {
             self.init()
+            self.identifier = id
         }
     }
 }

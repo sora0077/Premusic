@@ -33,6 +33,8 @@ extension Entity.Storefront {
         public typealias Language = String
         public typealias Identifier = String
 
+        @objc fileprivate(set) dynamic var identifier: Identifier = ""
+
         @objc public private(set) dynamic var defaultLanguageTag: String = ""
         @objc public private(set) dynamic var name: String = ""
         public var supportedLanguageTags: [String] {
@@ -45,6 +47,7 @@ extension Entity.Storefront {
                                 name: String,
                                 supportedLanguageTags: [String]) throws {
             self.init()
+            self.identifier = id
             self.defaultLanguageTag = defaultLanguageTag
             self.name = name
             self._supportedLanguageTags.append(objectsIn: supportedLanguageTags.map(Entity.StringValue.init))

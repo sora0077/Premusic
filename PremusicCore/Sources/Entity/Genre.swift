@@ -28,9 +28,11 @@ extension Entity.Genre {
     @objc(GenreAttributes)
     public final class Attributes: Object, AppleMusicKit.Genre {
         public typealias Identifier = String
+        @objc fileprivate(set) dynamic var identifier: Identifier = ""
 
         public convenience init(id: Identifier, name: String) throws {
             self.init()
+            self.identifier = id
         }
     }
 }
