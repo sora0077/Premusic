@@ -12,12 +12,12 @@ import AppleMusicKit
 
 public extension Entity {
     @objc(Song)
-    public final class Song: EntityObject {
+    public final class Song: EntityObject, EntityType {
         public typealias Identifier = Attributes.Identifier
         @objc public private(set) dynamic var identifier: Identifier = ""
         @objc public private(set) dynamic var attributes: Attributes?
 
-        convenience init(resource: Resource<Attributes, GetSong.Resource.Relationships>, attributes attr: Attributes? = nil) {
+        convenience init<R>(resource: Resource<Attributes, R>, attributes attr: Attributes? = nil) {
             self.init()
             identifier = resource.id
             attributes = attr ?? resource.attributes

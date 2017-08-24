@@ -22,3 +22,10 @@ typealias GetSong = AppleMusicKit.GetSong<
     Entity.Artist.Attributes,
     Entity.Genre.Attributes,
     Entity.Storefront.Attributes>
+
+typealias GetMultipleSongs = AppleMusicKit.GetMultipleSongs<
+    Entity.Song.Attributes,
+    Entity.Album.Attributes,
+    Entity.Artist.Attributes,
+    Entity.Genre.Attributes,
+    Entity.Storefront.Attributes>

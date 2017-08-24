@@ -11,17 +11,15 @@ import AppleMusicKit
 import RxSwift
 
 final class StorefrontRepositoryImpl: Repository {
-    private let disposeBag = DisposeBag()
+    func fetch(with id: Entity.Storefront.Identifier) -> Single<Void> {
+        return locator.session.send(GetStorefront(id: id)).write { realm, page in
+            save(type: Entity.Storefront.self, page.data, to: realm)
+        }
+    }
 
-    func fetchAll() {
-        locator.session.send(GetAllStorefronts()).write { (realm, page) in
-            let saved = Dictionary(uniqueKeysWithValues: {
-                realm.objects(Entity.Storefront.self)
-                    .filter("id IN %@", page.data.map { $0.id })
-                    .map { ($0.identifier, $0) }
-            }())
-            let new = page.data.map { Entity.Storefront(resource: $0, attributes: saved[$0.id]?.attributes) }
-            realm.add(new, update: true)
-        }.subscribe().disposed(by: disposeBag)
+    func fetchAll() -> Single<Void> {
+        return locator.session.send(GetAllStorefronts()).write { (realm, page) in
+            save(type: Entity.Storefront.self, page.data, to: realm)
+        }
     }
 }

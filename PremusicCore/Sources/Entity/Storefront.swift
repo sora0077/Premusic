@@ -14,7 +14,7 @@ extension String: Language {}
 
 public extension Entity {
     @objc(Storefront)
-    public final class Storefront: EntityObject {
+    public final class Storefront: EntityObject, EntityType {
         public typealias Identifier = Attributes.Identifier
         @objc public private(set) dynamic var identifier: Identifier = ""
         @objc public private(set) dynamic var attributes: Attributes?
