@@ -13,13 +13,13 @@ import RxSwift
 final class StorefrontRepositoryImpl: Repository {
     func fetch(with id: Entity.Storefront.Identifier) -> Single<Void> {
         return locator.session.send(GetStorefront(id: id)).write { realm, page in
-            save(type: Entity.Storefront.self, page.data, to: realm)
+            Entity.Storefront.save(page.data, to: realm)
         }
     }
 
     func fetchAll() -> Single<Void> {
         return locator.session.send(GetAllStorefronts()).write { (realm, page) in
-            save(type: Entity.Storefront.self, page.data, to: realm)
+            Entity.Storefront.save(page.data, to: realm)
         }
     }
 }

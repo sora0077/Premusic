@@ -21,13 +21,13 @@ final class SongRepositoryImpl: Repository {
 
     func fetch(with id: Entity.Song.Identifier) -> Single<Void> {
         return locator.session.send(GetSong(storefront: storefront, id: id)).write { realm, response in
-            save(type: Entity.Song.self, response.data, to: realm)
+            Entity.Song.save(response.data, to: realm)
         }
     }
 
     func fetch(with ids: Entity.Song.Identifier...) -> Single<Void> {
         return locator.session.send(GetMultipleSongs(storefront: storefront, ids: ids)).write { realm, response in
-            save(type: Entity.Song.self, response.data, to: realm)
+            Entity.Song.save(response.data, to: realm)
         }
     }
 }
