@@ -15,6 +15,8 @@ public struct Entity {
     final class StringValue: Object {
         @objc dynamic var value: String = ""
 
+        override class func primaryKey() -> String? { return "value" }
+
         convenience init(_ value: String) {
             self.init()
             self.value = value
