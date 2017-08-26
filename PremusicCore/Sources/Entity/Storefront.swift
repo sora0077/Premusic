@@ -20,8 +20,6 @@ public extension Entity {
         @objc public private(set) dynamic var identifier: Identifier = ""
         @objc public private(set) dynamic var attributes: Attributes?
 
-        public override class func primaryKey() -> String? { return "identifier" }
-
         convenience init<R>(resource: Resource<Attributes, R>, attributes attr: Attributes? = nil) {
             self.init()
             identifier = resource.id
@@ -44,8 +42,6 @@ extension Entity {
             return _supportedLanguageTags.map { $0.value }
         }
         private let _supportedLanguageTags = List<Entity.StringValue>()
-
-        public override class func primaryKey() -> String? { return "identifier" }
 
         public convenience init(id: Identifier,
                                 defaultLanguageTag: String,

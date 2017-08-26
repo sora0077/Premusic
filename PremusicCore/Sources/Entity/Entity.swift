@@ -26,11 +26,13 @@ public struct Entity {
     @objc(EntityObject)
     public class EntityObject: Object {
         @objc private(set) dynamic var cachedAt = Date()
+        public override class func primaryKey() -> String? { return "identifier" }
     }
 
     @objc(AttributesObject)
     public class AttributesObject: Object {
         @objc private(set) dynamic var cachedAt = Date()
+        public override class func primaryKey() -> String? { return "identifier" }
     }
 }
 

@@ -18,8 +18,6 @@ public extension Entity {
         @objc public private(set) dynamic var identifier: Attributes.Identifier = ""
         @objc public private(set) dynamic var attributes: Attributes?
 
-        public override class func primaryKey() -> String? { return "identifier" }
-
         convenience init<R>(resource: Resource<Attributes, R>, attributes attr: Attributes? = nil) {
             self.init()
             identifier = resource.id
@@ -32,9 +30,8 @@ extension Entity {
     @objc(ArtistAttributes)
     public final class ArtistAttributes: AttributesObject, AppleMusicKit.Artist {
         public typealias Identifier = String
-        @objc fileprivate(set) dynamic var identifier: Identifier = ""
-
-        public override class func primaryKey() -> String? { return "identifier" }
+        @objc private(set) dynamic var identifier: Identifier = ""
+        @objc private(set) dynamic var editorialNotes: EditorialNotes?
 
         public convenience init(
             id: Identifier,

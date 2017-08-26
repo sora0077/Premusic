@@ -18,8 +18,6 @@ public extension Entity {
         @objc public private(set) dynamic var identifier: Identifier = ""
         @objc public private(set) dynamic var attributes: Attributes?
 
-        public override class func primaryKey() -> String? { return "identifier" }
-
         convenience init<R>(resource: Resource<Attributes, R>, attributes attr: Attributes? = nil) {
             self.init()
             identifier = resource.id
@@ -43,8 +41,6 @@ extension Entity {
 
         var song: Entity.Song { return objects[0] }
         private let objects = LinkingObjects(fromType: Entity.Song.self, property: "attributes")
-
-        public override class func primaryKey() -> String? { return "identifier" }
 
         public convenience init(
             id: Identifier,

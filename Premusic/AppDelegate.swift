@@ -50,6 +50,15 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
                 break
             }
         }
+
+        if let token = UserDefaults.standard.string(forKey: "DeveloperToken") {
+            guard let saved = realm.objects(Entity.DeveloperToken.self).first, token == saved.token else {
+                try! realm.write {
+                    realm.add(Entity.DeveloperToken(token: token), update: true)
+                }
+                return true
+            }
+        }
         return true
     }
 }

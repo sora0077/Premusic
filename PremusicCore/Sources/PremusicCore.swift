@@ -15,6 +15,21 @@ import AppleMusicKit
 public func launch() {
     var config = Realm.Configuration.defaultConfiguration
     config.deleteRealmIfMigrationNeeded = true
+    config.objectTypes = [
+        Entity.StringValue.self,
+        Entity.DeveloperToken.self,
+        Entity.EditorialNotes.self,
+        Entity.Storefront.self,
+        Entity.Storefront.Attributes.self,
+        Entity.Genre.self,
+        Entity.Genre.Attributes.self,
+        Entity.Song.self,
+        Entity.Song.Attributes.self,
+        Entity.Album.self,
+        Entity.Album.Attributes.self,
+        Entity.Artist.self,
+        Entity.Artist.Attributes.self
+    ]
     Realm.Configuration.defaultConfiguration = config
 
     print(config.fileURL?.absoluteString ?? "")
