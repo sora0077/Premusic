@@ -13,26 +13,38 @@ import AppleMusicKit
 public extension Entity {
     @objc(Song)
     public final class Song: EntityObject, EntityType {
+        public typealias Attributes = SongAttributes
         public typealias Identifier = Attributes.Identifier
         @objc public private(set) dynamic var identifier: Identifier = ""
         @objc public private(set) dynamic var attributes: Attributes?
+
+        public override class func primaryKey() -> String? { return "identifier" }
 
         convenience init<R>(resource: Resource<Attributes, R>, attributes attr: Attributes? = nil) {
             self.init()
             identifier = resource.id
             attributes = attr ?? resource.attributes
+
+            switch R.self as Any {
+            case is GetSong.Relationships:
+                break
+            default:
+                break
+            }
         }
     }
 }
 
-extension Entity.Song {
+extension Entity {
     @objc(SongAttributes)
-    public final class Attributes: AttributesObject, AppleMusicKit.Song {
+    public final class SongAttributes: AttributesObject, AppleMusicKit.Song {
         public typealias Identifier = String
         @objc fileprivate(set) dynamic var identifier: Identifier = ""
 
         var song: Entity.Song { return objects[0] }
         private let objects = LinkingObjects(fromType: Entity.Song.self, property: "attributes")
+
+        public override class func primaryKey() -> String? { return "identifier" }
 
         public convenience init(
             id: Identifier,

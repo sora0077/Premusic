@@ -21,14 +21,14 @@ public struct Entity {
         }
     }
 
+    @objc(EntityObject)
     public class EntityObject: Object {
-        public override class func primaryKey() -> String? { return "identifier" }
         @objc private(set) dynamic var cachedAt = Date()
+    }
 
-        public class AttributesObject: Object {
-            public override class func primaryKey() -> String? { return "identifier" }
-            @objc private(set) dynamic var cachedAt = Date()
-        }
+    @objc(AttributesObject)
+    public class AttributesObject: Object {
+        @objc private(set) dynamic var cachedAt = Date()
     }
 }
 
@@ -49,7 +49,7 @@ extension EntityType {
 
     static func save<R>(_ resources: [Resource<Attributes, R>], to realm: Realm) where Self: Object, Identifier: Hashable {
         let pairs = realm.objects(Self.self)
-            .filter("id IN %@", resources.map { $0.id })
+            .filter("identifier IN %@", resources.map { $0.id })
             .map { ($0.identifier, $0) }
         let saved = Dictionary(uniqueKeysWithValues: pairs)
         let new = resources.map { create(resource: $0, attributes: saved[$0.id]?.attributes) }

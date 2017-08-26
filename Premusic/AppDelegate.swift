@@ -8,7 +8,9 @@
 
 import UIKit
 import WindowKit
-import PremusicCore
+@testable import PremusicCore
+import RealmSwift
+import AppleMusicKit
 
 private enum WindowLevel: Int, WindowKit.WindowLevel {
     case main
@@ -20,6 +22,8 @@ private enum WindowLevel: Int, WindowKit.WindowLevel {
 final class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    private let disposeBag = DisposeBag()
+    private var notificationToken: NotificationToken?
 
     private lazy var manager: Manager<WindowLevel> = .init(mainWindow: self.window!)
 
@@ -30,6 +34,22 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = UIViewController()
         window?.makeKeyAndVisible()
+
+        let realm = try! Realm()
+        notificationToken = realm.objects(Entity.DeveloperToken.self).addNotificationBlock { changes in
+            switch changes {
+            case .initial(let results), .update(let results, _, _, _):
+                if let token = results.first?.token {
+                    Session.shared.authorization = .init(developerToken: token)
+
+                    StorefrontRepositoryImpl().fetchAll().debug().subscribe().disposed(by: self.disposeBag)
+                } else {
+                    Session.shared.authorization = nil
+                }
+            case .error(let error):
+                break
+            }
+        }
         return true
     }
 }

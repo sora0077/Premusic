@@ -12,9 +12,13 @@ import AppleMusicKit
 
 public extension Entity {
     @objc(Artist)
-    public final class Artist: EntityObject {
+    public final class Artist: EntityObject, EntityType {
+        public typealias Attributes = ArtistAttributes
+        public typealias Identifier = Attributes.Identifier
         @objc public private(set) dynamic var identifier: Attributes.Identifier = ""
         @objc public private(set) dynamic var attributes: Attributes?
+
+        public override class func primaryKey() -> String? { return "identifier" }
 
         convenience init<R>(resource: Resource<Attributes, R>, attributes attr: Attributes? = nil) {
             self.init()
@@ -24,11 +28,13 @@ public extension Entity {
     }
 }
 
-extension Entity.Artist {
+extension Entity {
     @objc(ArtistAttributes)
-    public final class Attributes: Object, AppleMusicKit.Artist {
+    public final class ArtistAttributes: AttributesObject, AppleMusicKit.Artist {
         public typealias Identifier = String
         @objc fileprivate(set) dynamic var identifier: Identifier = ""
+
+        public override class func primaryKey() -> String? { return "identifier" }
 
         public convenience init(
             id: Identifier,
