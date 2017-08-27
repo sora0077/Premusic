@@ -35,7 +35,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = UIViewController()
         window?.makeKeyAndVisible()
 
-        let realm = try! Realm()
+        let realm = try! Realm()  // swiftlint:disable:this force_try
         notificationToken = realm.objects(Entity.DeveloperToken.self).addNotificationBlock { changes in
             switch changes {
             case .initial(let results), .update(let results, _, _, _):
@@ -53,7 +53,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
 
         if let token = UserDefaults.standard.string(forKey: "DeveloperToken") {
             guard let saved = realm.objects(Entity.DeveloperToken.self).first, token == saved.token else {
-                try! realm.write {
+                try! realm.write {  // swiftlint:disable:this force_try
                     realm.add(Entity.DeveloperToken(token: token), update: true)
                 }
                 return true
