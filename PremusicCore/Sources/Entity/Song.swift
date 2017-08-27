@@ -37,7 +37,20 @@ extension Entity {
     @objc(SongAttributes)
     public final class SongAttributes: AttributesObject, AppleMusicKit.Song {
         public typealias Identifier = String
-        @objc fileprivate(set) dynamic var identifier: Identifier = ""
+        @objc private(set) dynamic var identifier: Identifier = ""
+        @objc private(set) dynamic var artistName: String = ""
+        @objc private(set) dynamic var composerName: String?
+        @objc private(set) dynamic var contentRating: String?
+        @objc private(set) dynamic var discNumber: Int = 0
+        @objc private(set) dynamic var durationInMillis: Int = 0
+        @objc private(set) dynamic var editorialNotes: EditorialNotes?
+        @objc private(set) dynamic var name: String = ""
+
+        @nonobjc private(set) var artwork: Artwork {
+            get { return _artwork }
+            set { _artwork = newValue }
+        }
+        @objc private dynamic var _artwork: Artwork!
 
         var song: Entity.Song { return objects[0] }
         private let objects = LinkingObjects(fromType: Entity.Song.self, property: "attributes")
@@ -45,24 +58,32 @@ extension Entity {
         public convenience init(
             id: Identifier,
             artistName: String,
-            artwork: Entity.Artwork,
+            artwork: Artwork,
             composerName: String?,
             contentRating: String?,
             discNumber: Int,
             durationInMillis: Int?,
-            editorialNotes: Entity.EditorialNotes?,
+            editorialNotes: EditorialNotes?,
             genreNames: [String],
             movementCount: Int?,
             movementName: String?,
             movementNumber: Int?,
             name: String,
-            playParams: Entity.PlayParameters?,
+            playParams: PlayParameters?,
             releaseDate: String,
             trackNumber: Int,
             url: String,
             workName: String?) throws {
             self.init()
             self.identifier = id
+            self.artistName = artistName
+            self.artwork = artwork
+            self.composerName = composerName
+            self.contentRating = contentRating
+            self.discNumber = discNumber
+            self.durationInMillis = durationInMillis ?? 0
+            self.editorialNotes = editorialNotes
+            self.name = name
         }
     }
 }

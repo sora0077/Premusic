@@ -46,6 +46,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
                     Session.shared.authorization = .init(developerToken: token)
 
                     StorefrontRepositoryImpl().storefronts().debug().subscribe().disposed(by: self.disposeBag)
+                    SongRepositoryImpl(storefront: "jp").song(with: "1263790415").debug().subscribe().disposed(by: self.disposeBag)
                 } else {
                     Session.shared.authorization = nil
                 }

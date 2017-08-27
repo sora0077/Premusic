@@ -19,6 +19,7 @@ public func launch() {
         Entity.StringValue.self,
         Entity.DeveloperToken.self,
         Entity.EditorialNotes.self,
+        Entity.Artwork.self,
         Entity.Storefront.self,
         Entity.Storefront.Attributes.self,
         Entity.Genre.self,

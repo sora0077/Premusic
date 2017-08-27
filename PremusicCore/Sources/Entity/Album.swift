@@ -12,7 +12,7 @@ import AppleMusicKit
 
 public extension Entity {
     @objc(Album)
-    public final class Album: EntityObject {
+    public final class Album: EntityObject, EntityType {
         public typealias Attributes = AlbumAttributes
         public typealias Identifier = Attributes.Identifier
         @objc public private(set) dynamic var identifier: Attributes.Identifier = ""

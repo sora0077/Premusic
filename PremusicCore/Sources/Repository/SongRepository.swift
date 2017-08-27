@@ -29,7 +29,11 @@ final class SongRepositoryImpl: Repository {
                 locator.session.send(GetSong(storefront: storefront, id: id))
             }
             .write { realm, response in
+                let relationships = response.data.flatMap { $0.relationships }
                 Entity.Song.save(response.data, to: realm)
+                Entity.Album.save(relationships.flatMap { $0.albums.data }, to: realm)
+                Entity.Artist.save(relationships.flatMap { $0.artists.data }, to: realm)
+                Entity.Genre.save(relationships.flatMap { $0.genres?.data ?? [] }, to: realm)
             }
     }
 
@@ -43,7 +47,11 @@ final class SongRepositoryImpl: Repository {
                 locator.session.send(GetMultipleSongs(storefront: storefront, ids: ids))
             }
             .write { realm, response in
+                let relationships = response.data.flatMap { $0.relationships }
                 Entity.Song.save(response.data, to: realm)
+                Entity.Album.save(relationships.flatMap { $0.albums.data }, to: realm)
+                Entity.Artist.save(relationships.flatMap { $0.artists.data }, to: realm)
+                Entity.Genre.save(relationships.flatMap { $0.genres?.data ?? [] }, to: realm)
             }
     }
 }
