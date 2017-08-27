@@ -29,11 +29,15 @@ final class SongRepositoryImpl: Repository {
                 locator.session.send(GetSong(storefront: storefront, id: id))
             }
             .write { realm, response in
-                let relationships = response.data.flatMap { $0.relationships }
-                Entity.Song.save(response.data, to: realm)
-                Entity.Album.save(relationships.flatMap { $0.albums.data }, to: realm)
-                Entity.Artist.save(relationships.flatMap { $0.artists.data }, to: realm)
-                Entity.Genre.save(relationships.flatMap { $0.genres?.data ?? [] }, to: realm)
+                let songs = Entity.Song.save(response.data, to: realm)
+                let albums = Entity.Album.save(type: Entity.Song.self, response.data, relationships: { $0.albums.data }, to: realm)
+                let artists = Entity.Artist.save(type: Entity.Song.self, response.data, relationships: { $0.artists.data }, to: realm)
+                let genres = Entity.Genre.save(type: Entity.Song.self, response.data, relationships: { $0.genres?.data ?? [] }, to: realm)
+                for song in songs {
+                    song.albums.append(objectsIn: albums[song.identifier] ?? [])
+                    song.artists.append(objectsIn: artists[song.identifier] ?? [])
+                    song.genres.append(objectsIn: genres[song.identifier] ?? [])
+                }
             }
     }
 
@@ -47,11 +51,15 @@ final class SongRepositoryImpl: Repository {
                 locator.session.send(GetMultipleSongs(storefront: storefront, ids: ids))
             }
             .write { realm, response in
-                let relationships = response.data.flatMap { $0.relationships }
-                Entity.Song.save(response.data, to: realm)
-                Entity.Album.save(relationships.flatMap { $0.albums.data }, to: realm)
-                Entity.Artist.save(relationships.flatMap { $0.artists.data }, to: realm)
-                Entity.Genre.save(relationships.flatMap { $0.genres?.data ?? [] }, to: realm)
+                let songs = Entity.Song.save(response.data, to: realm)
+                let albums = Entity.Album.save(type: Entity.Song.self, response.data, relationships: { $0.albums.data }, to: realm)
+                let artists = Entity.Artist.save(type: Entity.Song.self, response.data, relationships: { $0.artists.data }, to: realm)
+                let genres = Entity.Genre.save(type: Entity.Song.self, response.data, relationships: { $0.genres?.data ?? [] }, to: realm)
+                for song in songs {
+                    song.albums.append(objectsIn: albums[song.identifier] ?? [])
+                    song.artists.append(objectsIn: artists[song.identifier] ?? [])
+                    song.genres.append(objectsIn: genres[song.identifier] ?? [])
+                }
             }
     }
 }

@@ -61,4 +61,19 @@ extension EntityType {
         realm.add(new, update: true)
         return new
     }
+
+    @discardableResult
+    static func save<E, R>(
+        type: E.Type,
+        _ resources: [Resource<E.Attributes, R>],
+        relationships: (R) -> [Resource<Attributes, NoRelationships>],
+        to realm: Realm
+    ) -> [E.Identifier: [Self]] where Self: Object, Identifier: Hashable, E: EntityType, E.Identifier: Hashable {
+        var dict: [E.Identifier: [Self]] = [:]
+        for r in resources {
+            guard let rel = r.relationships else { continue }
+            dict[r.id] = save(relationships(rel), to: realm)
+        }
+        return dict
+    }
 }

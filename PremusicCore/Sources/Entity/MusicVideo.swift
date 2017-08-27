@@ -1,8 +1,8 @@
 //
-//  Song.swift
+//  MusicVideo.swift
 //  PremusicCore
 //
-//  Created by 林達也 on 2017/07/31.
+//  Created by 林達也 on 2017/08/28.
 //  Copyright © 2017年 jp.sora0077. All rights reserved.
 //
 
@@ -11,16 +11,12 @@ import RealmSwift
 import AppleMusicKit
 
 public extension Entity {
-    @objc(Song)
-    public final class Song: EntityObject, EntityType {
-        public typealias Attributes = SongAttributes
+    @objc(MusicVideo)
+    public final class MusicVideo: EntityObject, EntityType {
+        public typealias Attributes = MusicVideoAttributes
         public typealias Identifier = Attributes.Identifier
         @objc public private(set) dynamic var identifier: Identifier = ""
         @objc public private(set) dynamic var attributes: Attributes?
-
-        let albums = List<Album>()
-        let artists = List<Artist>()
-        let genres = List<Genre>()
 
         convenience init<R>(resource: Resource<Attributes, R>, attributes attr: Attributes? = nil) {
             self.init()
@@ -31,14 +27,12 @@ public extension Entity {
 }
 
 extension Entity {
-    @objc(SongAttributes)
-    public final class SongAttributes: AttributesObject, AppleMusicKit.Song {
+    @objc(MusicVideoAttributes)
+    public final class MusicVideoAttributes: AttributesObject, AppleMusicKit.MusicVideo {
         public typealias Identifier = String
         @objc private(set) dynamic var identifier: Identifier = ""
         @objc private(set) dynamic var artistName: String = ""
-        @objc private(set) dynamic var composerName: String?
         @objc private(set) dynamic var contentRating: String?
-        @objc private(set) dynamic var discNumber: Int = 0
         @objc private(set) dynamic var durationInMillis: Int = 0
         @objc private(set) dynamic var editorialNotes: EditorialNotes?
         @objc private(set) dynamic var name: String = ""
@@ -49,35 +43,28 @@ extension Entity {
         }
         @objc private dynamic var _artwork: Artwork!
 
-        var song: Entity.Song { return objects[0] }
-        private let objects = LinkingObjects(fromType: Entity.Song.self, property: "attributes")
+        var entity: Entity.MusicVideo { return objects[0] }
+        private let objects = LinkingObjects(fromType: Entity.MusicVideo.self, property: "attributes")
 
         public convenience init(
             id: Identifier,
             artistName: String,
             artwork: Artwork,
-            composerName: String?,
             contentRating: String?,
-            discNumber: Int,
             durationInMillis: Int?,
             editorialNotes: EditorialNotes?,
             genreNames: [String],
-            movementCount: Int?,
-            movementName: String?,
-            movementNumber: Int?,
             name: String,
             playParams: PlayParameters?,
             releaseDate: String,
-            trackNumber: Int,
+            trackNumber: Int?,
             url: String,
-            workName: String?) throws {
+            videoSubType: String?) throws {
             self.init()
             self.identifier = id
             self.artistName = artistName
             self.artwork = artwork
-            self.composerName = composerName
             self.contentRating = contentRating
-            self.discNumber = discNumber
             self.durationInMillis = durationInMillis ?? 0
             self.editorialNotes = editorialNotes
             self.name = name
