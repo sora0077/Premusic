@@ -1,9 +1,15 @@
 excluded:
   - Carthage
+  - Pods
+  - vendor
 
 identifier_name:
   excluded:
     - id
+    - pk
 
 large_tuple:
   5
+
+line_length:
+  140

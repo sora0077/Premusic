@@ -51,12 +51,14 @@ extension EntityType {
         return Self.init(resource: resource, attributes: attr)
     }
 
-    static func save<R>(_ resources: [Resource<Attributes, R>], to realm: Realm) where Self: Object, Identifier: Hashable {
+    @discardableResult
+    static func save<R>(_ resources: [Resource<Attributes, R>], to realm: Realm) -> [Self] where Self: Object, Identifier: Hashable {
         let pairs = realm.objects(Self.self)
             .filter("identifier IN %@", resources.map { $0.id })
             .map { ($0.identifier, $0) }
         let saved = Dictionary(uniqueKeysWithValues: pairs)
         let new = resources.map { create(resource: $0, attributes: saved[$0.id]?.attributes) }
         realm.add(new, update: true)
+        return new
     }
 }

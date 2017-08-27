@@ -28,7 +28,8 @@ public func launch() {
         Entity.Album.self,
         Entity.Album.Attributes.self,
         Entity.Artist.self,
-        Entity.Artist.Attributes.self
+        Entity.Artist.Attributes.self,
+        Cache.StorefrontsCache.self
     ]
     Realm.Configuration.defaultConfiguration = config
 

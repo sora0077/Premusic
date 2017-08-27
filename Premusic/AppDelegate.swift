@@ -27,7 +27,10 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
 
     private lazy var manager: Manager<WindowLevel> = .init(mainWindow: self.window!)
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(
+        _ application: UIApplication,
+        didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?
+    ) -> Bool {
         // Override point for customization after application launch.
         PremusicCore.launch()
 
@@ -42,7 +45,7 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
                 if let token = results.first?.token {
                     Session.shared.authorization = .init(developerToken: token)
 
-                    StorefrontRepositoryImpl().fetchAll().debug().subscribe().disposed(by: self.disposeBag)
+                    StorefrontRepositoryImpl().storefronts().debug().subscribe().disposed(by: self.disposeBag)
                 } else {
                     Session.shared.authorization = nil
                 }

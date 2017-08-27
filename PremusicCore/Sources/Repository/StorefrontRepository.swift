@@ -11,15 +11,43 @@ import AppleMusicKit
 import RxSwift
 
 final class StorefrontRepositoryImpl: Repository {
-    func fetch(with id: Entity.Storefront.Identifier) -> Single<Void> {
-        return locator.session.send(GetStorefront(id: id)).write { realm, page in
-            Entity.Storefront.save(page.data, to: realm)
-        }
+    func storefront(with id: Entity.Storefront.Identifier) -> Single<Void> {
+        return
+            read { realm in
+                realm.object(ofType: Entity.Storefront.Attributes.self, forPrimaryKey: id)
+            }
+            .flatMap { _ in
+                locator.session.send(GetStorefront(id: id))
+            }
+            .write { realm, page in
+                Entity.Storefront.save(page.data, to: realm)
+            }
     }
 
-    func fetchAll() -> Single<Void> {
-        return locator.session.send(GetAllStorefronts()).write { (realm, page) in
-            Entity.Storefront.save(page.data, to: realm)
-        }
+    func storefronts(with ids: Entity.Storefront.Identifier...) -> Single<Void> {
+        return
+            read { realm in
+                realm.objects(Entity.Storefront.Attributes.self).filter("identifier IN %@", ids).count == ids.count
+            }
+            .flatMap { _ in
+                locator.session.send(GetMultipleStorefronts(ids: ids))
+            }
+            .write { realm, response in
+                Entity.Storefront.save(response.data, to: realm)
+            }
+    }
+
+    func storefronts() -> Single<Void> {
+        return
+            read { realm in
+                realm.object(ofType: Cache.StorefrontsCache.self, forPrimaryKey: Cache.StorefrontsCache.pk)
+            }
+            .flatMap { _ in
+                locator.session.send(GetAllStorefronts())
+            }
+            .write { (realm, page) in
+                let data = Entity.Storefront.save(page.data, to: realm)
+                realm.add(Cache.StorefrontsCache(data), update: true)
+            }
     }
 }

@@ -14,20 +14,36 @@ import AppleMusicKit
 final class SongRepositoryImpl: Repository {
     private let storefront: Entity.Storefront.Identifier
 
-    init(storefront: Entity.Storefront.Identifier, locator: Locator = Repository.defaultLocator) {
+    init(storefront: Entity.Storefront.Identifier) {
         self.storefront = storefront
-        super.init(locator: locator)
+        super.init()
     }
 
-    func fetch(with id: Entity.Song.Identifier) -> Single<Void> {
-        return locator.session.send(GetSong(storefront: storefront, id: id)).write { realm, response in
-            Entity.Song.save(response.data, to: realm)
-        }
+    func song(with id: Entity.Song.Identifier) -> Single<Void> {
+        let storefront = self.storefront
+        return
+            read { realm in
+                realm.object(ofType: Entity.Song.Attributes.self, forPrimaryKey: id)
+            }
+            .flatMap { _ in
+                locator.session.send(GetSong(storefront: storefront, id: id))
+            }
+            .write { realm, response in
+                Entity.Song.save(response.data, to: realm)
+            }
     }
 
-    func fetch(with ids: Entity.Song.Identifier...) -> Single<Void> {
-        return locator.session.send(GetMultipleSongs(storefront: storefront, ids: ids)).write { realm, response in
-            Entity.Song.save(response.data, to: realm)
-        }
+    func songs(with ids: Entity.Song.Identifier...) -> Single<Void> {
+        let storefront = self.storefront
+        return
+            read { realm in
+                realm.objects(Entity.Song.Attributes.self).filter("identifier IN %@", ids).count == ids.count
+            }
+            .flatMap { _ in
+                locator.session.send(GetMultipleSongs(storefront: storefront, ids: ids))
+            }
+            .write { realm, response in
+                Entity.Song.save(response.data, to: realm)
+            }
     }
 }

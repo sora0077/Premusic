@@ -25,16 +25,12 @@ extension Locator {
     var session: Session { return Session.shared }
 }
 
+let locator: Locator = LocatorImpl()
+
 private struct LocatorImpl: Locator {
 }
 
 class Repository {
-    static let defaultLocator: Locator = LocatorImpl()
-    let locator: Locator
-
-    init(locator: Locator = Repository.defaultLocator) {
-        self.locator = locator
-    }
 }
 
 extension Single {
@@ -47,6 +43,38 @@ extension Single {
             }
             return ret
         }
+    }
+}
+
+struct AlreadyCached: Error {}
+
+func read<R>(_ transform: @escaping (Realm) throws -> R?) -> Single<Void> {
+    return Single.create { subscriber in
+        do {
+            if try transform(Realm()) == nil {
+                subscriber(.success(()))
+            } else {
+                subscriber(.error(AlreadyCached()))
+            }
+        } catch {
+            subscriber(.error(error))
+        }
+        return Disposables.create()
+    }
+}
+
+func read(_ transform: @escaping (Realm) throws -> Bool) -> Single<Void> {
+    return Single.create { subscriber in
+        do {
+            if try !transform(Realm()) {
+                subscriber(.success(()))
+            } else {
+                subscriber(.error(AlreadyCached()))
+            }
+        } catch {
+            subscriber(.error(error))
+        }
+        return Disposables.create()
     }
 }
 

@@ -23,6 +23,8 @@
 		D924869F1F2F38F9006E1C49 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D924869B1F2F38E9006E1C49 /* RxSwift.framework */; };
 		D92486A01F2F38F9006E1C49 /* RxSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D924869B1F2F38E9006E1C49 /* RxSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D92486A11F2F3900006E1C49 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D924869B1F2F38E9006E1C49 /* RxSwift.framework */; };
+		D94D5FF31F532E5900E7B8D5 /* StorefrontCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94D5FF21F532E5900E7B8D5 /* StorefrontCache.swift */; };
+		D94D5FF51F532E6500E7B8D5 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94D5FF41F532E6500E7B8D5 /* Cache.swift */; };
 		D9939DAF1F28EEBF00EE9F5A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9939DAE1F28EEBF00EE9F5A /* AppDelegate.swift */; };
 		D9939DB11F28EEBF00EE9F5A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9939DB01F28EEBF00EE9F5A /* ViewController.swift */; };
 		D9939DB61F28EEBF00EE9F5A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D9939DB51F28EEBF00EE9F5A /* Assets.xcassets */; };
@@ -142,6 +144,8 @@
 		D92486991F2F2117006E1C49 /* RequestAlias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestAlias.swift; sourceTree = "<group>"; };
 		D924869B1F2F38E9006E1C49 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
 		D924869C1F2F38E9006E1C49 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
+		D94D5FF21F532E5900E7B8D5 /* StorefrontCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorefrontCache.swift; sourceTree = "<group>"; };
+		D94D5FF41F532E6500E7B8D5 /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
 		D9939DAB1F28EEBF00EE9F5A /* Premusic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Premusic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9939DAE1F28EEBF00EE9F5A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D9939DB01F28EEBF00EE9F5A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -232,6 +236,7 @@
 			children = (
 				D9B21B801F436091009711BB /* UseCase */,
 				D9B21B841F49C29A009711BB /* Repository */,
+				D94D5FF11F532E4400E7B8D5 /* Cache */,
 				D92486851F2F066C006E1C49 /* Entity */,
 				D92486991F2F2117006E1C49 /* RequestAlias.swift */,
 				D9B21B7D1F43537B009711BB /* PremusicCore.swift */,
@@ -270,6 +275,15 @@
 				D92486911F2F1E30006E1C49 /* PlayParameters.swift */,
 			);
 			path = Attachment;
+			sourceTree = "<group>";
+		};
+		D94D5FF11F532E4400E7B8D5 /* Cache */ = {
+			isa = PBXGroup;
+			children = (
+				D94D5FF41F532E6500E7B8D5 /* Cache.swift */,
+				D94D5FF21F532E5900E7B8D5 /* StorefrontCache.swift */,
+			);
+			path = Cache;
 			sourceTree = "<group>";
 		};
 		D9939DA21F28EEBF00EE9F5A = {
@@ -774,12 +788,14 @@
 				D92486901F2F1E08006E1C49 /* EditorialNotes.swift in Sources */,
 				D9BA47D31F50A2FF00B6A529 /* DeveloperToken.swift in Sources */,
 				D9B21B861F49C2B9009711BB /* SongRepository.swift in Sources */,
+				D94D5FF51F532E6500E7B8D5 /* Cache.swift in Sources */,
 				D924868B1F2F09A0006E1C49 /* Song.swift in Sources */,
 				D9B21B7E1F43537B009711BB /* PremusicCore.swift in Sources */,
 				D92486891F2F0684006E1C49 /* Entity.swift in Sources */,
 				D9B21B881F49D40E009711BB /* StorefrontRepository.swift in Sources */,
 				D9B21B8A1F49D697009711BB /* Repository.swift in Sources */,
 				D924868E1F2F1DA1006E1C49 /* Artwork.swift in Sources */,
+				D94D5FF31F532E5900E7B8D5 /* StorefrontCache.swift in Sources */,
 				D92486871F2F0679006E1C49 /* Storefront.swift in Sources */,
 				D924869A1F2F2117006E1C49 /* RequestAlias.swift in Sources */,
 				D92486941F2F1FD8006E1C49 /* Album.swift in Sources */,
