@@ -14,14 +14,17 @@ public extension Entity {
     @objc(MusicVideo)
     public final class MusicVideo: EntityObject, EntityType {
         public typealias Attributes = MusicVideoAttributes
+        typealias Relations = MusicVideoRelations
         public typealias Identifier = Attributes.Identifier
         @objc public private(set) dynamic var identifier: Identifier = ""
         @objc public private(set) dynamic var attributes: Attributes?
+        @objc private(set) dynamic var relations: Relations!
 
-        convenience init<R>(resource: Resource<Attributes, R>, attributes attr: Attributes? = nil) {
+        convenience init<R>(resource: Resource<Attributes, R>, attributes attr: Attributes? = nil, relations rels: Relations? = nil) {
             self.init()
             identifier = resource.id
             attributes = attr ?? resource.attributes
+            relations = rels ?? Relations()
         }
     }
 }
@@ -69,5 +72,10 @@ extension Entity {
             self.editorialNotes = editorialNotes
             self.name = name
         }
+    }
+
+    @objc(MusicVideoRelations)
+    final class MusicVideoRelations: RelationsObject {
+
     }
 }

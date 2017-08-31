@@ -34,21 +34,28 @@ public struct Entity {
         @objc private(set) dynamic var cachedAt = Date()
         public override class func primaryKey() -> String? { return "identifier" }
     }
+
+    @objc(RelationsObject)
+    public class RelationsObject: Object {
+
+    }
 }
 
 protocol EntityType {
     associatedtype Attributes: AppleMusicKit.Attributes
+    associatedtype Relations
     typealias Identifier = Attributes.Identifier
 
     var identifier: Identifier { get }
     var attributes: Attributes? { get }
+    var relations: Relations! { get }
 
-    init<R>(resource: Resource<Attributes, R>, attributes attr: Attributes?)
+    init<R>(resource: Resource<Attributes, R>, attributes attr: Attributes?, relations: Relations?)
 }
 
 extension EntityType {
-    private static func create<R>(resource: Resource<Attributes, R>, attributes attr: Attributes?) -> Self {
-        return Self.init(resource: resource, attributes: attr)
+    private static func create<R>(resource: Resource<Attributes, R>, attributes attr: Attributes?, relations: Relations?) -> Self {
+        return Self.init(resource: resource, attributes: attr, relations: relations)
     }
 
     @discardableResult
@@ -57,7 +64,7 @@ extension EntityType {
             .filter("identifier IN %@", resources.map { $0.id })
             .map { ($0.identifier, $0) }
         let saved = Dictionary(uniqueKeysWithValues: pairs)
-        let new = resources.map { create(resource: $0, attributes: saved[$0.id]?.attributes) }
+        let new = resources.map { create(resource: $0, attributes: saved[$0.id]?.attributes, relations: saved[$0.id]?.relations) }
         realm.add(new, update: true)
         return new
     }

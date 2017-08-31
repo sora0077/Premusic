@@ -14,18 +14,21 @@ public extension Entity {
     @objc(Song)
     public final class Song: EntityObject, EntityType {
         public typealias Attributes = SongAttributes
+        typealias Relations = SongRelations
         public typealias Identifier = Attributes.Identifier
         @objc public private(set) dynamic var identifier: Identifier = ""
         @objc public private(set) dynamic var attributes: Attributes?
+        @objc private(set) dynamic var relations: Relations!
 
         let albums = List<Album>()
         let artists = List<Artist>()
         let genres = List<Genre>()
 
-        convenience init<R>(resource: Resource<Attributes, R>, attributes attr: Attributes? = nil) {
+        convenience init<R>(resource: Resource<Attributes, R>, attributes attr: Attributes? = nil, relations rels: Relations? = nil) {
             self.init()
             identifier = resource.id
             attributes = attr ?? resource.attributes
+            relations = rels ?? Relations()
         }
     }
 }
@@ -82,5 +85,10 @@ extension Entity {
             self.editorialNotes = editorialNotes
             self.name = name
         }
+    }
+
+    @objc(SongRelations)
+    final class SongRelations: RelationsObject {
+
     }
 }

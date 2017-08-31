@@ -34,6 +34,7 @@
 		D9939DD71F28EED800EE9F5A /* PremusicCore.h in Headers */ = {isa = PBXBuildFile; fileRef = D9939DC71F28EED700EE9F5A /* PremusicCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D9939DDA1F28EED800EE9F5A /* PremusicCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9939DC51F28EED700EE9F5A /* PremusicCore.framework */; };
 		D9939DDB1F28EED800EE9F5A /* PremusicCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D9939DC51F28EED700EE9F5A /* PremusicCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D9AC050A1F5717930072F849 /* SongCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9AC05091F5717930072F849 /* SongCache.swift */; };
 		D9B21B7E1F43537B009711BB /* PremusicCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B21B7D1F43537B009711BB /* PremusicCore.swift */; };
 		D9B21B821F436C75009711BB /* WindowKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9B21B811F436C6A009711BB /* WindowKit.framework */; };
 		D9B21B831F436C75009711BB /* WindowKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D9B21B811F436C6A009711BB /* WindowKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -160,6 +161,7 @@
 		D9939DCD1F28EED800EE9F5A /* PremusicCoreTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PremusicCoreTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9939DD41F28EED800EE9F5A /* PremusicCoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremusicCoreTests.swift; sourceTree = "<group>"; };
 		D9939DD61F28EED800EE9F5A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D9AC05091F5717930072F849 /* SongCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongCache.swift; sourceTree = "<group>"; };
 		D9B21B7D1F43537B009711BB /* PremusicCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremusicCore.swift; sourceTree = "<group>"; };
 		D9B21B811F436C6A009711BB /* WindowKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WindowKit.framework; path = Carthage/Build/iOS/WindowKit.framework; sourceTree = "<group>"; };
 		D9B21B851F49C2B9009711BB /* SongRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongRepository.swift; sourceTree = "<group>"; };
@@ -287,6 +289,7 @@
 			children = (
 				D94D5FF41F532E6500E7B8D5 /* Cache.swift */,
 				D94D5FF21F532E5900E7B8D5 /* StorefrontCache.swift */,
+				D9AC05091F5717930072F849 /* SongCache.swift */,
 			);
 			path = Cache;
 			sourceTree = "<group>";
@@ -807,6 +810,7 @@
 				D92486871F2F0679006E1C49 /* Storefront.swift in Sources */,
 				D924869A1F2F2117006E1C49 /* RequestAlias.swift in Sources */,
 				D92486941F2F1FD8006E1C49 /* Album.swift in Sources */,
+				D9AC050A1F5717930072F849 /* SongCache.swift in Sources */,
 				D92486961F2F2048006E1C49 /* Artist.swift in Sources */,
 				D92486921F2F1E30006E1C49 /* PlayParameters.swift in Sources */,
 			);

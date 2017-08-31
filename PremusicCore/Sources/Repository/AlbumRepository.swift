@@ -45,7 +45,9 @@ final class AlbumRepositoryImpl: Repository {
             }
             .write { realm, response in
                 let relationships = response.data.flatMap { $0.relationships }
-                Entity.Album.save(response.data, to: realm)
+                let albums = Entity.Album.save(response.data, to: realm)
+                for album in albums {
+                }
                 Entity.Artist.save(relationships.flatMap { $0.artists.data }, to: realm)
                 Entity.Song.save(relationships.flatMap { $0.tracks.data }.flatMap { $0.song }, to: realm)
                 Entity.MusicVideo.save(relationships.flatMap { $0.tracks.data }.flatMap { $0.musicVideo }, to: realm)
