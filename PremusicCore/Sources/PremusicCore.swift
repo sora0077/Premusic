@@ -12,26 +12,33 @@ import APIKit
 import AppleMusicKit
 @_exported import RxSwift
 
+private extension EntityType where Self: Object, Attributes: Object, Relations: Object {
+    static var classes: [Object.Type] { return [Self.self, Attributes.self, Relations.self] }
+}
+
+private extension Array where Iterator.Element: Sequence {
+    var flatten: [Iterator.Element.Iterator.Element] {
+        return flatMap { $0 }
+    }
+}
+
 public func launch() {
     var config = Realm.Configuration.defaultConfiguration
     config.deleteRealmIfMigrationNeeded = true
-    config.objectTypes = [
+    let objectTypes = [
+        Cache.StorefrontsCache.self,
         Entity.StringValue.self,
         Entity.DeveloperToken.self,
         Entity.EditorialNotes.self,
-        Entity.Artwork.self,
-        Entity.Storefront.self,
-        Entity.Storefront.Attributes.self,
-        Entity.Genre.self,
-        Entity.Genre.Attributes.self,
-        Entity.Song.self,
-        Entity.Song.Attributes.self,
-        Entity.Album.self,
-        Entity.Album.Attributes.self,
-        Entity.Artist.self,
-        Entity.Artist.Attributes.self,
-        Cache.StorefrontsCache.self
+        Entity.Artwork.self
     ]
+    config.objectTypes = objectTypes + [
+        Entity.Storefront.classes,
+        Entity.Genre.classes,
+        Entity.Song.classes,
+        Entity.Album.classes,
+        Entity.Artist.classes
+        ].flatten
     Realm.Configuration.defaultConfiguration = config
 
     print(config.fileURL?.absoluteString ?? "")

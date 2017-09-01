@@ -24,7 +24,7 @@ public extension Entity {
             self.init()
             identifier = resource.id
             attributes = attr ?? resource.attributes
-            relations = rels ?? Relations()
+            relations = rels ?? Relations(id: resource.id)
         }
     }
 }
@@ -43,6 +43,10 @@ extension Entity {
 
     @objc(GenreRelations)
     final class GenreRelations: RelationsObject {
+        @objc private(set) dynamic var identifier: Genre.Identifier = ""
 
+        convenience init(id: Genre.Identifier) {
+            self.init()
+        }
     }
 }

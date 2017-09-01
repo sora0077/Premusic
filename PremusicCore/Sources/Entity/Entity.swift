@@ -37,7 +37,7 @@ public struct Entity {
 
     @objc(RelationsObject)
     public class RelationsObject: Object {
-
+        public override class func primaryKey() -> String? { return "identifier" }
     }
 }
 
