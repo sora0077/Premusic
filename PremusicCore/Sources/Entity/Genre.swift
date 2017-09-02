@@ -47,6 +47,7 @@ extension Entity {
 
         convenience init(id: Genre.Identifier) {
             self.init()
+            self.identifier = id
         }
     }
 }

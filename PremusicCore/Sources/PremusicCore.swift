@@ -26,7 +26,9 @@ public func launch() {
     var config = Realm.Configuration.defaultConfiguration
     config.deleteRealmIfMigrationNeeded = true
     let objectTypes = [
+        Cache.RequestObject.self,
         Cache.StorefrontsCache.self,
+        Cache.SongCache.self,
         Entity.StringValue.self,
         Entity.DeveloperToken.self,
         Entity.EditorialNotes.self,
@@ -36,6 +38,7 @@ public func launch() {
         Entity.Storefront.classes,
         Entity.Genre.classes,
         Entity.Song.classes,
+        Entity.MusicVideo.classes,
         Entity.Album.classes,
         Entity.Artist.classes
         ].flatten

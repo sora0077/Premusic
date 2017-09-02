@@ -35,6 +35,7 @@ extension Entity {
         public typealias Identifier = String
         @objc private(set) dynamic var identifier: Identifier = ""
         @objc private(set) dynamic var editorialNotes: EditorialNotes?
+        @objc private(set) dynamic var name: String = ""
 
         public convenience init(
             id: Identifier,
@@ -44,6 +45,7 @@ extension Entity {
             url: String) throws {
             self.init()
             self.identifier = id
+            self.name = name
         }
     }
 
@@ -53,6 +55,7 @@ extension Entity {
 
         convenience init(id: Album.Identifier) {
             self.init()
+            self.identifier = id
         }
     }
 }

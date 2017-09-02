@@ -44,13 +44,24 @@ final class AlbumRepositoryImpl: Repository {
                 locator.session.send(GetAlbum(storefront: storefront, id: id))
             }
             .write { realm, response in
-                let relationships = response.data.flatMap { $0.relationships }
-                let albums = Entity.Album.save(response.data, to: realm)
-                for album in albums {
+                func save<T: EntityType>(
+                    type: T.Type,
+                    relationships: (GetAlbum.Relationships) -> [Resource<T.Attributes, NoRelationships>]
+                ) -> [Entity.Album.Identifier: [T]] where T: Object, T.Attributes: Object, T.Identifier: Hashable {
+                    return T.save(type: Entity.Album.self, response.data, relationships: relationships, to: realm)
                 }
-                Entity.Artist.save(relationships.flatMap { $0.artists.data }, to: realm)
-                Entity.Song.save(relationships.flatMap { $0.tracks.data }.flatMap { $0.song }, to: realm)
-                Entity.MusicVideo.save(relationships.flatMap { $0.tracks.data }.flatMap { $0.musicVideo }, to: realm)
+                let albums = Entity.Album.save(response.data, to: realm)
+                let artists = save(type: Entity.Artist.self, relationships: { $0.artists.data })
+                let songs = save(type: Entity.Song.self, relationships: { $0.tracks.data.flatMap { $0.song } })
+                let musicVideos = save(type: Entity.MusicVideo.self, relationships: { $0.tracks.data.flatMap { $0.musicVideo } })
+                for album in albums {
+                    album.relations.artists.removeAll()
+                    album.relations.artists.append(objectsIn: artists[album.identifier] ?? [])
+                    album.relations.songs.removeAll()
+                    album.relations.songs.append(objectsIn: songs[album.identifier] ?? [])
+                    album.relations.musicVideos.removeAll()
+                    album.relations.musicVideos.append(objectsIn: musicVideos[album.identifier] ?? [])
+                }
             }
     }
 }

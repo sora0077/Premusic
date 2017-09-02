@@ -80,6 +80,7 @@ extension Entity {
 
         convenience init(id: MusicVideo.Identifier) {
             self.init()
+            self.identifier = id
         }
     }
 }

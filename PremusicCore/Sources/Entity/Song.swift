@@ -93,6 +93,7 @@ extension Entity {
 
         convenience init(id: Song.Identifier) {
             self.init()
+            self.identifier = id
         }
     }
 }

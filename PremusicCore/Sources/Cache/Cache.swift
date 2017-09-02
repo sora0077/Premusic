@@ -18,4 +18,9 @@ struct Cache {
 
         override class func primaryKey() -> String? { return "pk" }
     }
+
+    @objc(RequestObject)
+    final class RequestObject: Object {
+
+    }
 }

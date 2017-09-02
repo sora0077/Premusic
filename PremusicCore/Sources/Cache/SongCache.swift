@@ -7,10 +7,12 @@
 //
 
 import Foundation
+import RealmSwift
 
 extension Cache {
     @objc(SongCache)
     final class SongCache: CacheObject {
-
+        let list = List<Entity.Song>()
+        @objc dynamic var next: RequestObject?
     }
 }

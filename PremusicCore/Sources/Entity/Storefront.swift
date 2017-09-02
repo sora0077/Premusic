@@ -64,6 +64,7 @@ extension Entity {
 
         convenience init(id: Storefront.Identifier) {
             self.init()
+            self.identifier = id
         }
     }
 }
