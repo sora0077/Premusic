@@ -29,6 +29,7 @@ public func launch() {
         Cache.RequestObject.self,
         Cache.StorefrontsCache.self,
         Cache.SongCache.self,
+        Entity.Chart.ChartSongs.self,
         Entity.StringValue.self,
         Entity.DeveloperToken.self,
         Entity.EditorialNotes.self,
@@ -44,5 +45,6 @@ public func launch() {
         ].flatten
     Realm.Configuration.defaultConfiguration = config
 
-    print(config.fileURL?.absoluteString ?? "")
+    let path = config.fileURL?.absoluteString ?? ""
+    print("open " + path.replacingOccurrences(of: "file://", with: ""))
 }

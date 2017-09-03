@@ -78,6 +78,17 @@ func read(_ transform: @escaping (Realm) throws -> Bool) -> Single<Void> {
     }
 }
 
+func next<Req: PaginatorRequest>(_ transform: @escaping (Realm) throws -> Req?) -> Single<Req?> {
+    return Single.create { subscriber in
+        do {
+            subscriber(.success((try transform(Realm()))))
+        } catch {
+            subscriber(.error(error))
+        }
+        return Disposables.create()
+    }
+}
+
 extension Session {
     func send<Req: Request>(_ request: Req) -> Single<Req.Response> {
         return Single.create { [weak self] subscriber in

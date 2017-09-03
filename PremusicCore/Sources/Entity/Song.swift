@@ -19,10 +19,9 @@ public extension Entity {
         @objc public private(set) dynamic var identifier: Identifier = ""
         @objc public private(set) dynamic var attributes: Attributes?
         @objc private(set) dynamic var relations: Relations!
-
-        let albums = List<Album>()
-        let artists = List<Artist>()
-        let genres = List<Genre>()
+        public var albums: List<Entity.Album> { return relations.albums }
+        public var artists: List<Entity.Artist> { return relations.artists }
+        public var genres: List<Entity.Genre> { return relations.genres }
 
         convenience init<R>(resource: Resource<Attributes, R>, attributes attr: Attributes? = nil, relations rels: Relations? = nil) {
             self.init()
@@ -45,6 +44,7 @@ extension Entity {
         @objc private(set) dynamic var durationInMillis: Int = 0
         @objc private(set) dynamic var editorialNotes: EditorialNotes?
         @objc private(set) dynamic var name: String = ""
+        @objc private(set) dynamic var trackNumber: Int = 0
 
         @nonobjc private(set) var artwork: Artwork {
             get { return _artwork }
@@ -84,12 +84,16 @@ extension Entity {
             self.durationInMillis = durationInMillis ?? 0
             self.editorialNotes = editorialNotes
             self.name = name
+            self.trackNumber = trackNumber
         }
     }
 
     @objc(SongRelations)
     final class SongRelations: RelationsObject {
         @objc private(set) dynamic var identifier: Song.Identifier = ""
+        let albums = List<Album>()
+        let artists = List<Artist>()
+        let genres = List<Genre>()
 
         convenience init(id: Song.Identifier) {
             self.init()

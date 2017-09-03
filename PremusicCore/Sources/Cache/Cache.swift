@@ -8,6 +8,7 @@
 
 import Foundation
 import RealmSwift
+import AppleMusicKit
 
 struct Cache {
     @objc(CacheObject)
@@ -21,6 +22,22 @@ struct Cache {
 
     @objc(RequestObject)
     final class RequestObject: Object {
+        @objc private dynamic var path: String = ""
+        @objc private dynamic var parameters: String = ""
 
+        convenience init?<Req: PaginatorRequest>(_ request: Req) throws {
+            self.init()
+            guard let url = try request.buildURLRequest().url else { return nil }
+            self.path = url.path
+            self.parameters = url.query ?? ""
+        }
+
+        func request<Req: PaginatorRequest>() -> Req {
+            let parameters = Dictionary(uniqueKeysWithValues: self.parameters
+                .components(separatedBy: "&")
+                .map { $0.components(separatedBy: "=") }
+                .map { ($0[0], $0[1]) })
+            return Req(path: path, parameters: parameters)
+        }
     }
 }

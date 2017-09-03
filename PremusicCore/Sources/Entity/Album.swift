@@ -34,7 +34,15 @@ extension Entity {
     public final class AlbumAttributes: AttributesObject, AppleMusicKit.Album {
         public typealias Identifier = String
         @objc private(set) dynamic var identifier: Identifier = ""
+        @objc private(set) dynamic var artistName: String = ""
+        @objc private(set) dynamic var copyright: String = ""
         @objc private(set) dynamic var name: String = ""
+
+        @nonobjc private(set) var artwork: Artwork {
+            get { return _artwork }
+            set { _artwork = newValue }
+        }
+        @objc private dynamic var _artwork: Artwork!
 
         public convenience init(
             id: Identifier,
@@ -53,6 +61,9 @@ extension Entity {
             url: String) throws {
             self.init()
             self.identifier = id
+            self.artistName = artistName
+            self.artwork = artwork
+            self.copyright = copyright
             self.name = name
         }
     }

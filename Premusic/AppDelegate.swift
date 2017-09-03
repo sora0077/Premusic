@@ -45,8 +45,9 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
                 if let token = results.first?.token {
                     Session.shared.authorization = .init(developerToken: token)
 
-                    StorefrontRepositoryImpl().storefronts().debug().subscribe().disposed(by: self.disposeBag)
-                    AlbumRepositoryImpl(storefront: "us").album(with: "310730204").debug().subscribe().disposed(by: self.disposeBag)
+                    ChartRepositoryImpl(storefront: "jp").chart().debug().subscribe().disposed(by: self.disposeBag)
+//                    StorefrontRepositoryImpl().storefronts().debug().subscribe().disposed(by: self.disposeBag)
+//                    AlbumRepositoryImpl(storefront: "us").album(with: "310730204").debug().subscribe().disposed(by: self.disposeBag)
                 } else {
                     Session.shared.authorization = nil
                 }

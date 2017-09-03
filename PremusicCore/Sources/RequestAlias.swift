@@ -43,3 +43,10 @@ typealias GetMultipleAlbums = AppleMusicKit.GetMultipleAlbums<
     Entity.MusicVideo.Attributes,
     Entity.Artist.Attributes,
     Entity.Storefront.Attributes>
+
+typealias GetCharts = AppleMusicKit.GetCharts<
+    Entity.Song.Attributes,
+    Entity.MusicVideo.Attributes,
+    Entity.Album.Attributes,
+    Entity.Genre.Attributes,
+    Entity.Storefront.Attributes>

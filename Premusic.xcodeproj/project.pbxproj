@@ -34,6 +34,7 @@
 		D9939DD71F28EED800EE9F5A /* PremusicCore.h in Headers */ = {isa = PBXBuildFile; fileRef = D9939DC71F28EED700EE9F5A /* PremusicCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D9939DDA1F28EED800EE9F5A /* PremusicCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9939DC51F28EED700EE9F5A /* PremusicCore.framework */; };
 		D9939DDB1F28EED800EE9F5A /* PremusicCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D9939DC51F28EED700EE9F5A /* PremusicCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D994F6D91F5B221F00F468C0 /* Chart.swift in Sources */ = {isa = PBXBuildFile; fileRef = D994F6D81F5B221F00F468C0 /* Chart.swift */; };
 		D9AC050A1F5717930072F849 /* SongCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9AC05091F5717930072F849 /* SongCache.swift */; };
 		D9B21B7E1F43537B009711BB /* PremusicCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9B21B7D1F43537B009711BB /* PremusicCore.swift */; };
 		D9B21B821F436C75009711BB /* WindowKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9B21B811F436C6A009711BB /* WindowKit.framework */; };
@@ -64,6 +65,7 @@
 		D9E3EFF31F2901C900B8C2DE /* iTunesService.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D9E3EFEB1F2901C900B8C2DE /* iTunesService.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D9E3EFF71F2901E200B8C2DE /* APIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9E3EFD51F2900B200B8C2DE /* APIKit.framework */; };
 		D9E3EFF81F2901E500B8C2DE /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9E3EFD31F2900B200B8C2DE /* Result.framework */; };
+		D9EF01CB1F5B1C8E00271064 /* ChartRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9EF01CA1F5B1C8E00271064 /* ChartRepository.swift */; };
 		DA1EF30C87E8614606EBAEE0 /* Pods_Premusic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 943C73EAE9A367024A7AE278 /* Pods_Premusic.framework */; };
 		E2767CCF297A651E069AD13A /* Pods_iTunesService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 310CC87A01F4165D3F60318C /* Pods_iTunesService.framework */; };
 		E3C25F664361B062EF82586A /* Pods_PremusicCoreTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0166FE39AB0D253D301F1B8 /* Pods_PremusicCoreTests.framework */; };
@@ -161,6 +163,7 @@
 		D9939DCD1F28EED800EE9F5A /* PremusicCoreTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PremusicCoreTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9939DD41F28EED800EE9F5A /* PremusicCoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremusicCoreTests.swift; sourceTree = "<group>"; };
 		D9939DD61F28EED800EE9F5A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D994F6D81F5B221F00F468C0 /* Chart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chart.swift; sourceTree = "<group>"; };
 		D9AC05091F5717930072F849 /* SongCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongCache.swift; sourceTree = "<group>"; };
 		D9B21B7D1F43537B009711BB /* PremusicCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremusicCore.swift; sourceTree = "<group>"; };
 		D9B21B811F436C6A009711BB /* WindowKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WindowKit.framework; path = Carthage/Build/iOS/WindowKit.framework; sourceTree = "<group>"; };
@@ -178,6 +181,7 @@
 		D9E3EFEB1F2901C900B8C2DE /* iTunesService.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = iTunesService.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9E3EFED1F2901C900B8C2DE /* iTunesService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iTunesService.h; sourceTree = "<group>"; };
 		D9E3EFEE1F2901C900B8C2DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D9EF01CA1F5B1C8E00271064 /* ChartRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartRepository.swift; sourceTree = "<group>"; };
 		F6FA9C334C14B489BAC6B6D3 /* Pods-iTunesService.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iTunesService.release.xcconfig"; path = "Pods/Target Support Files/Pods-iTunesService/Pods-iTunesService.release.xcconfig"; sourceTree = "<group>"; };
 		FE0192E15E0E2421A4CE8DCE /* Pods-PremusicCoreTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PremusicCoreTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PremusicCoreTests/Pods-PremusicCoreTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -269,6 +273,7 @@
 				D9BC08981F5353B600B7147A /* MusicVideo.swift */,
 				D92486931F2F1FD8006E1C49 /* Album.swift */,
 				D92486951F2F2048006E1C49 /* Artist.swift */,
+				D994F6D81F5B221F00F468C0 /* Chart.swift */,
 				D9BA47D21F50A2FF00B6A529 /* DeveloperToken.swift */,
 			);
 			path = Entity;
@@ -363,6 +368,7 @@
 				D9B21B871F49D40E009711BB /* StorefrontRepository.swift */,
 				D9B21B851F49C2B9009711BB /* SongRepository.swift */,
 				D9BC08961F53529F00B7147A /* AlbumRepository.swift */,
+				D9EF01CA1F5B1C8E00271064 /* ChartRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -807,8 +813,10 @@
 				D9B21B8A1F49D697009711BB /* Repository.swift in Sources */,
 				D924868E1F2F1DA1006E1C49 /* Artwork.swift in Sources */,
 				D94D5FF31F532E5900E7B8D5 /* StorefrontCache.swift in Sources */,
+				D994F6D91F5B221F00F468C0 /* Chart.swift in Sources */,
 				D92486871F2F0679006E1C49 /* Storefront.swift in Sources */,
 				D924869A1F2F2117006E1C49 /* RequestAlias.swift in Sources */,
+				D9EF01CB1F5B1C8E00271064 /* ChartRepository.swift in Sources */,
 				D92486941F2F1FD8006E1C49 /* Album.swift in Sources */,
 				D9AC050A1F5717930072F849 /* SongCache.swift in Sources */,
 				D92486961F2F2048006E1C49 /* Artist.swift in Sources */,
