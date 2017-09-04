@@ -42,9 +42,20 @@ public extension Entity.Chart {
             return next?.request()
         }
 
-        func update(_ songs: [Entity.Song], next: GetCharts.GetPage<Entity.Song.Attributes>?) throws {
+        func update(_ songs: [Entity.Song], next: GetCharts.GetPage<Entity.Song.Attributes>?, to realm: Realm) throws {
+            super.update()
             self.songs.append(objectsIn: songs)
-            self.next = try next.flatMap(Cache.RequestObject.init)
+            if let next = try next.flatMap({ try Cache.RequestObject(key: "ChartSongs", $0) }) {
+                realm.add(next, update: true)
+                self.next = next
+            } else {
+                self.next = nil
+            }
+        }
+
+        func reset() {
+            songs.removeAll()
+            next = nil
         }
 
         // MARK: Collection

@@ -22,12 +22,16 @@ struct Cache {
 
     @objc(RequestObject)
     final class RequestObject: Object {
+        @objc private dynamic var key: String = ""
         @objc private dynamic var path: String = ""
         @objc private dynamic var parameters: String = ""
 
-        convenience init?<Req: PaginatorRequest>(_ request: Req) throws {
+        override class func primaryKey() -> String? { return "key" }
+
+        convenience init?<Req: PaginatorRequest>(key: String, _ request: Req) throws {
             self.init()
             guard let url = try request.buildURLRequest().url else { return nil }
+            self.key = key
             self.path = url.path
             self.parameters = url.query ?? ""
         }

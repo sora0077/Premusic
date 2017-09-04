@@ -41,7 +41,7 @@ final class ChartRepositoryImpl: Repository {
                 let songs = Entity.Song.save(response.data, to: realm)
                 let chart = realm.object(ofType: Entity.Chart.ChartSongs.self, forPrimaryKey: kind.rawValue)
                     ?? Entity.Chart.ChartSongs(kind: kind)
-                try chart.update(songs, next: response.next)
+                try chart.update(songs, next: response.next, to: realm)
                 realm.add(chart, update: true)
             }
     }
@@ -49,6 +49,12 @@ final class ChartRepositoryImpl: Repository {
 
 private func next(from realm: Realm, kind: Entity.Chart.Kind) throws -> Song.Next? {
     guard let chart = realm.object(ofType: Entity.Chart.ChartSongs.self, forPrimaryKey: kind.rawValue) else { return nil }
+    if chart.updateAt < Date(timeIntervalSinceNow: -0.5 * 60 * 60) {
+        try realm.write {
+            chart.reset()
+        }
+        return nil
+    }
     guard let next = chart.request() else { throw AlreadyCached() }
     return next
 }
