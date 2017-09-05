@@ -38,12 +38,16 @@ public extension Entity.Chart {
             self.kind = kind
         }
 
+        static func chart(kind: Kind, from realm: Realm) -> ChartSongs? {
+            let cachedAt = Date(timeIntervalSinceNow: -0.5 * 60 * 60)
+            return realm.objects(self).filter("_kind = %@ AND cachedAt > %@", kind.rawValue, cachedAt).first
+        }
+
         func request() -> GetCharts.GetPage<Entity.Song.Attributes>? {
             return next?.request()
         }
 
         func update(_ songs: [Entity.Song], next: GetCharts.GetPage<Entity.Song.Attributes>?, to realm: Realm) throws {
-            super.update()
             self.songs.append(objectsIn: songs)
             if let next = try next.flatMap({ try Cache.RequestObject(key: "ChartSongs", $0) }) {
                 realm.add(next, update: true)

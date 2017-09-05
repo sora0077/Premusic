@@ -45,6 +45,8 @@ public func launch() {
         ].flatten
     Realm.Configuration.defaultConfiguration = config
 
-    let path = config.fileURL?.absoluteString ?? ""
+    let realm = try? Realm()
+
+    let path = realm?.configuration.fileURL?.absoluteString ?? config.fileURL?.absoluteString ?? ""
     print("open " + path.replacingOccurrences(of: "file://", with: ""))
 }

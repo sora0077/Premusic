@@ -11,10 +11,7 @@ import RxSwift
 import RealmSwift
 import AppleMusicKit
 
-private struct Song {
-    typealias Data = [Resource<Entity.Song.Attributes, NoRelationships>]
-    typealias Next = GetCharts.GetPage<Entity.Song.Attributes>
-}
+private typealias SongRequest = GetCharts.GetPage<Entity.Song.Attributes>
 
 final class ChartRepositoryImpl: Repository {
     private let storefront: Entity.Storefront.Identifier
@@ -29,32 +26,25 @@ final class ChartRepositoryImpl: Repository {
             next { realm in
                 try next(from: realm, kind: kind)
             }
-            .flatMap { request -> Single<(data: Song.Data, next: Song.Next?)> in
+            .flatMap { request -> Single<SongRequest.Response?> in
                 if let request = request {
-                    return locator.session.send(request).map { ($0.data, $0.next) }
+                    return locator.session.send(request).map { $0 }
                 } else {
-                    return locator.session.send(GetCharts(storefront: storefront, types: [.songs]))
-                        .map { ($0.songs?.data ?? [], $0.songs?.next) }
+                    let request = GetCharts(storefront: storefront, types: [.songs])
+                    return locator.session.send(request).map { $0.songs }
                 }
             }
             .write { realm, response in
-                let songs = Entity.Song.save(response.data, to: realm)
-                let chart = realm.object(ofType: Entity.Chart.ChartSongs.self, forPrimaryKey: kind.rawValue)
-                    ?? Entity.Chart.ChartSongs(kind: kind)
-                try chart.update(songs, next: response.next, to: realm)
+                let songs = Entity.Song.save(response?.data ?? [], to: realm)
+                let chart = Entity.Chart.ChartSongs.chart(kind: kind, from: realm) ?? Entity.Chart.ChartSongs(kind: kind)
+                try chart.update(songs, next: response?.next, to: realm)
                 realm.add(chart, update: true)
             }
     }
 }
 
-private func next(from realm: Realm, kind: Entity.Chart.Kind) throws -> Song.Next? {
-    guard let chart = realm.object(ofType: Entity.Chart.ChartSongs.self, forPrimaryKey: kind.rawValue) else { return nil }
-    if chart.updateAt < Date(timeIntervalSinceNow: -0.5 * 60 * 60) {
-        try realm.write {
-            chart.reset()
-        }
-        return nil
-    }
+private func next(from realm: Realm, kind: Entity.Chart.Kind) throws -> SongRequest? {
+    guard let chart = Entity.Chart.ChartSongs.chart(kind: kind, from: realm) else { return nil }
     guard let next = chart.request() else { throw AlreadyCached() }
     return next
 }
