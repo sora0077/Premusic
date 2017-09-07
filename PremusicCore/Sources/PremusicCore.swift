@@ -32,6 +32,8 @@ public func launch() {
         Entity.Chart.ChartSongs.self,
         Entity.Search.SearchObject.self,
         Entity.Search.SearchSongs.self,
+        Entity.Search.SearchAlbums.self,
+        Entity.Search.SearchArtists.self,
         Entity.StringValue.self,
         Entity.DeveloperToken.self,
         Entity.EditorialNotes.self,
