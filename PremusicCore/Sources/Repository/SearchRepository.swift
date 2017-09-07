@@ -40,8 +40,9 @@ private typealias Response = (
     albums: Value<AlbumRequest.Response>?,
     artist: Value<ArtistRequest.Response>?)
 
-private func response(_ res: SearchResources.Response) -> Response {
-    return (Value(res.songs), Value(res.albums), Value(res.artists))
+private func initialRequest(storefront: Entity.Storefront.Identifier, term: String) -> Single<Response> {
+    let request = SearchResources(storefront: storefront, term: term, limit: 10)
+    return locator.session.send(request).map { (Value($0.songs), Value($0.albums), Value($0.artists)) }
 }
 
 final class SearchRepositoryImpl: Repository {
@@ -62,8 +63,7 @@ final class SearchRepositoryImpl: Repository {
                 if let request = request {
                     return locator.session.send(request).map { (Value($0), nil, nil) }
                 } else {
-                    let request = SearchResources(storefront: storefront, term: term)
-                    return locator.session.send(request).map(response)
+                    return initialRequest(storefront: storefront, term: term)
                 }
             }
             .write { realm, response in
@@ -81,8 +81,7 @@ final class SearchRepositoryImpl: Repository {
                 if let request = request {
                     return locator.session.send(request).map { (nil, Value($0), nil) }
                 } else {
-                    let request = SearchResources(storefront: storefront, term: term)
-                    return locator.session.send(request).map(response)
+                    return initialRequest(storefront: storefront, term: term)
                 }
             }
             .write { realm, response in
@@ -100,8 +99,7 @@ final class SearchRepositoryImpl: Repository {
                 if let request = request {
                     return locator.session.send(request).map { (nil, nil, Value($0)) }
                 } else {
-                    let request = SearchResources(storefront: storefront, term: term)
-                    return locator.session.send(request).map(response)
+                    return initialRequest(storefront: storefront, term: term)
                 }
             }
             .write { realm, response in
