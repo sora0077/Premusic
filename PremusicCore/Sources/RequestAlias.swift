@@ -50,3 +50,10 @@ typealias GetCharts = AppleMusicKit.GetCharts<
     Entity.Album.Attributes,
     Entity.Genre.Attributes,
     Entity.Storefront.Attributes>
+
+typealias SearchResources = AppleMusicKit.SearchResources<
+    Entity.Song.Attributes,
+    Entity.MusicVideo.Attributes,
+    Entity.Album.Attributes,
+    Entity.Artist.Attributes,
+    Entity.Storefront.Attributes>

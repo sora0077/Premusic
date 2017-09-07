@@ -1,4 +1,4 @@
-github "sora0077/AppleMusicKit" ~> 1.0
+github "sora0077/AppleMusicKit" "master"
 github "realm/realm-cocoa" "master"
 github "ReactiveX/RxSwift" "master"
 github "sora0077/WindowKit" "master"

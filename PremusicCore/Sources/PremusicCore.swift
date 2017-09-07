@@ -30,6 +30,8 @@ public func launch() {
         Cache.StorefrontsCache.self,
         Cache.SongCache.self,
         Entity.Chart.ChartSongs.self,
+        Entity.Search.SearchObject.self,
+        Entity.Search.SearchSongs.self,
         Entity.StringValue.self,
         Entity.DeveloperToken.self,
         Entity.EditorialNotes.self,

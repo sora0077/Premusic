@@ -24,6 +24,7 @@ public extension Entity.Chart {
     @objc(ChartSongs)
     public final class ChartSongs: Entity.EntityObject, Collection {
         @objc private dynamic var _kind: String = ""
+        @objc private dynamic var _kinda: String = ""
         @nonobjc public var kind: Kind {
             get { return Kind(rawValue: _kind)! }
             set { _kind = newValue.rawValue }
@@ -47,19 +48,14 @@ public extension Entity.Chart {
             return next?.request()
         }
 
-        func update(_ songs: [Entity.Song], next: GetCharts.GetPage<Entity.Song.Attributes>?, to realm: Realm) throws {
+        func update(_ songs: [Entity.Song], next: GetCharts.GetPage<Entity.Song.Attributes>?, to realm: Realm) {
             self.songs.append(objectsIn: songs)
-            if let next = try next.flatMap({ try Cache.RequestObject(key: "ChartSongs", $0) }) {
+            if let next = next.flatMap({ Cache.RequestObject(key: "ChartSongs", $0) }) {
                 realm.add(next, update: true)
                 self.next = next
             } else {
                 self.next = nil
             }
-        }
-
-        func reset() {
-            songs.removeAll()
-            next = nil
         }
 
         // MARK: Collection

@@ -37,7 +37,7 @@ final class ChartRepositoryImpl: Repository {
             .write { realm, response in
                 let songs = Entity.Song.save(response?.data ?? [], to: realm)
                 let chart = Entity.Chart.ChartSongs.chart(kind: kind, from: realm) ?? Entity.Chart.ChartSongs(kind: kind)
-                try chart.update(songs, next: response?.next, to: realm)
+                chart.update(songs, next: response?.next, to: realm)
                 realm.add(chart, update: true)
             }
     }

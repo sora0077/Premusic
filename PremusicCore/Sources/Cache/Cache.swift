@@ -28,12 +28,11 @@ struct Cache {
 
         override class func primaryKey() -> String? { return "key" }
 
-        convenience init?<Req: PaginatorRequest>(key: String, _ request: Req) throws {
+        convenience init?<Req: PaginatorRequest>(key: String, _ request: Req) {
             self.init()
-            guard let url = try request.buildURLRequest().url else { return nil }
             self.key = key
-            self.path = url.path
-            self.parameters = url.query ?? ""
+            self.path = request.path
+            self.parameters = (request.parameters as? [String: Any])?.map { "\($0.key)=\($0.value)" }.joined(separator: "&") ?? ""
         }
 
         func request<Req: PaginatorRequest>() -> Req {
