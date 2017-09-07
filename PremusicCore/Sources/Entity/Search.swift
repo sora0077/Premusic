@@ -14,34 +14,36 @@ extension Entity {
 }
 
 extension Entity.Search {
-    @objc(SearchObject)
-    final class SearchObject: Entity.EntityObject {
+    @objc(SearchRoot)
+    final class Root: Entity.EntityObject {
         @objc private(set) dynamic var term: String = ""
-        @objc private(set) dynamic var songs: SearchSongs!
-        @objc private(set) dynamic var albums: SearchAlbums!
-        @objc private(set) dynamic var artists: SearchArtists!
+        @objc private(set) dynamic var songs: Songs!
+        @objc private(set) dynamic var albums: Albums!
+        @objc private(set) dynamic var artists: Artists!
 
         override class func primaryKey() -> String? { return "term" }
 
         convenience required init(term: String) {
             self.init()
             self.term = term
-            self.songs = SearchSongs(term: term)
-            self.albums = SearchAlbums(term: term)
-            self.artists = SearchArtists(term: term)
+            self.songs = Songs(term: term)
+            self.albums = Albums(term: term)
+            self.artists = Artists(term: term)
         }
 
-        static func object(term: String, from realm: Realm) -> SearchObject? {
+        static func object(term: String, from realm: Realm) -> Root? {
             let cachedAt = Date(timeIntervalSinceNow: -0.5 * 60 * 60)
             return realm.objects(self).filter("term = %@ AND cachedAt > %@", term, cachedAt).first
         }
     }
 
     @objc(SearchSongs)
-    final class SearchSongs: Object, Collection {
+    final class Songs: Object, Collection {
         @objc private dynamic var term: String = ""
         private let songs = List<Entity.Song>()
         @objc private dynamic var next: Cache.RequestObject?
+
+        override class func primaryKey() -> String? { return "term" }
 
         convenience init(term: String) {
             self.init()
@@ -70,10 +72,12 @@ extension Entity.Search {
     }
 
     @objc(SearchAlbums)
-    final class SearchAlbums: Object, Collection {
+    final class Albums: Object, Collection {
         @objc private dynamic var term: String = ""
         private let albums = List<Entity.Album>()
         @objc private dynamic var next: Cache.RequestObject?
+
+        override class func primaryKey() -> String? { return "term" }
 
         convenience init(term: String) {
             self.init()
@@ -102,10 +106,12 @@ extension Entity.Search {
     }
 
     @objc(SearchArtists)
-    final class SearchArtists: Object, Collection {
+    final class Artists: Object, Collection {
         @objc private dynamic var term: String = ""
         private let artists = List<Entity.Artist>()
         @objc private dynamic var next: Cache.RequestObject?
+
+        override class func primaryKey() -> String? { return "term" }
 
         convenience init(term: String) {
             self.init()
