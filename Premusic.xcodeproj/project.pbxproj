@@ -23,8 +23,13 @@
 		D924869F1F2F38F9006E1C49 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D924869B1F2F38E9006E1C49 /* RxSwift.framework */; };
 		D92486A01F2F38F9006E1C49 /* RxSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D924869B1F2F38E9006E1C49 /* RxSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D92486A11F2F3900006E1C49 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D924869B1F2F38E9006E1C49 /* RxSwift.framework */; };
+		D92E19AA1F62F7D700C79FF7 /* SearchUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92E19A91F62F7D700C79FF7 /* SearchUseCase.swift */; };
 		D94D5FF31F532E5900E7B8D5 /* StorefrontCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94D5FF21F532E5900E7B8D5 /* StorefrontCache.swift */; };
 		D94D5FF51F532E6500E7B8D5 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94D5FF41F532E6500E7B8D5 /* Cache.swift */; };
+		D96A82951F684750003EBDE5 /* SelectStorefront+Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96A82941F684750003EBDE5 /* SelectStorefront+Presenter.swift */; };
+		D96A82971F68475E003EBDE5 /* SelectStorefront.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96A82961F68475E003EBDE5 /* SelectStorefront.swift */; };
+		D96A82991F684778003EBDE5 /* SelectStorefront+Usecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96A82981F684778003EBDE5 /* SelectStorefront+Usecase.swift */; };
+		D96A829C1F68DBBA003EBDE5 /* Disposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96A829B1F68DBBA003EBDE5 /* Disposer.swift */; };
 		D9939DAF1F28EEBF00EE9F5A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9939DAE1F28EEBF00EE9F5A /* AppDelegate.swift */; };
 		D9939DB11F28EEBF00EE9F5A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9939DB01F28EEBF00EE9F5A /* ViewController.swift */; };
 		D9939DB61F28EEBF00EE9F5A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D9939DB51F28EEBF00EE9F5A /* Assets.xcassets */; };
@@ -151,8 +156,13 @@
 		D92486991F2F2117006E1C49 /* RequestAlias.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestAlias.swift; sourceTree = "<group>"; };
 		D924869B1F2F38E9006E1C49 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
 		D924869C1F2F38E9006E1C49 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
+		D92E19A91F62F7D700C79FF7 /* SearchUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUseCase.swift; sourceTree = "<group>"; };
 		D94D5FF21F532E5900E7B8D5 /* StorefrontCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorefrontCache.swift; sourceTree = "<group>"; };
 		D94D5FF41F532E6500E7B8D5 /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
+		D96A82941F684750003EBDE5 /* SelectStorefront+Presenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SelectStorefront+Presenter.swift"; sourceTree = "<group>"; };
+		D96A82961F68475E003EBDE5 /* SelectStorefront.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectStorefront.swift; sourceTree = "<group>"; };
+		D96A82981F684778003EBDE5 /* SelectStorefront+Usecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SelectStorefront+Usecase.swift"; sourceTree = "<group>"; };
+		D96A829B1F68DBBA003EBDE5 /* Disposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Disposer.swift; sourceTree = "<group>"; };
 		D9939DAB1F28EEBF00EE9F5A /* Premusic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Premusic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9939DAE1F28EEBF00EE9F5A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D9939DB01F28EEBF00EE9F5A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -248,10 +258,12 @@
 		D92486821F2F0617006E1C49 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				D96A82931F684728003EBDE5 /* SelectStorefront */,
 				D9B21B801F436091009711BB /* UseCase */,
 				D9B21B841F49C29A009711BB /* Repository */,
 				D94D5FF11F532E4400E7B8D5 /* Cache */,
 				D92486851F2F066C006E1C49 /* Entity */,
+				D96A829A1F68DB91003EBDE5 /* Utils */,
 				D92486991F2F2117006E1C49 /* RequestAlias.swift */,
 				D9B21B7D1F43537B009711BB /* PremusicCore.swift */,
 			);
@@ -302,6 +314,24 @@
 				D9AC05091F5717930072F849 /* SongCache.swift */,
 			);
 			path = Cache;
+			sourceTree = "<group>";
+		};
+		D96A82931F684728003EBDE5 /* SelectStorefront */ = {
+			isa = PBXGroup;
+			children = (
+				D96A82961F68475E003EBDE5 /* SelectStorefront.swift */,
+				D96A82941F684750003EBDE5 /* SelectStorefront+Presenter.swift */,
+				D96A82981F684778003EBDE5 /* SelectStorefront+Usecase.swift */,
+			);
+			path = SelectStorefront;
+			sourceTree = "<group>";
+		};
+		D96A829A1F68DB91003EBDE5 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				D96A829B1F68DBBA003EBDE5 /* Disposer.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		D9939DA21F28EEBF00EE9F5A = {
@@ -362,6 +392,7 @@
 		D9B21B801F436091009711BB /* UseCase */ = {
 			isa = PBXGroup;
 			children = (
+				D92E19A91F62F7D700C79FF7 /* SearchUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -808,23 +839,28 @@
 				D92486981F2F20AE006E1C49 /* Genre.swift in Sources */,
 				D92486901F2F1E08006E1C49 /* EditorialNotes.swift in Sources */,
 				D9BA47D31F50A2FF00B6A529 /* DeveloperToken.swift in Sources */,
+				D96A82971F68475E003EBDE5 /* SelectStorefront.swift in Sources */,
 				D9BC08971F53529F00B7147A /* AlbumRepository.swift in Sources */,
 				D9BC08991F5353B600B7147A /* MusicVideo.swift in Sources */,
 				D9B21B861F49C2B9009711BB /* SongRepository.swift in Sources */,
+				D96A82991F684778003EBDE5 /* SelectStorefront+Usecase.swift in Sources */,
 				D94D5FF51F532E6500E7B8D5 /* Cache.swift in Sources */,
 				D924868B1F2F09A0006E1C49 /* Song.swift in Sources */,
 				D9B21B7E1F43537B009711BB /* PremusicCore.swift in Sources */,
 				D92486891F2F0684006E1C49 /* Entity.swift in Sources */,
 				D9B21B881F49D40E009711BB /* StorefrontRepository.swift in Sources */,
 				D9B21B8A1F49D697009711BB /* Repository.swift in Sources */,
+				D96A829C1F68DBBA003EBDE5 /* Disposer.swift in Sources */,
 				D924868E1F2F1DA1006E1C49 /* Artwork.swift in Sources */,
 				D94D5FF31F532E5900E7B8D5 /* StorefrontCache.swift in Sources */,
 				D994F6D91F5B221F00F468C0 /* Chart.swift in Sources */,
 				D9DF69621F617FFC00D7B0A7 /* SearchRepository.swift in Sources */,
 				D9DF69601F617FE300D7B0A7 /* Search.swift in Sources */,
 				D92486871F2F0679006E1C49 /* Storefront.swift in Sources */,
+				D96A82951F684750003EBDE5 /* SelectStorefront+Presenter.swift in Sources */,
 				D924869A1F2F2117006E1C49 /* RequestAlias.swift in Sources */,
 				D9EF01CB1F5B1C8E00271064 /* ChartRepository.swift in Sources */,
+				D92E19AA1F62F7D700C79FF7 /* SearchUseCase.swift in Sources */,
 				D92486941F2F1FD8006E1C49 /* Album.swift in Sources */,
 				D9AC050A1F5717930072F849 /* SongCache.swift in Sources */,
 				D92486961F2F2048006E1C49 /* Artist.swift in Sources */,

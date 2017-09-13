@@ -18,6 +18,10 @@ struct Cache {
         @objc private(set) dynamic var cachedAt = Date()
 
         override class func primaryKey() -> String? { return "pk" }
+
+        static func object(from realm: Realm) -> Self? {
+            return realm.object(ofType: self, forPrimaryKey: "pk")
+        }
     }
 
     @objc(RequestObject)

@@ -11,6 +11,14 @@ import RealmSwift
 import APIKit
 import AppleMusicKit
 @_exported import RxSwift
+@_exported import class RealmSwift.ThreadSafeReference
+@_exported import class RealmSwift.Results
+
+public protocol PremusicRealmObjectType {}
+extension Object: PremusicRealmObjectType {}
+public extension PremusicRealmObjectType where Self: Object {
+    var ref: ThreadSafeReference<Self> { return .init(to: self) }
+}
 
 private extension EntityType where Self: Object, Attributes: Object, Relations: Object {
     static var classes: [Object.Type] { return [Self.self, Attributes.self, Relations.self] }
@@ -28,6 +36,7 @@ public func launch() {
     let objectTypes = [
         Cache.RequestObject.self,
         Cache.StorefrontsCache.self,
+        Cache.SelectedStorefront.self,
         Cache.SongCache.self,
         Entity.Chart.ChartSongs.self,
         Entity.Search.Root.self,

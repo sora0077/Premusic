@@ -7,9 +7,9 @@
 //
 
 import UIKit
+import RealmSwift
 import WindowKit
 @testable import PremusicCore
-import RealmSwift
 import AppleMusicKit
 
 private enum WindowLevel: Int, WindowKit.WindowLevel {
@@ -35,36 +35,32 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         PremusicCore.launch()
 
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = UIViewController()
+        window?.rootViewController = ViewController()
         window?.makeKeyAndVisible()
 
         let realm = try! Realm()  // swiftlint:disable:this force_try
-        notificationToken = realm.objects(Entity.DeveloperToken.self).addNotificationBlock { changes in
+        notificationToken = realm.objects(Entity.DeveloperToken.self).addNotificationBlock { (changes) in
             switch changes {
             case .initial(let results), .update(let results, _, _, _):
                 if let token = results.first?.token {
                     Session.shared.authorization = .init(developerToken: token)
-
-//                    ChartRepositoryImpl(storefront: "jp").chart().debug().subscribe().disposed(by: self.disposeBag)
-                    SearchRepositoryImpl(storefront: "jp").searchSongs(term: "初音ミク").debug().subscribe().disposed(by: self.disposeBag)
-//                    StorefrontRepositoryImpl().storefronts().debug().subscribe().disposed(by: self.disposeBag)
-//                    AlbumRepositoryImpl(storefront: "us").album(with: "310730204").debug().subscribe().disposed(by: self.disposeBag)
-                } else {
-                    Session.shared.authorization = nil
                 }
-            case .error(let error):
+            case .error:
                 break
             }
         }
 
-        if let token = UserDefaults.standard.string(forKey: "DeveloperToken") {
+        func setDeveloperToken() {
+            guard let token = UserDefaults.standard.string(forKey: "DeveloperToken") else { return }
             guard let saved = realm.objects(Entity.DeveloperToken.self).first, token == saved.token else {
                 try! realm.write {  // swiftlint:disable:this force_try
                     realm.add(Entity.DeveloperToken(token: token), update: true)
                 }
-                return true
+                return
             }
         }
+        setDeveloperToken()
+
         return true
     }
 }
