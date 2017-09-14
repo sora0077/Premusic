@@ -26,7 +26,7 @@ final class SongRepositoryImpl: Repository {
                 realm.object(ofType: Entity.Song.Attributes.self, forPrimaryKey: id)
             }
             .flatMap { _ in
-                locator.session.send(GetSong(storefront: storefront, id: id))
+                locator.session.send(GetSong(storefront: storefront, id: id, language: locator.language.identifier))
             }
             .write { realm, response in
                 save(to: realm, with: response.data)
@@ -40,7 +40,7 @@ final class SongRepositoryImpl: Repository {
                 realm.objects(Entity.Song.Attributes.self).filter("identifier IN %@", ids).count == ids.count
             }
             .flatMap { _ in
-                locator.session.send(GetMultipleSongs(storefront: storefront, ids: ids))
+                locator.session.send(GetMultipleSongs(storefront: storefront, ids: ids, language: locator.language.identifier))
             }
             .write { realm, response in
                 save(to: realm, with: response.data)

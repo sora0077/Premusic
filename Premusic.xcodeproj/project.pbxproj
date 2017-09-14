@@ -163,11 +163,11 @@
 		D96A82961F68475E003EBDE5 /* SelectStorefront.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectStorefront.swift; sourceTree = "<group>"; };
 		D96A82981F684778003EBDE5 /* SelectStorefront+Usecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SelectStorefront+Usecase.swift"; sourceTree = "<group>"; };
 		D96A829B1F68DBBA003EBDE5 /* Disposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Disposer.swift; sourceTree = "<group>"; };
+		D97EADAB1F6AF1930025539C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D9939DAB1F28EEBF00EE9F5A /* Premusic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Premusic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9939DAE1F28EEBF00EE9F5A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D9939DB01F28EEBF00EE9F5A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		D9939DB51F28EEBF00EE9F5A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		D9939DB81F28EEBF00EE9F5A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D9939DBA1F28EEBF00EE9F5A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D9939DC51F28EED700EE9F5A /* PremusicCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PremusicCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9939DC71F28EED700EE9F5A /* PremusicCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PremusicCore.h; sourceTree = "<group>"; };
@@ -591,10 +591,10 @@
 			};
 			buildConfigurationList = D9939DA61F28EEBF00EE9F5A /* Build configuration list for PBXProject "Premusic" */;
 			compatibilityVersion = "Xcode 8.0";
-			developmentRegion = en;
+			developmentRegion = ja;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
+				ja,
 				Base,
 			);
 			mainGroup = D9939DA21F28EEBF00EE9F5A;
@@ -912,7 +912,7 @@
 		D9939DB71F28EEBF00EE9F5A /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				D9939DB81F28EEBF00EE9F5A /* Base */,
+				D97EADAB1F6AF1930025539C /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -924,6 +924,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -981,6 +982,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";

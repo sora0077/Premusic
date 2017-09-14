@@ -12,17 +12,21 @@ import RealmSwift
 import RxSwift
 
 protocol LanguageService {
+    var identifier: String { get }
 }
 
 protocol Locator {
     var session: Session { get }
-//    var language: LanguageService { get }
+    var language: LanguageService { get }
 
 //    var subscriber:
 }
 
+extension Locale: LanguageService {}
+
 extension Locator {
     var session: Session { return Session.shared }
+    var language: LanguageService { return Locale.current }
 }
 
 let locator: Locator = LocatorImpl()

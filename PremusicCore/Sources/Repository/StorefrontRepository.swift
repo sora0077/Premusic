@@ -17,7 +17,7 @@ final class StorefrontRepositoryImpl: Repository {
                 realm.object(ofType: Entity.Storefront.Attributes.self, forPrimaryKey: id)
             }
             .flatMap { _ in
-                locator.session.send(GetStorefront(id: id))
+                locator.session.send(GetStorefront(id: id, language: locator.language.identifier))
             }
             .write { realm, page in
                 Entity.Storefront.save(page.data, to: realm)
@@ -30,7 +30,7 @@ final class StorefrontRepositoryImpl: Repository {
                 realm.objects(Entity.Storefront.Attributes.self).filter("identifier IN %@", ids).count == ids.count
             }
             .flatMap { _ in
-                locator.session.send(GetMultipleStorefronts(ids: ids))
+                locator.session.send(GetMultipleStorefronts(ids: ids, language: locator.language.identifier))
             }
             .write { realm, response in
                 Entity.Storefront.save(response.data, to: realm)
@@ -43,7 +43,7 @@ final class StorefrontRepositoryImpl: Repository {
                 realm.object(ofType: Cache.StorefrontsCache.self, forPrimaryKey: Cache.StorefrontsCache.pk)
             }
             .flatMap { _ in
-                locator.session.send(GetAllStorefronts())
+                locator.session.send(GetAllStorefronts(language: locator.language.identifier))
             }
             .write { (realm, page) in
                 let data = Entity.Storefront.save(page.data, to: realm)

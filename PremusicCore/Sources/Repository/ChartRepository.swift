@@ -30,7 +30,7 @@ final class ChartRepositoryImpl: Repository {
                 if let request = request {
                     return locator.session.send(request).map { $0 }
                 } else {
-                    let request = GetCharts(storefront: storefront, types: [.songs])
+                    let request = GetCharts(storefront: storefront, types: [.songs], language: locator.language.identifier)
                     return locator.session.send(request).map { $0.songs }
                 }
             }

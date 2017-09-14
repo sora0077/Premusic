@@ -41,7 +41,7 @@ private typealias Response = (
     artist: Value<ArtistRequest.Response>?)
 
 private func initialRequest(storefront: Entity.Storefront.Identifier, term: String) -> Single<Response> {
-    let request = SearchResources(storefront: storefront, term: term, limit: 10)
+    let request = SearchResources(storefront: storefront, term: term, language: locator.language.identifier, limit: 10)
     return locator.session.send(request).map { (Value($0.songs), Value($0.albums), Value($0.artists)) }
 }
 
