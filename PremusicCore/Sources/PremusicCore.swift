@@ -17,7 +17,8 @@ import AppleMusicKit
 public protocol PremusicRealmObjectType {}
 extension Object: PremusicRealmObjectType {}
 public extension PremusicRealmObjectType where Self: Object {
-    var ref: ThreadSafeReference<Self> { return .init(to: self) }
+    typealias Ref = ThreadSafeReference<Self>
+    var ref: Ref { return .init(to: self) }
 }
 
 private extension EntityType where Self: Object, Attributes: Object, Relations: Object {
@@ -28,6 +29,41 @@ private extension Array where Iterator.Element: Sequence {
     var flatten: [Iterator.Element.Iterator.Element] {
         return flatMap { $0 }
     }
+}
+
+private func objectTypes() -> [Object.Type] {
+    let objectTypes = [
+        Cache.RequestObject.self,
+        Cache.StorefrontsCache.self,
+        Cache.SelectedStorefront.self,
+        Cache.SongCache.self,
+        Entity.Chart.ChartSongs.self,
+        Entity.Search.Root.self,
+        Entity.Search.Songs.self,
+        Entity.Search.Albums.self,
+        Entity.Search.Artists.self,
+        Entity.StringValue.self,
+        Entity.DeveloperToken.self,
+        Entity.EditorialNotes.self,
+        Entity.Artwork.self
+    ]
+    return objectTypes + [
+        Entity.Storefront.classes,
+        Entity.Genre.classes,
+        Entity.Song.classes,
+        Entity.MusicVideo.classes,
+        Entity.Album.classes,
+        Entity.Artist.classes
+    ].flatten
+}
+
+public func StorefrontRealm() throws -> Realm {  // swiftlint:disable:this identifier_name
+    var config = Realm.Configuration()
+    config.deleteRealmIfMigrationNeeded = true
+    config.objectTypes = objectTypes()
+    let fileURL = config.fileURL?.deletingLastPathComponent()
+    config.fileURL = fileURL?.appendingPathComponent("storefront.realm")
+    return try Realm(configuration: config)
 }
 
 public func launch() {

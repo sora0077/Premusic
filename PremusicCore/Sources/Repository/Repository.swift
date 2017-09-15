@@ -50,6 +50,17 @@ extension Single {
     }
 }
 
+func write<R>(_ transform: @escaping (Realm) throws -> R) -> Single<R> {
+    return Single.create { subscriber in
+        do {
+            subscriber(.success(try transform(Realm())))
+        } catch {
+            subscriber(.error(error))
+        }
+        return Disposables.create()
+    }
+}
+
 struct AlreadyCached: Error {}
 
 func read<R>(_ transform: @escaping (Realm) throws -> R?) -> Single<Void> {

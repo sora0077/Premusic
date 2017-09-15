@@ -11,6 +11,16 @@ import AppleMusicKit
 import RxSwift
 
 final class StorefrontRepositoryImpl: Repository {
+    func saveSelectedStorefront(_ storefront: Entity.Storefront.Ref) -> Single<Void> {
+        return write { realm in
+            if let storefront = realm.resolve(storefront) {
+                try realm.write {
+                    realm.add(Cache.SelectedStorefront(storefront), update: true)
+                }
+            }
+        }
+    }
+
     func storefront(with id: Entity.Storefront.Identifier) -> Single<Void> {
         return
             read { realm in

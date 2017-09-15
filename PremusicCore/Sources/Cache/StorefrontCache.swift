@@ -22,7 +22,7 @@ extension Cache {
 
     @objc(StorefrontsCache)
     final class StorefrontsCache: CacheObject {
-        private let list = List<Entity.Storefront>()
+        let list = List<Entity.Storefront>()
 
         convenience init(_ storefronts: [Entity.Storefront]) {
             self.init()

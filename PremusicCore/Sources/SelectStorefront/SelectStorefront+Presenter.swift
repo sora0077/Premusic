@@ -41,7 +41,7 @@ extension SelectStorefront {
 
         public init(input: SelectStorefrontPresenterInput, output: SelectStorefrontPresenterOutput) throws {
             let realm = try Realm()
-            storefronts = realm.objects(Entity.Storefront.self)
+            storefronts = realm.objects(Entity.Storefront.self).sorted(byKeyPath: "identifier")
             storefronts.addNotificationBlock { [weak output] changes in
                 switch changes {
                 case .initial(let results):
@@ -59,22 +59,15 @@ extension SelectStorefront {
                     output?.selectStorefront(storefront)
                 }
                 switch changes {
-                case .initial(let results):
-                    select(results)
-                case .update(let results, _, _, _):
+                case .initial(let results), .update(let results, _, _, _):
                     select(results)
                 case .error:
                     break
                 }
             } --> disposer
 
-            input.select.subscribeOnNext { storefront in
-                let realm = try Realm()
-                if let storefront = realm.resolve(storefront) {
-                    try realm.write {
-                        realm.add(Cache.SelectedStorefront(storefront), update: true)
-                    }
-                }
+            input.select.subscribeOnNext { [weak self] storefront in
+                try self?.usecase.select(storefront)
             } --> disposer
         }
 
@@ -89,6 +82,10 @@ extension SelectStorefront {
 
         func listStorefronts() {
             repos.storefront.storefronts().debug().subscribe() --> disposer
+        }
+
+        func select(_ storefront: Entity.Storefront.Ref) throws {
+            repos.storefront.saveSelectedStorefront(storefront).debug().subscribe() --> disposer
         }
     }
 }
