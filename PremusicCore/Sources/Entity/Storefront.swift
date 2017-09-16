@@ -25,7 +25,7 @@ public extension Entity {
         convenience init<R>(resource: Resource<Attributes, R>, attributes attr: Attributes? = nil, relations rels: Relations? = nil) {
             self.init()
             identifier = resource.id
-            attributes = attr ?? resource.attributes
+            attributes = resource.attributes ?? attr
             relations = rels ?? Relations(id: resource.id)
         }
     }
