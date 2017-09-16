@@ -20,7 +20,7 @@ public protocol SelectStorefrontPresenterOutput: class {
     func selectStorefront(_ storefront: Entity.Storefront)
 }
 
-extension SelectStorefront {
+extension Module.SelectStorefront {
     public final class Presenter: PremusicCore.Presenter {
         private let usecase = Usecase()
         private let disposer = Disposer()
@@ -36,19 +36,6 @@ extension SelectStorefront {
                     output?.showStorefronts(results)
                 case .update(let results, let deletions, let insertions, let modifications):
                     output?.showStorefronts(results, deletions: deletions, insertions: insertions, modifications: modifications)
-                case .error:
-                    break
-                }
-            } --> disposer
-
-            realm.objects(Cache.SelectedStorefront.self).addNotificationBlock { [weak output] changes in
-                func select(_ results: Results<Cache.SelectedStorefront>) {
-                    guard let storefront = results.first?.storefront else { return }
-                    output?.selectStorefront(storefront)
-                }
-                switch changes {
-                case .initial(let results), .update(let results, _, _, _):
-                    select(results)
                 case .error:
                     break
                 }

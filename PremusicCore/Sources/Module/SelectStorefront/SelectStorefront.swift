@@ -8,4 +8,6 @@
 
 import Foundation
 
-public struct SelectStorefront {}
+extension Module {
+    public struct SelectStorefront {}
+}

@@ -50,6 +50,20 @@ extension Single {
     }
 }
 
+//extension Observable {
+//    static func read<R>(_ transform: @escaping (Realm) throws -> R) -> Observable<R> {
+//        return Observable.create { subscriber in
+//            do {
+//                let realm = try Realm()
+//                subscriber
+//            } catch {
+//                subscriber.on(.error(error))
+//            }
+//            return Disposables.create()
+//        }
+//    }
+//}
+
 func realm<R>(_ transform: @escaping (Realm) throws -> R) -> Single<R> {
     return Single.create { subscriber in
         do {
@@ -58,6 +72,14 @@ func realm<R>(_ transform: @escaping (Realm) throws -> R) -> Single<R> {
             subscriber(.error(error))
         }
         return Disposables.create()
+    }
+}
+
+func realm<R>(_ transform: @escaping (Realm) throws -> Observable<R>) -> Observable<R> {
+    do {
+        return try transform(Realm())
+    } catch {
+        return Observable.error(error)
     }
 }
 

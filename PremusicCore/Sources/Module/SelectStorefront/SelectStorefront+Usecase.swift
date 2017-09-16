@@ -9,7 +9,7 @@
 import Foundation
 import RxSwift
 
-extension SelectStorefront {
+extension Module.SelectStorefront {
     final class Usecase {
         private let repos = (storefront: StorefrontRepositoryImpl(), dummy: 0)
 
@@ -19,6 +19,28 @@ extension SelectStorefront {
 
         func select(_ storefront: Entity.Storefront.Ref) -> Single<Void> {
             return repos.storefront.saveSelectedStorefront(storefront)
+        }
+        
+        func selected() -> Observable<Entity.Storefront.Ref> {
+            return realm { realm in
+                Observable<Entity.Storefront.Ref>.create { subscriber in
+                    let token = realm.objects(Cache.SelectedStorefront.self).addNotificationBlock { changes in
+                        func select(_ results: Results<Cache.SelectedStorefront>) {
+                            guard let storefront = results.first?.storefront else { return }
+                            subscriber.onNext(storefront.ref)
+                        }
+                        switch changes {
+                        case .initial(let results), .update(let results, _, _, _):
+                            select(results)
+                        case .error(let error):
+                            subscriber.onError(error)
+                        }
+                    }
+                    return Disposables.create {
+                        token.stop()
+                    }
+                }
+            }
         }
     }
 }

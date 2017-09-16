@@ -46,15 +46,7 @@ private func initialRequest(storefront: Entity.Storefront.Identifier, term: Stri
 }
 
 final class SearchRepositoryImpl: Repository {
-    private let storefront: Entity.Storefront.Identifier
-
-    init(storefront: Entity.Storefront.Identifier) {
-        self.storefront = storefront
-        super.init()
-    }
-
-    func searchSongs(term: String) -> Single<Void> {
-        let storefront = self.storefront
+    func searchSongs(storefront: Entity.Storefront.Identifier, term: String) -> Single<Void> {
         return
             next { realm in
                 try nextSongs(from: realm, term: term)
@@ -71,8 +63,7 @@ final class SearchRepositoryImpl: Repository {
             }
     }
 
-    func searchAlbums(term: String) -> Single<Void> {
-        let storefront = self.storefront
+    func searchAlbums(storefront: Entity.Storefront.Identifier, term: String) -> Single<Void> {
         return
             next { realm in
                 try nextAlbums(from: realm, term: term)
@@ -89,8 +80,7 @@ final class SearchRepositoryImpl: Repository {
             }
     }
 
-    func searchArtists(term: String) -> Single<Void> {
-        let storefront = self.storefront
+    func searchArtists(storefront: Entity.Storefront.Identifier, term: String) -> Single<Void> {
         return
             next { realm in
                 try nextArtists(from: realm, term: term)

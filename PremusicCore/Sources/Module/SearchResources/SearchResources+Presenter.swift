@@ -1,5 +1,5 @@
 //
-//  Presenter.swift
+//  SearchResources+Presenter.swift
 //  PremusicCore
 //
 //  Created by 林 達也 on 2017/09/16.

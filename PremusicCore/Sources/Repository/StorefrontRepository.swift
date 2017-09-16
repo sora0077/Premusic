@@ -18,6 +18,8 @@ final class StorefrontRepositoryImpl: Repository {
             }
         }
     }
+    
+    func selectedStorefront() -> Single<Entity.Storefront.Ref>
 
     func storefront(with id: Entity.Storefront.Identifier) -> Single<Void> {
         return

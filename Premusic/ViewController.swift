@@ -36,7 +36,7 @@ class ViewController: UIViewController {
 }
 
 final class StorefrontSelectViewController: UIViewController {
-    private lazy var presenter: SelectStorefront.Presenter = try! .init(input: self, output: self)  // swiftlint:disable:this force_try
+    private lazy var presenter: Module.SelectStorefront.Presenter = try! .init(input: self, output: self)  // swiftlint:disable:this force_try
     private let _select = PublishSubject<ThreadSafeReference<Entity.Storefront>>()
 
     private let tableView = UITableView()

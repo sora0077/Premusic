@@ -1,5 +1,5 @@
 //
-//  Presenter.swift
+//  SearchResources.swift
 //  PremusicCore
 //
 //  Created by 林 達也 on 2017/09/16.
@@ -7,3 +7,7 @@
 //
 
 import Foundation
+
+extension Module {
+    public struct SearchResources {}
+}
