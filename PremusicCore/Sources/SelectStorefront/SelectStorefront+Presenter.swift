@@ -72,16 +72,15 @@ extension SelectStorefront {
         }
 
         public func viewDidLoad() {
-            usecase.listStorefronts()
+            usecase.listStorefronts().debug().subscribe() --> disposer
         }
     }
 
     final class Usecase {
         private let repos = (storefront: StorefrontRepositoryImpl(), dummy: 0)
-        private let disposer = Disposer()
 
-        func listStorefronts() {
-            repos.storefront.storefronts().debug().subscribe() --> disposer
+        func listStorefronts() -> Single<Void> {
+            return repos.storefront.storefronts()
         }
 
         func select(_ storefront: Entity.Storefront.Ref) -> Single<Void> {
