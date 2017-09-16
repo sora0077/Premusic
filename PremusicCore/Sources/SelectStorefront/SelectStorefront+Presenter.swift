@@ -10,18 +10,6 @@ import Foundation
 import RealmSwift
 import RxSwift
 
-extension Observable {
-    func subscribeOnNext(_ next: @escaping (E) throws -> Void) -> Disposable {
-        return subscribe(onNext: { elem in
-            do {
-                try next(elem)
-            } catch {
-
-            }
-        })
-    }
-}
-
 public protocol SelectStorefrontPresenterInput: class {
     var select: Observable<ThreadSafeReference<Entity.Storefront>> { get }
 }
@@ -71,20 +59,8 @@ extension SelectStorefront {
             }.debug().subscribe() --> disposer
         }
 
-        public func viewDidLoad() {
+        public func viewWillAppear() {
             usecase.listStorefronts().debug().subscribe() --> disposer
-        }
-    }
-
-    final class Usecase {
-        private let repos = (storefront: StorefrontRepositoryImpl(), dummy: 0)
-
-        func listStorefronts() -> Single<Void> {
-            return repos.storefront.storefronts()
-        }
-
-        func select(_ storefront: Entity.Storefront.Ref) -> Single<Void> {
-            return repos.storefront.saveSelectedStorefront(storefront)
         }
     }
 }

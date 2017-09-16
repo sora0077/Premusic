@@ -45,15 +45,18 @@ final class StorefrontSelectViewController: UIViewController {
         super.viewDidLoad()
 
         view.backgroundColor = .white
-
-        presenter.viewDidLoad()
-
         tableView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         tableView.frame = view.bounds
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         view.addSubview(tableView)
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        presenter.viewWillAppear()
     }
 }
 

@@ -7,3 +7,18 @@
 //
 
 import Foundation
+import RxSwift
+
+extension SelectStorefront {
+    final class Usecase {
+        private let repos = (storefront: StorefrontRepositoryImpl(), dummy: 0)
+
+        func listStorefronts() -> Single<Void> {
+            return repos.storefront.storefronts()
+        }
+
+        func select(_ storefront: Entity.Storefront.Ref) -> Single<Void> {
+            return repos.storefront.saveSelectedStorefront(storefront)
+        }
+    }
+}

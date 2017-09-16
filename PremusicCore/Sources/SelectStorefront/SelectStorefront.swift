@@ -12,4 +12,16 @@ public struct SelectStorefront {}
 
 public protocol Presenter {
     func viewDidLoad()
+    func viewWillAppear()
+    func viewDidAppear()
+    func viewWillDisappear()
+    func viewDidDisappear()
+}
+
+public extension Presenter {
+    func viewDidLoad() {}
+    func viewWillAppear() {}
+    func viewDidAppear() {}
+    func viewWillDisappear() {}
+    func viewDidDisappear() {}
 }
