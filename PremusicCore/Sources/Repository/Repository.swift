@@ -62,11 +62,25 @@ func realm<R>(_ transform: @escaping (Realm) throws -> R) -> Single<R> {
 }
 
 extension ThreadSafeReference {
-    func write<R>(_ transform: @escaping (Realm, Confined?) throws -> R) -> Single<R> {
+    func read<R>(from outerRealm: Realm? = nil, _ transform: @escaping (Realm, Confined?) throws -> R) -> Single<R> {
         let ref = self
         return Single.create { subscriber in
             do {
-                let realm = try Realm()
+                let realm = try outerRealm ?? Realm()
+                let resolved = realm.resolve(ref)
+                subscriber(.success(try transform(realm, resolved)))
+            } catch {
+                subscriber(.error(error))
+            }
+            return Disposables.create()
+        }
+    }
+
+    func write<R>(from outerRealm: Realm? = nil, _ transform: @escaping (Realm, Confined?) throws -> R) -> Single<R> {
+        let ref = self
+        return Single.create { subscriber in
+            do {
+                let realm = try outerRealm ?? Realm()
                 let resolved = realm.resolve(ref)
                 try realm.write {
                     subscriber(.success(try transform(realm, resolved)))

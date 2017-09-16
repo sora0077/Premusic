@@ -26,6 +26,7 @@
 		D92E19AA1F62F7D700C79FF7 /* SearchUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D92E19A91F62F7D700C79FF7 /* SearchUseCase.swift */; };
 		D94D5FF31F532E5900E7B8D5 /* StorefrontCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94D5FF21F532E5900E7B8D5 /* StorefrontCache.swift */; };
 		D94D5FF51F532E6500E7B8D5 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94D5FF41F532E6500E7B8D5 /* Cache.swift */; };
+		D9552AB01F6CDFF3006036AD /* Swift+Empty.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9552AAF1F6CDFF3006036AD /* Swift+Empty.swift */; };
 		D96A82951F684750003EBDE5 /* SelectStorefront+Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96A82941F684750003EBDE5 /* SelectStorefront+Presenter.swift */; };
 		D96A82971F68475E003EBDE5 /* SelectStorefront.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96A82961F68475E003EBDE5 /* SelectStorefront.swift */; };
 		D96A82991F684778003EBDE5 /* SelectStorefront+Usecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D96A82981F684778003EBDE5 /* SelectStorefront+Usecase.swift */; };
@@ -159,6 +160,7 @@
 		D92E19A91F62F7D700C79FF7 /* SearchUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUseCase.swift; sourceTree = "<group>"; };
 		D94D5FF21F532E5900E7B8D5 /* StorefrontCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorefrontCache.swift; sourceTree = "<group>"; };
 		D94D5FF41F532E6500E7B8D5 /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
+		D9552AAF1F6CDFF3006036AD /* Swift+Empty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Swift+Empty.swift"; sourceTree = "<group>"; };
 		D96A82941F684750003EBDE5 /* SelectStorefront+Presenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SelectStorefront+Presenter.swift"; sourceTree = "<group>"; };
 		D96A82961F68475E003EBDE5 /* SelectStorefront.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectStorefront.swift; sourceTree = "<group>"; };
 		D96A82981F684778003EBDE5 /* SelectStorefront+Usecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SelectStorefront+Usecase.swift"; sourceTree = "<group>"; };
@@ -330,6 +332,7 @@
 			isa = PBXGroup;
 			children = (
 				D96A829B1F68DBBA003EBDE5 /* Disposer.swift */,
+				D9552AAF1F6CDFF3006036AD /* Swift+Empty.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -851,6 +854,7 @@
 				D9B21B881F49D40E009711BB /* StorefrontRepository.swift in Sources */,
 				D9B21B8A1F49D697009711BB /* Repository.swift in Sources */,
 				D96A829C1F68DBBA003EBDE5 /* Disposer.swift in Sources */,
+				D9552AB01F6CDFF3006036AD /* Swift+Empty.swift in Sources */,
 				D924868E1F2F1DA1006E1C49 /* Artwork.swift in Sources */,
 				D94D5FF31F532E5900E7B8D5 /* StorefrontCache.swift in Sources */,
 				D994F6D91F5B221F00F468C0 /* Chart.swift in Sources */,

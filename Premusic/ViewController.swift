@@ -72,8 +72,6 @@ extension StorefrontSelectViewController: UITableViewDataSource {
 
 extension StorefrontSelectViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-
         _select.onNext(presenter.storefronts[indexPath.row].ref)
     }
 }
@@ -91,6 +89,10 @@ extension StorefrontSelectViewController: SelectStorefrontPresenterInput, Select
 
     func selectStorefront(_ storefront: Entity.Storefront) {
         print(storefront)
+        if tableView.indexPathsForSelectedRows.isEmpty, let index = presenter.storefronts.index(of: storefront) {
+            let indexPath = IndexPath(row: index, section: 0)
+            tableView.selectRow(at: indexPath, animated: true, scrollPosition: .none)
+        }
 
 //        dismiss(animated: true, completion: nil)
     }
