@@ -66,9 +66,9 @@ extension SelectStorefront {
                 }
             } --> disposer
 
-            input.select.subscribeOnNext { [weak self] storefront in
-                try self?.usecase.select(storefront)
-            } --> disposer
+            input.select.flatMap { [weak self] storefront in
+                self?.usecase.select(storefront) ?? .never()
+            }.debug().subscribe() --> disposer
         }
 
         public func viewDidLoad() {
@@ -84,8 +84,8 @@ extension SelectStorefront {
             repos.storefront.storefronts().debug().subscribe() --> disposer
         }
 
-        func select(_ storefront: Entity.Storefront.Ref) throws {
-            repos.storefront.saveSelectedStorefront(storefront).debug().subscribe() --> disposer
+        func select(_ storefront: Entity.Storefront.Ref) -> Single<Void> {
+            return repos.storefront.saveSelectedStorefront(storefront)
         }
     }
 }

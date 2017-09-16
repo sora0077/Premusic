@@ -12,11 +12,9 @@ import RxSwift
 
 final class StorefrontRepositoryImpl: Repository {
     func saveSelectedStorefront(_ storefront: Entity.Storefront.Ref) -> Single<Void> {
-        return write { realm in
-            if let storefront = realm.resolve(storefront) {
-                try realm.write {
-                    realm.add(Cache.SelectedStorefront(storefront), update: true)
-                }
+        return storefront.write { realm, resolved in
+            if let storefront = resolved {
+                realm.add(Cache.SelectedStorefront(storefront), update: true)
             }
         }
     }
