@@ -11,12 +11,10 @@ import RealmSwift
 
 extension Module.SearchResources {
     final class Usecase {
-        let repos: (search: SearchRepositoryImpl, dummy: Int)
-        
+        private let repos = (search: SearchRepositoryImpl(), storefront: StorefrontRepositoryImpl())
+
         init() throws {
-            let storefront = StorefrontRepositoryImpl()
-            storefront.
         }
-        
+
     }
 }

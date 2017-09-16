@@ -41,9 +41,13 @@ extension Module.SelectStorefront {
                 }
             } --> disposer
 
-            input.select.flatMap { [weak self] storefront in
-                self?.usecase.select(storefront) ?? .never()
-            }.debug().subscribe() --> disposer
+            usecase.selected().debug().subscribe(onNext: { [weak output] ref in
+                if let realm = try? Realm(), let storefront = realm.resolve(ref) {
+                    output?.selectStorefront(storefront)
+                }
+            }) --> disposer
+
+            input.select.flatMap(usecase.select).debug().subscribe() --> disposer
         }
 
         public func viewWillAppear() {
