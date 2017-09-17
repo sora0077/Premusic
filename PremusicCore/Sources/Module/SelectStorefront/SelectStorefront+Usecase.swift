@@ -8,13 +8,14 @@
 
 import Foundation
 import RxSwift
+import RealmSwift
 
 extension Module.SelectStorefront {
     final class Usecase {
         private let repos = (storefront: StorefrontRepositoryImpl(), dummy: 0)
 
-        func listStorefronts() -> Single<Void> {
-            return repos.storefront.storefronts()
+        func fetch() -> Single<Void> {
+            return repos.storefront.fetch()
         }
 
         func select(_ storefront: Entity.Storefront.Ref) -> Single<Void> {
@@ -23,6 +24,10 @@ extension Module.SelectStorefront {
 
         func selected() -> Observable<Entity.Storefront.Ref> {
             return repos.storefront.selectedStorefront()
+        }
+
+        func allStorefronts() throws -> (Results<Entity.Storefront>, CollectionChange<Entity.Storefront>) {
+            return try repos.storefront.allStorefronts()
         }
     }
 }

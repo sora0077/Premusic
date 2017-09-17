@@ -9,6 +9,15 @@
 import Foundation
 import AppleMusicKit
 import RxSwift
+import RealmSwift
+
+typealias CollectionChange<E> = Observable<RealmCollectionChange<Results<E>>> where E: Object
+
+//protocol AAA {
+//    associatedtype Element: Object
+//    typealias CollectionChange = Observable<RealmCollectionChange<Results<Element>>>
+//
+//}
 
 final class StorefrontRepositoryImpl: Repository {
     func saveSelectedStorefront(_ storefront: Entity.Storefront.Ref) -> Single<Void> {
@@ -41,7 +50,21 @@ final class StorefrontRepositoryImpl: Repository {
         }
     }
 
-    func storefront(with id: Entity.Storefront.Identifier) -> Single<Void> {
+    func allStorefronts() throws -> (Results<Entity.Storefront>, CollectionChange<Entity.Storefront>) {
+        let realm = try Realm()
+        let results = realm.objects(Entity.Storefront.self).sorted(byKeyPath: "identifier", ascending: true)
+        let changes = CollectionChange<Entity.Storefront>.create { subscriber in
+            let token = results.addNotificationBlock { changes in
+                subscriber.onNext(changes)
+            }
+            return Disposables.create {
+                token.stop()
+            }
+        }
+        return (results, changes)
+    }
+
+    func fetch(with id: Entity.Storefront.Identifier) -> Single<Void> {
         return
             read { realm in
                 realm.object(ofType: Entity.Storefront.Attributes.self, forPrimaryKey: id)
@@ -54,7 +77,7 @@ final class StorefrontRepositoryImpl: Repository {
             }
     }
 
-    func storefronts(with ids: Entity.Storefront.Identifier...) -> Single<Void> {
+    func fetch(with ids: Entity.Storefront.Identifier...) -> Single<Void> {
         return
             read { realm in
                 realm.objects(Entity.Storefront.Attributes.self).filter("identifier IN %@", ids).count == ids.count
@@ -67,7 +90,7 @@ final class StorefrontRepositoryImpl: Repository {
             }
     }
 
-    func storefronts() -> Single<Void> {
+    func fetch() -> Single<Void> {
         return
             read { realm in
                 realm.object(ofType: Cache.StorefrontsCache.self, forPrimaryKey: Cache.StorefrontsCache.pk)

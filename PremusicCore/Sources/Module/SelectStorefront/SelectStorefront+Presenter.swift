@@ -28,9 +28,9 @@ extension Module.SelectStorefront {
         public let storefronts: Results<Entity.Storefront>
 
         public init(input: SelectStorefrontPresenterInput, output: SelectStorefrontPresenterOutput) throws {
-            let realm = try Realm()
-            storefronts = realm.objects(Entity.Storefront.self).sorted(byKeyPath: "identifier")
-            storefronts.addNotificationBlock { [weak output] changes in
+            let (results, changes) = try usecase.allStorefronts()
+            storefronts = results
+            changes.debug().subscribe(onNext: { [weak output] changes in
                 switch changes {
                 case .initial(let results):
                     output?.showStorefronts(results)
@@ -39,7 +39,7 @@ extension Module.SelectStorefront {
                 case .error:
                     break
                 }
-            } --> disposer
+            }) --> disposer
 
             usecase.selected().debug().subscribe(onNext: { [weak output] ref in
                 if let realm = try? Realm(), let storefront = realm.resolve(ref) {
@@ -51,7 +51,7 @@ extension Module.SelectStorefront {
         }
 
         public func viewWillAppear() {
-            usecase.listStorefronts().debug().subscribe() --> disposer
+            usecase.fetch().debug().subscribe() --> disposer
         }
     }
 }
