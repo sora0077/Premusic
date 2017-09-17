@@ -21,6 +21,10 @@ public extension PremusicRealmObjectType where Self: Object {
     var ref: Ref { return .init(to: self) }
 }
 
+extension RealmCollection {
+    typealias Changes = (Self, Observable<RealmCollectionChange<Self>>)
+}
+
 private extension EntityType where Self: Object, Attributes: Object, Relations: Object {
     static var classes: [Object.Type] { return [Self.self, Attributes.self, Relations.self] }
 }

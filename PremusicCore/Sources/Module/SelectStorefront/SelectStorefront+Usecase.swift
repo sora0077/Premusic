@@ -26,7 +26,7 @@ extension Module.SelectStorefront {
             return repos.storefront.selectedStorefront()
         }
 
-        func allStorefronts() throws -> (Results<Entity.Storefront>, CollectionChange<Entity.Storefront>) {
+        func allStorefronts() throws -> Results<Entity.Storefront>.Changes {
             let results = try repos.storefront.allStorefronts()
             return (results, repos.storefront.changes(results))
         }

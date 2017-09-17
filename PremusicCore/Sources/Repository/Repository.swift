@@ -35,9 +35,7 @@ private struct LocatorImpl: Locator {
 }
 
 class Repository {
-    typealias CollectionChange<E> = Observable<RealmCollectionChange<Results<E>>> where E: Object
-
-    func changes<E>(_ results: Results<E>) -> CollectionChange<E> {
+    func changes<C>(_ results: C) -> Observable<RealmCollectionChange<C>> where C: RealmCollection {
         return Observable.create { subscriber in
             let token = results.addNotificationBlock { changes in
                 subscriber.onNext(changes)

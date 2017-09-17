@@ -38,9 +38,9 @@ extension Entity.Search {
     }
 
     @objc(SearchSongs)
-    final class Songs: Object, Collection {
+    final class Songs: Object {
         @objc private dynamic var term: String = ""
-        private let songs = List<Entity.Song>()
+        let list = List<Entity.Song>()
         @objc private dynamic var next: Cache.RequestObject?
 
         override class func primaryKey() -> String? { return "term" }
@@ -55,7 +55,7 @@ extension Entity.Search {
         }
 
         func update(_ songs: [Entity.Song], next: SearchResources.GetPage<Entity.Song.Attributes>?, to realm: Realm) {
-            self.songs.append(objectsIn: songs)
+            self.list.append(objectsIn: songs)
             if let next = next.flatMap({ Cache.RequestObject(key: "SearchSongs::\(term)", $0) }) {
                 realm.add(next, update: true)
                 self.next = next
@@ -63,12 +63,6 @@ extension Entity.Search {
                 self.next = nil
             }
         }
-
-        // MARK: Collection
-        public var startIndex: Int { return songs.startIndex }
-        public var endIndex: Int { return songs.endIndex }
-        public func index(after idx: Int) -> Int { return songs.index(after: idx) }
-        public subscript(idx: Int) -> Entity.Song { return songs[idx] }
     }
 
     @objc(SearchAlbums)

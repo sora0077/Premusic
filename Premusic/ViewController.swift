@@ -104,7 +104,7 @@ extension StorefrontSelectViewController: SelectStorefrontPresenterInput, Select
 }
 
 final class SearchViewController: UIViewController {
-    private lazy var presenter: Module.SearchResources.Presenter = .init()
+    private lazy var presenter: Module.SearchResources.Presenter = .init(input: self, output: self)
 
     private let tableView = UITableView()
     private let searchController = UISearchController(searchResultsController: nil)
@@ -124,7 +124,7 @@ final class SearchViewController: UIViewController {
         tableView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         tableView.frame = view.bounds
 //        tableView.delegate = self
-//        tableView.dataSource = self
+        tableView.dataSource = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         view.addSubview(tableView)
 
@@ -137,8 +137,35 @@ final class SearchViewController: UIViewController {
     }
 }
 
+extension SearchViewController: SearchResourcesPresenterInput, SearchResourcesPresenterOutput {
+    func showSongs(_ songs: List<Entity.Song>) {
+        tableView.reloadData()
+    }
+
+    func showSongs(_ songs: List<Entity.Song>, deletions: [Int], insertions: [Int], modifications: [Int]) {
+        tableView.reloadData()
+    }
+
+    func showEmpty() {
+        tableView.reloadData()
+    }
+}
+
+extension SearchViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return presenter.songs?.count ?? 0
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let song = presenter.songs[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        cell.textLabel?.text = song.attributes?.name
+        return cell
+    }
+}
+
 extension SearchViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        presenter.searchSongs(term: searchText)
+        presenter.search(.songs(from: searchText))
     }
 }

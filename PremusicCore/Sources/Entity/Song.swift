@@ -43,7 +43,7 @@ extension Entity {
         @objc private(set) dynamic var discNumber: Int = 0
         @objc private(set) dynamic var durationInMillis: Int = 0
         @objc private(set) dynamic var editorialNotes: EditorialNotes?
-        @objc private(set) dynamic var name: String = ""
+        @objc public private(set) dynamic var name: String = ""
         @objc private(set) dynamic var trackNumber: Int = 0
 
         @nonobjc private(set) var artwork: Artwork {

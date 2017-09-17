@@ -14,6 +14,14 @@ extension Module.SearchResources {
     final class Usecase {
         private let repos = (search: SearchRepositoryImpl(), storefront: StorefrontRepositoryImpl())
 
+        func songs(term: String) throws -> List<Entity.Song>.Changes? {
+            let realm = try Realm()
+            if let results = realm.object(ofType: Entity.Search.Root.self, forPrimaryKey: term)?.songs.list {
+                return (results, repos.search.changes(results))
+            }
+            return nil
+        }
+
         func searchSongs(term: String) -> Observable<Void> {
             return repos.storefront.selectedStorefront()
                 .flatMap { storefront in
