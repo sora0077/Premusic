@@ -7,3 +7,19 @@
 //
 
 import Foundation
+
+extension Module.SearchResources {
+    public final class Presenter {
+        private let usecase = Usecase()
+        private let disposer = Disposer()
+
+        public init() {
+
+        }
+
+        public func searchSongs(term: String) {
+            guard !term.isEmpty else { return }
+            usecase.searchSongs(term: term).debug().subscribe() --> disposer
+        }
+    }
+}

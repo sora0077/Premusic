@@ -99,5 +99,46 @@ extension StorefrontSelectViewController: SelectStorefrontPresenterInput, Select
                 tableView.scrollToRow(at: indexPath, at: .middle, animated: true)
             }
         }
+        present(UINavigationController(rootViewController: SearchViewController()), animated: true, completion: nil)
+    }
+}
+
+final class SearchViewController: UIViewController {
+    private lazy var presenter: Module.SearchResources.Presenter = .init()
+
+    private let tableView = UITableView()
+    private let searchController = UISearchController(searchResultsController: nil)
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        title = "検索"
+
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(closeAction))
+
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.largeTitleDisplayMode = .always
+        navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
+
+        tableView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        tableView.frame = view.bounds
+//        tableView.delegate = self
+//        tableView.dataSource = self
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        view.addSubview(tableView)
+
+        searchController.searchBar.delegate = self
+    }
+
+    @objc
+    private func closeAction() {
+        dismiss(animated: true, completion: nil)
+    }
+}
+
+extension SearchViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        presenter.searchSongs(term: searchText)
     }
 }
