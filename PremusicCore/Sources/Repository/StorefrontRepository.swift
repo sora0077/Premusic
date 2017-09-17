@@ -50,18 +50,8 @@ final class StorefrontRepositoryImpl: Repository {
         }
     }
 
-    func allStorefronts() throws -> (Results<Entity.Storefront>, CollectionChange<Entity.Storefront>) {
-        let realm = try Realm()
-        let results = realm.objects(Entity.Storefront.self).sorted(byKeyPath: "identifier", ascending: true)
-        let changes = CollectionChange<Entity.Storefront>.create { subscriber in
-            let token = results.addNotificationBlock { changes in
-                subscriber.onNext(changes)
-            }
-            return Disposables.create {
-                token.stop()
-            }
-        }
-        return (results, changes)
+    func allStorefronts() throws -> Results<Entity.Storefront> {
+        return try Realm().objects(Entity.Storefront.self).sorted(byKeyPath: "identifier", ascending: true)
     }
 
     func fetch(with id: Entity.Storefront.Identifier) -> Single<Void> {

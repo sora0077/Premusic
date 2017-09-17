@@ -92,7 +92,6 @@ extension StorefrontSelectViewController: SelectStorefrontPresenterInput, Select
     }
 
     func selectStorefront(_ storefront: Entity.Storefront) {
-        print(storefront)
         if tableView.indexPathsForSelectedRows.isEmpty, let index = presenter.storefronts.index(of: storefront) {
             let indexPath = IndexPath(row: index, section: 0)
             tableView.selectRow(at: indexPath, animated: true, scrollPosition: .none)

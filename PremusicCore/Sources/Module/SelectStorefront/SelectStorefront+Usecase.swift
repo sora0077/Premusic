@@ -27,7 +27,8 @@ extension Module.SelectStorefront {
         }
 
         func allStorefronts() throws -> (Results<Entity.Storefront>, CollectionChange<Entity.Storefront>) {
-            return try repos.storefront.allStorefronts()
+            let results = try repos.storefront.allStorefronts()
+            return (results, repos.storefront.changes(results))
         }
     }
 }

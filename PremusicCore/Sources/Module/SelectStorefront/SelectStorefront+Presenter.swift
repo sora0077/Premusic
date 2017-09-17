@@ -30,7 +30,7 @@ extension Module.SelectStorefront {
         public init(input: SelectStorefrontPresenterInput, output: SelectStorefrontPresenterOutput) throws {
             let (results, changes) = try usecase.allStorefronts()
             storefronts = results
-            changes.debug().subscribe(onNext: { [weak output] changes in
+            changes.subscribe(onNext: { [weak output] changes in
                 switch changes {
                 case .initial(let results):
                     output?.showStorefronts(results)
