@@ -15,8 +15,8 @@ public protocol SearchResourcesPresenterInput: class {
 }
 
 public protocol SearchResourcesPresenterOutput: class {
-    func showSongs(_ songs: List<Entity.Song>)
-    func showSongs(_ songs: List<Entity.Song>, deletions: [Int], insertions: [Int], modifications: [Int])
+    func showSongs(_ songs: List<Entity.Song>?)
+    func showSongs(_ songs: List<Entity.Song>?, deletions: [Int], insertions: [Int], modifications: [Int])
 
     func showEmpty()
 
@@ -65,26 +65,30 @@ extension Module.SearchResources {
 
             let songTerm = term.flatMap(songOrEmpty).flatMap(termOrEmpty).shareReplay(1)
 
-            let songSearch = songTerm.flatMapLatest { [weak self] term in
-                self?.usecase.searchSongs(term: term) ?? .empty()
-            }.shareReplay(1)
-
-            Observable.combineLatest(songTerm, songSearch) { (term, _) in term }
+            songTerm
                 .flatMapLatest { [weak self] term in
-                    try self?.usecase.songs(term: term).map(Observable.just) ?? .empty()
+                    self?.usecase.searchSongs(term: term) ?? .empty()
                 }
-                .flatMapLatest { (songs, changes) in
-                    changes.map { changes in (songs, changes) }
+                .subscribe() --> disposer
+
+            songTerm
+                .debounce(0.2, scheduler: MainScheduler.instance)
+                .flatMapLatest { [weak self] term in
+                    try self?.usecase.songs(term: term) ?? .empty()
                 }
-                .subscribe(onNext: { [weak self, weak output] (songs, changes) in
-                    self?.songs = AnyRealmCollection(songs)
+                .subscribe(onNext: { [weak self, weak output] changes in
                     switch changes {
-                    case .initial(let results):
+                    case .initial(let results)?:
+                        self?.songs = AnyRealmCollection(results)
                         output?.showSongs(results)
-                    case .update(let results, let deletions, let insertions, let modifications):
+                    case .update(let results, let deletions, let insertions, let modifications)?:
+                        self?.songs = AnyRealmCollection(results)
                         output?.showSongs(results, deletions: deletions, insertions: insertions, modifications: modifications)
-                    case .error:
+                    case .error?:
                         break
+                    case nil:
+                        self?.songs = nil
+                        output?.showSongs(nil)
                     }
                 }) --> disposer
         }

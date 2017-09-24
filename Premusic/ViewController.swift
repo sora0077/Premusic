@@ -138,11 +138,11 @@ final class SearchViewController: UIViewController {
 }
 
 extension SearchViewController: SearchResourcesPresenterInput, SearchResourcesPresenterOutput {
-    func showSongs(_ songs: List<Entity.Song>) {
+    func showSongs(_ songs: List<Entity.Song>?) {
         tableView.reloadData()
     }
 
-    func showSongs(_ songs: List<Entity.Song>, deletions: [Int], insertions: [Int], modifications: [Int]) {
+    func showSongs(_ songs: List<Entity.Song>?, deletions: [Int], insertions: [Int], modifications: [Int]) {
         tableView.reloadData()
     }
 
