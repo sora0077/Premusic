@@ -40,13 +40,19 @@ private typealias Response = (
     albums: Value<AlbumRequest.Response>?,
     artist: Value<ArtistRequest.Response>?)
 
-private func initialRequest(storefront: Entity.Storefront.Identifier, term: String) -> Single<Response> {
+private func initialRequest(
+    storefront: Entity.Storefront.Identifier,
+    language: Entity.Storefront.Attributes.Language?,
+    term: String
+) -> Single<Response> {
     let request = SearchResources(storefront: storefront, term: term, language: locator.language.identifier, limit: 10)
     return locator.session.send(request).map { (Value($0.songs), Value($0.albums), Value($0.artists)) }
 }
 
 final class SearchRepositoryImpl: Repository {
-    func searchSongs(storefront: Entity.Storefront.Identifier, term: String) -> Single<Void> {
+    func searchSongs(storefront: Entity.Storefront, term: String) -> Single<Void> {
+        let identifier = storefront.identifier
+        let language = storefront.attributes?.defaultLanguageTag
         return
             next { realm in
                 try nextSongs(from: realm, term: term)
@@ -55,7 +61,7 @@ final class SearchRepositoryImpl: Repository {
                 if let request = request {
                     return locator.session.send(request).map { (Value($0), nil, nil) }
                 } else {
-                    return initialRequest(storefront: storefront, term: term)
+                    return initialRequest(storefront: identifier, language: language, term: term)
                 }
             }
             .write { realm, response in
@@ -63,7 +69,9 @@ final class SearchRepositoryImpl: Repository {
             }
     }
 
-    func searchAlbums(storefront: Entity.Storefront.Identifier, term: String) -> Single<Void> {
+    func searchAlbums(storefront: Entity.Storefront, term: String) -> Single<Void> {
+        let identifier = storefront.identifier
+        let language = storefront.attributes?.defaultLanguageTag
         return
             next { realm in
                 try nextAlbums(from: realm, term: term)
@@ -72,7 +80,7 @@ final class SearchRepositoryImpl: Repository {
                 if let request = request {
                     return locator.session.send(request).map { (nil, Value($0), nil) }
                 } else {
-                    return initialRequest(storefront: storefront, term: term)
+                    return initialRequest(storefront: identifier, language: language, term: term)
                 }
             }
             .write { realm, response in
@@ -80,7 +88,9 @@ final class SearchRepositoryImpl: Repository {
             }
     }
 
-    func searchArtists(storefront: Entity.Storefront.Identifier, term: String) -> Single<Void> {
+    func searchArtists(storefront: Entity.Storefront, term: String) -> Single<Void> {
+        let identifier = storefront.identifier
+        let language = storefront.attributes?.defaultLanguageTag
         return
             next { realm in
                 try nextArtists(from: realm, term: term)
@@ -89,7 +99,7 @@ final class SearchRepositoryImpl: Repository {
                 if let request = request {
                     return locator.session.send(request).map { (nil, nil, Value($0)) }
                 } else {
-                    return initialRequest(storefront: storefront, term: term)
+                    return initialRequest(storefront: identifier, language: language, term: term)
                 }
             }
             .write { realm, response in

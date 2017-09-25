@@ -56,22 +56,24 @@ extension Module.SearchResources {
         private let repos = (search: SearchRepositoryImpl(), storefront: StorefrontRepositoryImpl())
 
         func songs(term: String) throws -> Observable<RealmCollectionChange<List<Entity.Song>>?> {
-            return try Realm().objects(Entity.Search.Root.self)
-                .filter("term = %@", term)
-                .rx.first
-                .flatMapLatest { $0?.songs.list.rx.observable.map { $0 } ?? .just(nil) }
+            return term.isEmpty
+                ? .just(nil)
+                : try Realm().objects(Entity.Search.Root.self)
+                    .filter("term = %@", term)
+                    .rx.first
+                    .flatMapLatest { $0?.songs.list.rx.observable.map { $0 } ?? .just(nil) }
         }
 
         func searchSongs(term: String) -> Observable<Void> {
             return repos.storefront.selectedStorefront()
-                .flatMap { storefront in
+                .flatMapLatest { storefront in
                     storefront.read { (_, resolved) in
-                        resolved.map { Observable.just($0.identifier) } ?? .never()
+                        resolved.map { Observable.just($0) } ?? .never()
                     }
                 }
                 .flatMap { $0 }
-                .flatMap { [weak self] identifier in
-                    self?.repos.search.searchSongs(storefront: identifier, term: term)
+                .flatMap { [weak self] storefront in
+                    self?.repos.search.searchSongs(storefront: storefront, term: term)
                         .asObservable() ?? .never()
                 }
         }

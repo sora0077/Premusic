@@ -100,7 +100,8 @@ extension ThreadSafeReference {
             do {
                 let realm = try outerRealm ?? Realm()
                 let resolved = realm.resolve(ref)
-                subscriber(.success(try transform(realm, resolved)))
+                let invalidated = resolved?.isInvalidated == true
+                subscriber(.success(try transform(realm, invalidated ? nil : resolved)))
             } catch {
                 subscriber(.error(error))
             }
@@ -115,7 +116,8 @@ extension ThreadSafeReference {
                 let realm = try outerRealm ?? Realm()
                 let resolved = realm.resolve(ref)
                 try realm.write {
-                    subscriber(.success(try transform(realm, resolved)))
+                    let invalidated = resolved?.isInvalidated == true
+                    subscriber(.success(try transform(realm, invalidated ? nil : resolved)))
                 }
             } catch {
                 subscriber(.error(error))
