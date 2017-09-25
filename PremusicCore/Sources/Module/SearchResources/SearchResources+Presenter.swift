@@ -46,9 +46,7 @@ extension Module.SearchResources {
         public private(set) var songs: AnyRealmCollection<Entity.Song>!
 
         public init(input: SearchResourcesPresenterInput, output: SearchResourcesPresenterOutput) {
-
             let term = currentTerm
-                .throttle(0.3, scheduler: MainScheduler.instance)
                 .shareReplay(1)
             observeSongs(from: term, output: output)
         }
@@ -58,11 +56,12 @@ extension Module.SearchResources {
         }
 
         private func observeSongs(from term: Observable<Kind>, output: SearchResourcesPresenterOutput) {
-            let songTerm = term.flatMap(songOrEmpty)
-                .debounce(0.2, scheduler: MainScheduler.instance)
+            let songTerm = term
+                .flatMap(songOrEmpty)
                 .map { $0.term }
                 .shareReplay(1)
             let songs = songTerm
+                .debounce(0.2, scheduler: MainScheduler.instance)
                 .flatMapLatest { [weak self] term in
                     (try self?.usecase.songs(term: term) ?? .empty()).map { (term, $0) }
                 }
