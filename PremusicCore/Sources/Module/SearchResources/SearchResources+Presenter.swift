@@ -84,6 +84,7 @@ extension Module.SearchResources {
                 .flatMapLatest { [weak self] term in
                     term.flatMap { self?.usecase.searchSongs(term: $0) } ?? .empty()
                 }
+                .debug()
                 .subscribe() --> disposer
 
             songs.subscribe(onNext: { [weak self, weak output] (_, changes) in

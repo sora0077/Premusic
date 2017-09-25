@@ -76,6 +76,12 @@ extension Module.SearchResources {
                     self?.repos.search.searchSongs(storefront: storefront, term: term)
                         .asObservable() ?? .never()
                 }
+                .catchError { error in
+                    if error is AlreadyCached {
+                        return .empty()
+                    }
+                    throw error
+                }
         }
     }
 }
