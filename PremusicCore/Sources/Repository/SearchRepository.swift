@@ -45,7 +45,7 @@ private func initialRequest(
     language: Entity.Storefront.Attributes.Language?,
     term: String
 ) -> Single<Response> {
-    let request = SearchResources(storefront: storefront, term: term, language: locator.language.identifier, limit: 10)
+    let request = SearchResources(storefront: storefront, term: term, language: language, limit: 25)
     return locator.session.send(request).map { (Value($0.songs), Value($0.albums), Value($0.artists)) }
 }
 

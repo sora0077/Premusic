@@ -30,6 +30,8 @@
 		D93AEFDF1F7B2FE20060FB74 /* PINOperation.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D93AEFDB1F7B2FB60060FB74 /* PINOperation.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D93AEFE01F7B2FE20060FB74 /* PINRemoteImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D93AEFD91F7B2FB50060FB74 /* PINRemoteImage.framework */; };
 		D93AEFE11F7B2FE20060FB74 /* PINRemoteImage.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D93AEFD91F7B2FB50060FB74 /* PINRemoteImage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D93AEFE41F7BFA930060FB74 /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D93AEFE31F7BFA930060FB74 /* UIImageView+Extension.swift */; };
+		D93AEFE81F7BFD560060FB74 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D93AEFE71F7BFD560060FB74 /* SearchViewController.swift */; };
 		D94D5FF31F532E5900E7B8D5 /* StorefrontCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94D5FF21F532E5900E7B8D5 /* StorefrontCache.swift */; };
 		D94D5FF51F532E6500E7B8D5 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94D5FF41F532E6500E7B8D5 /* Cache.swift */; };
 		D9552AB01F6CDFF3006036AD /* Swift+Empty.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9552AAF1F6CDFF3006036AD /* Swift+Empty.swift */; };
@@ -174,6 +176,8 @@
 		D93AEFD91F7B2FB50060FB74 /* PINRemoteImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PINRemoteImage.framework; path = Carthage/Build/iOS/PINRemoteImage.framework; sourceTree = "<group>"; };
 		D93AEFDA1F7B2FB60060FB74 /* PINCache.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PINCache.framework; path = Carthage/Build/iOS/PINCache.framework; sourceTree = "<group>"; };
 		D93AEFDB1F7B2FB60060FB74 /* PINOperation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PINOperation.framework; path = Carthage/Build/iOS/PINOperation.framework; sourceTree = "<group>"; };
+		D93AEFE31F7BFA930060FB74 /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
+		D93AEFE71F7BFD560060FB74 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		D94D5FF21F532E5900E7B8D5 /* StorefrontCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorefrontCache.swift; sourceTree = "<group>"; };
 		D94D5FF41F532E6500E7B8D5 /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
 		D9552AAF1F6CDFF3006036AD /* Swift+Empty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Swift+Empty.swift"; sourceTree = "<group>"; };
@@ -341,6 +345,30 @@
 			path = Module;
 			sourceTree = "<group>";
 		};
+		D93AEFE21F7BFA7F0060FB74 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				D93AEFE31F7BFA930060FB74 /* UIImageView+Extension.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		D93AEFE51F7BFD3A0060FB74 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D93AEFE61F7BFD470060FB74 /* SearchView */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		D93AEFE61F7BFD470060FB74 /* SearchView */ = {
+			isa = PBXGroup;
+			children = (
+				D93AEFE71F7BFD560060FB74 /* SearchViewController.swift */,
+			);
+			path = SearchView;
+			sourceTree = "<group>";
+		};
 		D94D5FF11F532E4400E7B8D5 /* Cache */ = {
 			isa = PBXGroup;
 			children = (
@@ -407,6 +435,8 @@
 		D9939DAD1F28EEBF00EE9F5A /* Premusic */ = {
 			isa = PBXGroup;
 			children = (
+				D93AEFE51F7BFD3A0060FB74 /* Views */,
+				D93AEFE21F7BFA7F0060FB74 /* Utils */,
 				D9939DAE1F28EEBF00EE9F5A /* AppDelegate.swift */,
 				D9939DB01F28EEBF00EE9F5A /* ViewController.swift */,
 				D9939DB51F28EEBF00EE9F5A /* Assets.xcassets */,
@@ -868,7 +898,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D93AEFE41F7BFA930060FB74 /* UIImageView+Extension.swift in Sources */,
 				D9939DB11F28EEBF00EE9F5A /* ViewController.swift in Sources */,
+				D93AEFE81F7BFD560060FB74 /* SearchViewController.swift in Sources */,
 				D9939DAF1F28EEBF00EE9F5A /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

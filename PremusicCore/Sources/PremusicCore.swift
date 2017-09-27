@@ -13,6 +13,7 @@ import AppleMusicKit
 @_exported import RxSwift
 @_exported import class RealmSwift.ThreadSafeReference
 @_exported import class RealmSwift.Results
+@_exported import class RealmSwift.List
 
 public protocol PremusicRealmObjectType {}
 extension Object: PremusicRealmObjectType {}
