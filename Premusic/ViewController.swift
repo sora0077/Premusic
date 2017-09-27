@@ -11,6 +11,7 @@ import RxSwift
 import RxCocoa
 import RealmSwift
 import PremusicCore
+import PINRemoteImage
 
 class ViewController: UIViewController {
 
@@ -160,6 +161,7 @@ extension SearchViewController: UITableViewDataSource {
         let song = presenter.songs[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         cell.textLabel?.text = song.attributes?.name
+        cell.imageView?.pin_setImage(from: song.attributes?.artwork.url(size: 50))
         return cell
     }
 }

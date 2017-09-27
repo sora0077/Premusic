@@ -24,6 +24,12 @@
 		D92486A01F2F38F9006E1C49 /* RxSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D924869B1F2F38E9006E1C49 /* RxSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D92486A11F2F3900006E1C49 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D924869B1F2F38E9006E1C49 /* RxSwift.framework */; };
 		D926F7371F6CED8C0032D6F8 /* Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D926F7361F6CED8C0032D6F8 /* Presenter.swift */; };
+		D93AEFDC1F7B2FE20060FB74 /* PINCache.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D93AEFDA1F7B2FB60060FB74 /* PINCache.framework */; };
+		D93AEFDD1F7B2FE20060FB74 /* PINCache.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D93AEFDA1F7B2FB60060FB74 /* PINCache.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D93AEFDE1F7B2FE20060FB74 /* PINOperation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D93AEFDB1F7B2FB60060FB74 /* PINOperation.framework */; };
+		D93AEFDF1F7B2FE20060FB74 /* PINOperation.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D93AEFDB1F7B2FB60060FB74 /* PINOperation.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D93AEFE01F7B2FE20060FB74 /* PINRemoteImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D93AEFD91F7B2FB50060FB74 /* PINRemoteImage.framework */; };
+		D93AEFE11F7B2FE20060FB74 /* PINRemoteImage.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D93AEFD91F7B2FB50060FB74 /* PINRemoteImage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D94D5FF31F532E5900E7B8D5 /* StorefrontCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94D5FF21F532E5900E7B8D5 /* StorefrontCache.swift */; };
 		D94D5FF51F532E6500E7B8D5 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94D5FF41F532E6500E7B8D5 /* Cache.swift */; };
 		D9552AB01F6CDFF3006036AD /* Swift+Empty.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9552AAF1F6CDFF3006036AD /* Swift+Empty.swift */; };
@@ -121,15 +127,18 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				D93AEFDD1F7B2FE20060FB74 /* PINCache.framework in Embed Frameworks */,
 				D9E3EFE11F2900C300B8C2DE /* Realm.framework in Embed Frameworks */,
 				D9E3EFE31F2900C300B8C2DE /* RealmSwift.framework in Embed Frameworks */,
 				D92486A01F2F38F9006E1C49 /* RxSwift.framework in Embed Frameworks */,
 				D9E3EFDF1F2900C300B8C2DE /* AppleMusicKit.framework in Embed Frameworks */,
 				D9E3EFE51F2900C300B8C2DE /* Result.framework in Embed Frameworks */,
 				D924869E1F2F38F9006E1C49 /* RxCocoa.framework in Embed Frameworks */,
+				D93AEFE11F7B2FE20060FB74 /* PINRemoteImage.framework in Embed Frameworks */,
 				D9E3EFDD1F2900C300B8C2DE /* APIKit.framework in Embed Frameworks */,
 				D9E3EFF31F2901C900B8C2DE /* iTunesService.framework in Embed Frameworks */,
 				D9939DDB1F28EED800EE9F5A /* PremusicCore.framework in Embed Frameworks */,
+				D93AEFDF1F7B2FE20060FB74 /* PINOperation.framework in Embed Frameworks */,
 				D9B21B831F436C75009711BB /* WindowKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -162,6 +171,9 @@
 		D924869B1F2F38E9006E1C49 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
 		D924869C1F2F38E9006E1C49 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
 		D926F7361F6CED8C0032D6F8 /* Presenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Presenter.swift; sourceTree = "<group>"; };
+		D93AEFD91F7B2FB50060FB74 /* PINRemoteImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PINRemoteImage.framework; path = Carthage/Build/iOS/PINRemoteImage.framework; sourceTree = "<group>"; };
+		D93AEFDA1F7B2FB60060FB74 /* PINCache.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PINCache.framework; path = Carthage/Build/iOS/PINCache.framework; sourceTree = "<group>"; };
+		D93AEFDB1F7B2FB60060FB74 /* PINOperation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PINOperation.framework; path = Carthage/Build/iOS/PINOperation.framework; sourceTree = "<group>"; };
 		D94D5FF21F532E5900E7B8D5 /* StorefrontCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorefrontCache.swift; sourceTree = "<group>"; };
 		D94D5FF41F532E6500E7B8D5 /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
 		D9552AAF1F6CDFF3006036AD /* Swift+Empty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Swift+Empty.swift"; sourceTree = "<group>"; };
@@ -220,11 +232,14 @@
 				D924869F1F2F38F9006E1C49 /* RxSwift.framework in Frameworks */,
 				D9E3EFDE1F2900C300B8C2DE /* AppleMusicKit.framework in Frameworks */,
 				D9E3EFE41F2900C300B8C2DE /* Result.framework in Frameworks */,
+				D93AEFDC1F7B2FE20060FB74 /* PINCache.framework in Frameworks */,
 				D924869D1F2F38F9006E1C49 /* RxCocoa.framework in Frameworks */,
 				D9E3EFDC1F2900C300B8C2DE /* APIKit.framework in Frameworks */,
 				D9E3EFF21F2901C900B8C2DE /* iTunesService.framework in Frameworks */,
 				D9939DDA1F28EED800EE9F5A /* PremusicCore.framework in Frameworks */,
+				D93AEFE01F7B2FE20060FB74 /* PINRemoteImage.framework in Frameworks */,
 				D9B21B821F436C75009711BB /* WindowKit.framework in Frameworks */,
+				D93AEFDE1F7B2FE20060FB74 /* PINOperation.framework in Frameworks */,
 				DA1EF30C87E8614606EBAEE0 /* Pods_Premusic.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -436,6 +451,9 @@
 		D9E3EFD11F29008500B8C2DE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D93AEFDA1F7B2FB60060FB74 /* PINCache.framework */,
+				D93AEFDB1F7B2FB60060FB74 /* PINOperation.framework */,
+				D93AEFD91F7B2FB50060FB74 /* PINRemoteImage.framework */,
 				D9B21B811F436C6A009711BB /* WindowKit.framework */,
 				D924869C1F2F38E9006E1C49 /* RxCocoa.framework */,
 				D924869B1F2F38E9006E1C49 /* RxSwift.framework */,

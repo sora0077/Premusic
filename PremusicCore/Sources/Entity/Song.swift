@@ -46,7 +46,7 @@ extension Entity {
         @objc public private(set) dynamic var name: String = ""
         @objc private(set) dynamic var trackNumber: Int = 0
 
-        @nonobjc private(set) var artwork: Artwork {
+        @nonobjc public private(set) var artwork: Artwork {
             get { return _artwork }
             set { _artwork = newValue }
         }
