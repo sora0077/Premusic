@@ -32,6 +32,7 @@
 		D93AEFE11F7B2FE20060FB74 /* PINRemoteImage.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D93AEFD91F7B2FB50060FB74 /* PINRemoteImage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D93AEFE41F7BFA930060FB74 /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D93AEFE31F7BFA930060FB74 /* UIImageView+Extension.swift */; };
 		D93AEFE81F7BFD560060FB74 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D93AEFE71F7BFD560060FB74 /* SearchViewController.swift */; };
+		D93AEFEA1F7C04EA0060FB74 /* UIScrollView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D93AEFE91F7C04EA0060FB74 /* UIScrollView+Extension.swift */; };
 		D94D5FF31F532E5900E7B8D5 /* StorefrontCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94D5FF21F532E5900E7B8D5 /* StorefrontCache.swift */; };
 		D94D5FF51F532E6500E7B8D5 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94D5FF41F532E6500E7B8D5 /* Cache.swift */; };
 		D9552AB01F6CDFF3006036AD /* Swift+Empty.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9552AAF1F6CDFF3006036AD /* Swift+Empty.swift */; };
@@ -178,6 +179,7 @@
 		D93AEFDB1F7B2FB60060FB74 /* PINOperation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PINOperation.framework; path = Carthage/Build/iOS/PINOperation.framework; sourceTree = "<group>"; };
 		D93AEFE31F7BFA930060FB74 /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
 		D93AEFE71F7BFD560060FB74 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		D93AEFE91F7C04EA0060FB74 /* UIScrollView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Extension.swift"; sourceTree = "<group>"; };
 		D94D5FF21F532E5900E7B8D5 /* StorefrontCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorefrontCache.swift; sourceTree = "<group>"; };
 		D94D5FF41F532E6500E7B8D5 /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
 		D9552AAF1F6CDFF3006036AD /* Swift+Empty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Swift+Empty.swift"; sourceTree = "<group>"; };
@@ -349,6 +351,7 @@
 			isa = PBXGroup;
 			children = (
 				D93AEFE31F7BFA930060FB74 /* UIImageView+Extension.swift */,
+				D93AEFE91F7C04EA0060FB74 /* UIScrollView+Extension.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -902,6 +905,7 @@
 				D9939DB11F28EEBF00EE9F5A /* ViewController.swift in Sources */,
 				D93AEFE81F7BFD560060FB74 /* SearchViewController.swift in Sources */,
 				D9939DAF1F28EEBF00EE9F5A /* AppDelegate.swift in Sources */,
+				D93AEFEA1F7C04EA0060FB74 /* UIScrollView+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

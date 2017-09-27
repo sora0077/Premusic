@@ -109,6 +109,17 @@ extension ThreadSafeReference {
         }
     }
 
+    func read<R>(from outerRealm: Realm? = nil, _ transform: (Realm, Confined?) throws -> Observable<R>) -> Observable<R> {
+        do {
+            let realm = try outerRealm ?? Realm()
+            let resolved = realm.resolve(self)
+            let invalidated = resolved?.isInvalidated == true
+            return try transform(realm, invalidated ? nil : resolved)
+        } catch {
+            return Observable.error(error)
+        }
+    }
+
     func write<R>(from outerRealm: Realm? = nil, _ transform: @escaping (Realm, Confined?) throws -> R) -> Single<R> {
         let ref = self
         return Single.create { subscriber in

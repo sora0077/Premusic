@@ -9,11 +9,22 @@
 import UIKit
 import PremusicCore
 
+extension UIScrollView {
+
+}
+
 final class SearchViewController: UIViewController {
+    private enum Section {
+        case songs, loadSongs
+    }
     private lazy var presenter: Module.SearchResources.Presenter = .init(input: self, output: self)
 
     private let tableView = UITableView()
     private let searchController = UISearchController(searchResultsController: nil)
+    private let sections: [Section] = [.songs, .loadSongs]
+    private var canLoadSongs = false
+
+    private let _loadSongs = PublishSubject<Void>()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +40,7 @@ final class SearchViewController: UIViewController {
 
         tableView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         tableView.frame = view.bounds
-        //        tableView.delegate = self
+        tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         view.addSubview(tableView)
@@ -44,30 +55,69 @@ final class SearchViewController: UIViewController {
 }
 
 extension SearchViewController: SearchResourcesPresenterInput, SearchResourcesPresenterOutput {
+    var loadSongs: Observable<Void> { return _loadSongs }
+
     func showSongs(_ songs: List<Entity.Song>?) {
         tableView.reloadData()
     }
 
-    func showSongs(_ songs: List<Entity.Song>?, deletions: [Int], insertions: [Int], modifications: [Int]) {
+    func showSongs(_ songs: List<Entity.Song>?, diff: Presenter.Diff) {
         tableView.reloadData()
     }
 
     func showEmpty() {
         tableView.reloadData()
     }
+
+    func showLoadSongs() {
+        canLoadSongs = true
+        tableView.reloadData()
+//        tableView.reloadSections(IndexSet(integer: 1), with: .bottom)
+    }
+
+    func hideLoadSongs() {
+        canLoadSongs = false
+        tableView.reloadData()
+//        tableView.reloadSections(IndexSet(integer: 1), with: .top)
+    }
 }
 
 extension SearchViewController: UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return sections.count
+    }
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return presenter.songs?.count ?? 0
+        switch sections[section] {
+        case .songs: return presenter.songs?.count ?? 0
+        case .loadSongs: return canLoadSongs ? 1 : 0
+        }
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let song = presenter.songs[indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        cell.textLabel?.text = song.attributes?.name
-        cell.imageView?.setImage(with: song.attributes?.artwork, size: 50)
-        return cell
+        switch sections[indexPath.section] {
+        case .songs:
+            let song = presenter.songs[indexPath.row]
+            let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+            cell.textLabel?.text = song.attributes?.name
+            cell.imageView?.setImage(with: song.attributes?.artwork, size: 50)
+            return cell
+        case .loadSongs:
+            let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+            cell.textLabel?.text = "読み込む"
+            cell.imageView?.image = nil
+            return cell
+        }
+    }
+}
+
+extension SearchViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        switch sections[indexPath.section] {
+        case .songs:()
+        case .loadSongs: _loadSongs.onNext(())
+        }
     }
 }
 

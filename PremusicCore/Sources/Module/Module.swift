@@ -25,3 +25,7 @@ public extension Presenter {
     func viewWillDisappear() {}
     func viewDidDisappear() {}
 }
+
+public extension Presenter {
+    typealias Diff = (deletions: [Int], insertions: [Int], modifications: [Int])
+}

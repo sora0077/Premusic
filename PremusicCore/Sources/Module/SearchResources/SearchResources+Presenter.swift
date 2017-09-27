@@ -11,15 +11,17 @@ import RealmSwift
 import RxSwift
 
 public protocol SearchResourcesPresenterInput: class {
-
+    var loadSongs: Observable<Void> { get }
 }
 
 public protocol SearchResourcesPresenterOutput: class {
     func showSongs(_ songs: List<Entity.Song>?)
-    func showSongs(_ songs: List<Entity.Song>?, deletions: [Int], insertions: [Int], modifications: [Int])
+    func showSongs(_ songs: List<Entity.Song>?, diff: Presenter.Diff)
 
     func showEmpty()
 
+    func showLoadSongs()
+    func hideLoadSongs()
 }
 
 private func songOrEmpty(_ kind: Module.SearchResources.Presenter.Kind) -> Observable<Module.SearchResources.Presenter.Kind> {
@@ -38,16 +40,33 @@ extension Module.SearchResources {
                 case .songs(let term): return term
                 }
             }
+            var isSong: Bool {
+                switch self {
+                case .songs: return true
+                }
+            }
         }
         private let usecase = Usecase()
         private let disposer = Disposer()
         private let currentTerm = PublishSubject<Kind>()
 
+        public private(set) var hasNextSongs: Bool = true
         public private(set) var songs: AnyRealmCollection<Entity.Song>!
 
         public init(input: SearchResourcesPresenterInput, output: SearchResourcesPresenterOutput) {
             let term = currentTerm
                 .shareReplay(1)
+
+            input.loadSongs
+                .throttle(0.5, scheduler: MainScheduler.instance)
+                .flatMap { term }
+                .filter { $0.isSong }
+                .map { $0.term }
+                .filter { !$0.isEmpty }
+                .flatMapLatest { [weak self] in
+                    self?.usecase.searchSongs(term: $0) ?? .empty()
+                }
+                .subscribe() --> disposer
             observeSongs(from: term, output: output)
         }
 
@@ -94,7 +113,7 @@ extension Module.SearchResources {
                     output?.showSongs(results)
                 case .update(let results, let deletions, let insertions, let modifications)?:
                     self?.songs = AnyRealmCollection(results)
-                    output?.showSongs(results, deletions: deletions, insertions: insertions, modifications: modifications)
+                    output?.showSongs(results, diff: (deletions: deletions, insertions: insertions, modifications: modifications))
                 case .error?:
                     break
                 case nil:
@@ -103,6 +122,20 @@ extension Module.SearchResources {
                     output?.showEmpty()
                 }
             }) --> disposer
+
+            songTerm
+                .debounce(0.2, scheduler: MainScheduler.instance)
+                .flatMapLatest { [weak self] term in
+                    (try self?.usecase.hasNextSongs(term: term) ?? .empty()).map { (term, $0) }
+                }
+                .debug()
+                .subscribe(onNext: { [weak output] (_, hasNext) in
+                    if hasNext {
+                        output?.showLoadSongs()
+                    } else {
+                        output?.hideLoadSongs()
+                    }
+                }) --> disposer
         }
     }
 }

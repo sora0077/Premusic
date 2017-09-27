@@ -32,8 +32,12 @@ extension Entity.Search {
         }
 
         static func object(term: String, from realm: Realm) -> Root? {
+            return objects(term: term, from: realm).first
+        }
+
+        static func objects(term: String, from realm: Realm) -> Results<Entity.Search.Root> {
             let cachedAt = Date(timeIntervalSinceNow: -0.5 * 60 * 60)
-            return realm.objects(self).filter("term = %@ AND cachedAt > %@", term, cachedAt).first
+            return realm.objects(self).filter("term = %@ AND cachedAt > %@", term, cachedAt)
         }
     }
 

@@ -64,6 +64,14 @@ extension Module.SearchResources {
                     .flatMapLatest { $0?.songs.list.rx.observable.map { $0 } ?? .just(nil) }
         }
 
+        func hasNextSongs(term: String) throws -> Observable<Bool> {
+            return term.isEmpty
+                ? .just(false)
+                : try Entity.Search.Root.objects(term: term, from: Realm())
+                    .rx.first
+                    .map { $0?.songs.request() != nil }
+        }
+
         func searchSongs(term: String) -> Observable<Void> {
             return repos.storefront.selectedStorefront()
                 .flatMapLatest { storefront in
@@ -71,7 +79,6 @@ extension Module.SearchResources {
                         resolved.map { Observable.just($0) } ?? .never()
                     }
                 }
-                .flatMap { $0 }
                 .flatMap { [weak self] storefront in
                     self?.repos.search.searchSongs(storefront: storefront, term: term)
                         .asObservable() ?? .never()
