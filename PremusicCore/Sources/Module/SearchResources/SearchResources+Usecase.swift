@@ -32,13 +32,22 @@ extension Reactive where Base: RealmCollection, Base: AnyObject {
         }
     }
 
-    var first: Observable<Base.Element?> {
+    func first(_ test: @escaping (_ old: Base.Element?, _ new: Base.Element?) -> Bool = { _, _  in true }) -> Observable<Base.Element?> {
         var base = Optional(self.base)
         return Observable.create { subscriber in
+            var old: Base.Element?
             var token = base?.addNotificationBlock { change in
                 switch change {
-                case .initial(let c), .update(let c, _, _, _):
-                    subscriber.onNext(c.first)
+                case .initial(let c):
+                    let first = c.first
+                    subscriber.onNext(first)
+                    old = first
+                case .update(let c, _, _, _):
+                    let first = c.first
+                    if test(old, first) {
+                        subscriber.onNext(first)
+                    }
+                    old = first
                 case .error: break
                 }
             }
@@ -59,7 +68,7 @@ extension Module.SearchResources {
             return term.isEmpty
                 ? .just(nil)
                 : try Entity.Search.Root.objects(term: term, from: Realm())
-                    .rx.first
+                    .rx.first { old, new in old?.term != new?.term }
                     .flatMapLatest { $0?.songs.list.rx.observable.map { $0 } ?? .just(nil) }
         }
 
@@ -67,7 +76,7 @@ extension Module.SearchResources {
             return term.isEmpty
                 ? .just(false)
                 : try Entity.Search.Root.objects(term: term, from: Realm())
-                    .rx.first
+                    .rx.first { old, new in old?.term != new?.term }
                     .map { $0?.songs.request() != nil }
         }
 

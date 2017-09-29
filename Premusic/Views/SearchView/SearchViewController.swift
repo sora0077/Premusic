@@ -62,7 +62,14 @@ extension SearchViewController: SearchResourcesPresenterInput, SearchResourcesPr
     }
 
     func showSongs(_ songs: List<Entity.Song>?, diff: Presenter.Diff) {
-        tableView.reloadData()
+        func indexPaths(_ values: [Int]) -> [IndexPath] {
+            return values.map { IndexPath(row: $0, section: 0) }
+        }
+        tableView.beginUpdates()
+        tableView.reloadRows(at: indexPaths(diff.modifications), with: .automatic)
+        tableView.insertRows(at: indexPaths(diff.insertions), with: .automatic)
+        tableView.deleteRows(at: indexPaths(diff.deletions), with: .automatic)
+        tableView.endUpdates()
     }
 
     func showEmpty() {
@@ -70,15 +77,20 @@ extension SearchViewController: SearchResourcesPresenterInput, SearchResourcesPr
     }
 
     func showLoadSongs() {
+        guard !canLoadSongs else { return }
+//        let old = canLoadSongs
         canLoadSongs = true
-        tableView.reloadData()
-//        tableView.reloadSections(IndexSet(integer: 1), with: .bottom)
+        tableView.beginUpdates()
+        tableView.insertRows(at: [IndexPath(row: 0, section: 1)], with: .bottom)
+        tableView.endUpdates()
     }
 
     func hideLoadSongs() {
+        guard canLoadSongs else { return }
         canLoadSongs = false
-        tableView.reloadData()
-//        tableView.reloadSections(IndexSet(integer: 1), with: .top)
+        tableView.beginUpdates()
+        tableView.deleteRows(at: [IndexPath(row: 0, section: 1)], with: .top)
+        tableView.endUpdates()
     }
 }
 

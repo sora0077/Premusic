@@ -78,6 +78,7 @@ extension Module.SearchResources {
             let songTerm = term
                 .flatMap(songOrEmpty)
                 .map { $0.term }
+                .distinctUntilChanged()
                 .shareReplay(1)
             let songs = songTerm
                 .debounce(0.2, scheduler: MainScheduler.instance)
