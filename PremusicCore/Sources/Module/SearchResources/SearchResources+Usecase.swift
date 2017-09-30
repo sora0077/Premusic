@@ -32,7 +32,7 @@ extension Reactive where Base: RealmCollection, Base: AnyObject {
         }
     }
 
-    func first(_ test: @escaping (_ old: Base.Element?, _ new: Base.Element?) -> Bool = { _, _  in true }) -> Observable<Base.Element?> {
+    func first(where test: @escaping (_ old: Base.Element?, _ new: Base.Element?) -> Bool = { _, _  in true }) -> Observable<Base.Element?> {
         var base = Optional(self.base)
         return Observable.create { subscriber in
             var old: Base.Element?
@@ -93,7 +93,7 @@ extension Module.SearchResources {
                 }
                 .catchError { error in
                     if error is AlreadyCached {
-                        return .empty()
+                        return .just(())
                     }
                     throw error
                 }

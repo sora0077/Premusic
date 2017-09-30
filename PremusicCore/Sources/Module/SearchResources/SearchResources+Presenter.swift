@@ -18,10 +18,13 @@ public protocol SearchResourcesPresenterOutput: class {
     func showSongs(_ songs: List<Entity.Song>?)
     func showSongs(_ songs: List<Entity.Song>?, diff: Presenter.Diff)
 
-    func showEmpty()
+    func showLoadSongsTrigger()
+    func hideLoadSongsTrigger()
 
-    func showLoadSongs()
-    func hideLoadSongs()
+    func showLoadingSongs()
+    func hideLoadingSongs()
+
+    func showEmpty()
 }
 
 private func songOrEmpty(_ kind: Module.SearchResources.Presenter.Kind) -> Observable<Module.SearchResources.Presenter.Kind> {
@@ -50,12 +53,20 @@ extension Module.SearchResources {
         private let disposer = Disposer()
         private let currentTerm = PublishSubject<Kind>()
 
-        public private(set) var hasNextSongs: Bool = true
         public private(set) var songs: AnyRealmCollection<Entity.Song>!
 
         public init(input: SearchResourcesPresenterInput, output: SearchResourcesPresenterOutput) {
+            output.hideLoadingSongs()
             let term = currentTerm
                 .shareReplay(1)
+
+            let loadingSongs = PublishSubject<Bool>()
+
+            let fetchSongs: (String) -> Observable<Void> = { [weak self] in
+                loadingSongs.onNext(true)
+                return (self?.usecase.searchSongs(term: $0) ?? .empty())
+                    .do(onNext: { loadingSongs.onNext(false) })
+            }
 
             input.loadSongs
                 .throttle(0.5, scheduler: MainScheduler.instance)
@@ -63,18 +74,23 @@ extension Module.SearchResources {
                 .filter { $0.isSong }
                 .map { $0.term }
                 .filter { !$0.isEmpty }
-                .flatMapLatest { [weak self] in
-                    self?.usecase.searchSongs(term: $0) ?? .empty()
-                }
+                .flatMapLatest(fetchSongs)
                 .subscribe() --> disposer
-            observeSongs(from: term, output: output)
+
+            loadingSongs
+                .startWith(false)
+                .subscribe(onNext: { [weak output] loading in
+                    loading ? output?.showLoadingSongs() : output?.hideLoadingSongs()
+                }) --> disposer
+
+            observeSongs(from: term, fetch: fetchSongs, output: output)
         }
 
         public func search(_ kind: Kind) {
             currentTerm.onNext(kind)
         }
 
-        private func observeSongs(from term: Observable<Kind>, output: SearchResourcesPresenterOutput) {
+        private func observeSongs(from term: Observable<Kind>, fetch: @escaping (String) -> Observable<Void>, output: SearchResourcesPresenterOutput) {
             let songTerm = term
                 .flatMap(songOrEmpty)
                 .map { $0.term }
@@ -101,9 +117,7 @@ extension Module.SearchResources {
             Observable
                 .combineLatest(songs, songTerm, resultSelector: checkDoRequest)
                 .filter { !$0.isEmpty }
-                .flatMapLatest { [weak self] term in
-                    term.flatMap { self?.usecase.searchSongs(term: $0) } ?? .empty()
-                }
+                .flatMapLatest { term in term.flatMap(fetch) ?? .empty() }
                 .debug()
                 .subscribe() --> disposer
 
@@ -124,17 +138,16 @@ extension Module.SearchResources {
                 }
             }) --> disposer
 
-            songTerm
-                .debounce(0.2, scheduler: MainScheduler.instance)
-                .flatMapLatest { [weak self] term in
+            songs
+                .flatMapLatest { [weak self] term, _ in
                     (try self?.usecase.hasNextSongs(term: term) ?? .empty()).map { (term, $0) }
                 }
                 .debug()
                 .subscribe(onNext: { [weak output] (_, hasNext) in
                     if hasNext {
-                        output?.showLoadSongs()
+                        output?.showLoadSongsTrigger()
                     } else {
-                        output?.hideLoadSongs()
+                        output?.hideLoadSongsTrigger()
                     }
                 }) --> disposer
         }

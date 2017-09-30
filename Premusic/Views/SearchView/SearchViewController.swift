@@ -72,25 +72,32 @@ extension SearchViewController: SearchResourcesPresenterInput, SearchResourcesPr
         tableView.endUpdates()
     }
 
-    func showEmpty() {
-        tableView.reloadData()
-    }
-
-    func showLoadSongs() {
+    func showLoadSongsTrigger() {
         guard !canLoadSongs else { return }
-//        let old = canLoadSongs
         canLoadSongs = true
         tableView.beginUpdates()
         tableView.insertRows(at: [IndexPath(row: 0, section: 1)], with: .bottom)
         tableView.endUpdates()
     }
 
-    func hideLoadSongs() {
+    func hideLoadSongsTrigger() {
         guard canLoadSongs else { return }
         canLoadSongs = false
         tableView.beginUpdates()
         tableView.deleteRows(at: [IndexPath(row: 0, section: 1)], with: .top)
         tableView.endUpdates()
+    }
+
+    func showLoadingSongs() {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+    }
+
+    func hideLoadingSongs() {
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
+    }
+
+    func showEmpty() {
+        tableView.reloadData()
     }
 }
 
