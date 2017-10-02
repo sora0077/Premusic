@@ -7,16 +7,22 @@
 //
 
 import UIKit
+import AutolayoutHelper
 
 extension SearchViewController {
     final class Cell: UITableViewCell {
         let artworkImageView = UIImageView()
-        
+
         override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
             super.init(style: style, reuseIdentifier: reuseIdentifier)
-            
+
+            contentView.addSubview(artworkImageView)
+            artworkImageView.autolayout.edges.equal(to: contentView.autoresizing.edges)
+
+            clipsToBounds = true
+            artworkImageView.contentMode = .scaleAspectFill
         }
-        
+
         required init?(coder aDecoder: NSCoder) {
             fatalError("init(coder:) has not been implemented")
         }

@@ -23,6 +23,7 @@ final class SearchViewController: UIViewController {
     private let searchController = UISearchController(searchResultsController: nil)
     private let sections: [Section] = [.songs, .loadSongs]
     private var canLoadSongs = false
+    private var prevSearchText = ""
 
     private let _loadSongs = PublishSubject<Void>()
 
@@ -42,9 +43,14 @@ final class SearchViewController: UIViewController {
         tableView.frame = view.bounds
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.estimatedRowHeight = 200
+        tableView.rowHeight = UITableViewAutomaticDimension
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        tableView.register(Cell.self, forCellReuseIdentifier: "Result")
         view.addSubview(tableView)
 
+        searchController.dimsBackgroundDuringPresentation = false
+        searchController.delegate = self
         searchController.searchBar.delegate = self
     }
 
@@ -95,10 +101,6 @@ extension SearchViewController: SearchResourcesPresenterInput, SearchResourcesPr
     func hideLoadingSongs() {
         UIApplication.shared.isNetworkActivityIndicatorVisible = false
     }
-
-    func showEmpty() {
-        tableView.reloadData()
-    }
 }
 
 extension SearchViewController: UITableViewDataSource {
@@ -117,9 +119,8 @@ extension SearchViewController: UITableViewDataSource {
         switch sections[indexPath.section] {
         case .songs:
             let song = presenter.songs[indexPath.row]
-            let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-            cell.textLabel?.text = song.attributes?.name
-            cell.imageView?.setImage(with: song.attributes?.artwork, size: 50)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "Result", for: indexPath) as! Cell  // swiftlint:disable:this force_cast
+            cell.artworkImageView.setImage(with: song.attributes?.artwork, size: 200)
             return cell
         case .loadSongs:
             let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
@@ -131,6 +132,12 @@ extension SearchViewController: UITableViewDataSource {
 }
 
 extension SearchViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        switch sections[indexPath.section] {
+        case .songs: return 200
+        case .loadSongs: return 44
+        }
+    }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         switch sections[indexPath.section] {
@@ -140,8 +147,15 @@ extension SearchViewController: UITableViewDelegate {
     }
 }
 
+extension SearchViewController: UISearchControllerDelegate {
+    func didDismissSearchController(_ searchController: UISearchController) {
+        searchController.searchBar.text = prevSearchText
+    }
+}
+
 extension SearchViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        prevSearchText = searchText
         presenter.search(.songs(from: searchText))
     }
 }

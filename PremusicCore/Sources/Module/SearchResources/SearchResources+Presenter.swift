@@ -23,8 +23,6 @@ public protocol SearchResourcesPresenterOutput: class {
 
     func showLoadingSongs()
     func hideLoadingSongs()
-
-    func showEmpty()
 }
 
 private func songOrEmpty(_ kind: Module.SearchResources.Presenter.Kind) -> Observable<Module.SearchResources.Presenter.Kind> {
@@ -134,7 +132,6 @@ extension Module.SearchResources {
                 case nil:
                     self?.songs = nil
                     output?.showSongs(nil)
-                    output?.showEmpty()
                 }
             }) --> disposer
 
