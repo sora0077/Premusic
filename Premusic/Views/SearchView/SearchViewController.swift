@@ -8,6 +8,7 @@
 
 import UIKit
 import PremusicCore
+import AutolayoutHelper
 
 extension UIScrollView {
 
@@ -19,7 +20,8 @@ final class SearchViewController: UIViewController {
     }
     private lazy var presenter: Module.SearchResources.Presenter = .init(input: self, output: self)
 
-    private let tableView = UITableView()
+    private let collectionView = UICollectionView(frame: .zero,
+                                                  collectionViewLayout: UICollectionViewFlowLayout())
     private let searchController = UISearchController(searchResultsController: nil)
     private let sections: [Section] = [.songs, .loadSongs]
     private var canLoadSongs = false
@@ -39,15 +41,15 @@ final class SearchViewController: UIViewController {
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
 
-        tableView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        tableView.frame = view.bounds
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.estimatedRowHeight = 200
-        tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
-        tableView.register(Cell.self, forCellReuseIdentifier: "Result")
-        view.addSubview(tableView)
+        collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        collectionView.frame = view.bounds
+        collectionView.backgroundColor = .white
+        collectionView.alwaysBounceVertical = true
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.register(Cell.self, forCellWithReuseIdentifier: "Result")
+        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
+        view.addSubview(collectionView)
 
         searchController.dimsBackgroundDuringPresentation = false
         searchController.delegate = self
@@ -64,34 +66,34 @@ extension SearchViewController: SearchResourcesPresenterInput, SearchResourcesPr
     var loadSongs: Observable<Void> { return _loadSongs }
 
     func showSongs(_ songs: List<Entity.Song>?) {
-        tableView.reloadData()
+        collectionView.reloadData()
     }
 
     func showSongs(_ songs: List<Entity.Song>?, diff: Presenter.Diff) {
         func indexPaths(_ values: [Int]) -> [IndexPath] {
             return values.map { IndexPath(row: $0, section: 0) }
         }
-        tableView.beginUpdates()
-        tableView.reloadRows(at: indexPaths(diff.modifications), with: .automatic)
-        tableView.insertRows(at: indexPaths(diff.insertions), with: .automatic)
-        tableView.deleteRows(at: indexPaths(diff.deletions), with: .automatic)
-        tableView.endUpdates()
+        collectionView.performBatchUpdates({
+            collectionView.reloadItems(at: indexPaths(diff.modifications))
+            collectionView.insertItems(at: indexPaths(diff.insertions))
+            collectionView.deleteItems(at: indexPaths(diff.deletions))
+        }, completion: nil)
     }
 
     func showLoadSongsTrigger() {
         guard !canLoadSongs else { return }
-        canLoadSongs = true
-        tableView.beginUpdates()
-        tableView.insertRows(at: [IndexPath(row: 0, section: 1)], with: .bottom)
-        tableView.endUpdates()
+        collectionView.performBatchUpdates({
+            canLoadSongs = true
+            collectionView.insertItems(at: [IndexPath(row: 0, section: 1)])
+        }, completion: nil)
     }
 
     func hideLoadSongsTrigger() {
         guard canLoadSongs else { return }
-        canLoadSongs = false
-        tableView.beginUpdates()
-        tableView.deleteRows(at: [IndexPath(row: 0, section: 1)], with: .top)
-        tableView.endUpdates()
+        collectionView.performBatchUpdates({
+            canLoadSongs = false
+            collectionView.deleteItems(at: [IndexPath(row: 0, section: 1)])
+        }, completion: nil)
     }
 
     func showLoadingSongs() {
@@ -103,43 +105,43 @@ extension SearchViewController: SearchResourcesPresenterInput, SearchResourcesPr
     }
 }
 
-extension SearchViewController: UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
+extension SearchViewController: UICollectionViewDataSource {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return sections.count
     }
 
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch sections[section] {
         case .songs: return presenter.songs?.count ?? 0
         case .loadSongs: return canLoadSongs ? 1 : 0
         }
     }
 
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch sections[indexPath.section] {
         case .songs:
             let song = presenter.songs[indexPath.row]
-            let cell = tableView.dequeueReusableCell(withIdentifier: "Result", for: indexPath) as! Cell  // swiftlint:disable:this force_cast
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Result", for: indexPath) as! Cell  // swiftlint:disable:this force_cast
             cell.artworkImageView.setImage(with: song.attributes?.artwork, size: 200)
             return cell
         case .loadSongs:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-            cell.textLabel?.text = "読み込む"
-            cell.imageView?.image = nil
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath)
+            cell.backgroundColor = .blue
             return cell
         }
     }
 }
 
-extension SearchViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+extension SearchViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         switch sections[indexPath.section] {
-        case .songs: return 200
-        case .loadSongs: return 44
+        case .songs: return CGSize(width: 200, height: 200)
+        case .loadSongs: return CGSize(width: 44, height: 44)
         }
     }
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: true)
         switch sections[indexPath.section] {
         case .songs:()
         case .loadSongs: _loadSongs.onNext(())

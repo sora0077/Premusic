@@ -11,11 +11,11 @@ import AutolayoutHelper
 import PINRemoteImage
 
 extension SearchViewController {
-    final class Cell: UITableViewCell {
+    final class Cell: UICollectionViewCell {
         let artworkImageView = UIImageView()
 
-        override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-            super.init(style: style, reuseIdentifier: reuseIdentifier)
+        override init(frame: CGRect) {
+            super.init(frame: frame)
 
             contentView.addSubview(artworkImageView)
             artworkImageView.autolayout.edges.equal(to: contentView.autoresizing.edges)
