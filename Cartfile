@@ -1,5 +1,6 @@
 github "sora0077/AppleMusicKit" "master"
 github "realm/realm-cocoa" "master"
 github "ReactiveX/RxSwift" "master"
-github "sora0077/WindowKit" "master"
 github "pinterest/PINRemoteImage" "master"
+github "sora0077/WindowKit" "master"
+github "sora0077/AutolayoutHelper" "master"

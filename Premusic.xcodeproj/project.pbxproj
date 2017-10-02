@@ -87,6 +87,9 @@
 		D9E3EFF71F2901E200B8C2DE /* APIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9E3EFD51F2900B200B8C2DE /* APIKit.framework */; };
 		D9E3EFF81F2901E500B8C2DE /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9E3EFD31F2900B200B8C2DE /* Result.framework */; };
 		D9EF01CB1F5B1C8E00271064 /* ChartRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9EF01CA1F5B1C8E00271064 /* ChartRepository.swift */; };
+		D9F7BB4A1F81BE6900013042 /* SearchViewController+Views.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F7BB491F81BE6900013042 /* SearchViewController+Views.swift */; };
+		D9F7BB4C1F81C55A00013042 /* AutolayoutHelper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9F7BB4B1F81C55000013042 /* AutolayoutHelper.framework */; };
+		D9F7BB4D1F81C55A00013042 /* AutolayoutHelper.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D9F7BB4B1F81C55000013042 /* AutolayoutHelper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DA1EF30C87E8614606EBAEE0 /* Pods_Premusic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 943C73EAE9A367024A7AE278 /* Pods_Premusic.framework */; };
 		E2767CCF297A651E069AD13A /* Pods_iTunesService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 310CC87A01F4165D3F60318C /* Pods_iTunesService.framework */; };
 		E3C25F664361B062EF82586A /* Pods_PremusicCoreTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0166FE39AB0D253D301F1B8 /* Pods_PremusicCoreTests.framework */; };
@@ -139,6 +142,7 @@
 				D924869E1F2F38F9006E1C49 /* RxCocoa.framework in Embed Frameworks */,
 				D93AEFE11F7B2FE20060FB74 /* PINRemoteImage.framework in Embed Frameworks */,
 				D9E3EFDD1F2900C300B8C2DE /* APIKit.framework in Embed Frameworks */,
+				D9F7BB4D1F81C55A00013042 /* AutolayoutHelper.framework in Embed Frameworks */,
 				D9E3EFF31F2901C900B8C2DE /* iTunesService.framework in Embed Frameworks */,
 				D9939DDB1F28EED800EE9F5A /* PremusicCore.framework in Embed Frameworks */,
 				D93AEFDF1F7B2FE20060FB74 /* PINOperation.framework in Embed Frameworks */,
@@ -224,6 +228,8 @@
 		D9E3EFED1F2901C900B8C2DE /* iTunesService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iTunesService.h; sourceTree = "<group>"; };
 		D9E3EFEE1F2901C900B8C2DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D9EF01CA1F5B1C8E00271064 /* ChartRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartRepository.swift; sourceTree = "<group>"; };
+		D9F7BB491F81BE6900013042 /* SearchViewController+Views.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchViewController+Views.swift"; sourceTree = "<group>"; };
+		D9F7BB4B1F81C55000013042 /* AutolayoutHelper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AutolayoutHelper.framework; path = Carthage/Build/iOS/AutolayoutHelper.framework; sourceTree = "<group>"; };
 		F6FA9C334C14B489BAC6B6D3 /* Pods-iTunesService.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iTunesService.release.xcconfig"; path = "Pods/Target Support Files/Pods-iTunesService/Pods-iTunesService.release.xcconfig"; sourceTree = "<group>"; };
 		FE0192E15E0E2421A4CE8DCE /* Pods-PremusicCoreTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PremusicCoreTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PremusicCoreTests/Pods-PremusicCoreTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -235,6 +241,7 @@
 			files = (
 				D9E3EFE01F2900C300B8C2DE /* Realm.framework in Frameworks */,
 				D9E3EFE21F2900C300B8C2DE /* RealmSwift.framework in Frameworks */,
+				D9F7BB4C1F81C55A00013042 /* AutolayoutHelper.framework in Frameworks */,
 				D924869F1F2F38F9006E1C49 /* RxSwift.framework in Frameworks */,
 				D9E3EFDE1F2900C300B8C2DE /* AppleMusicKit.framework in Frameworks */,
 				D9E3EFE41F2900C300B8C2DE /* Result.framework in Frameworks */,
@@ -368,6 +375,7 @@
 			isa = PBXGroup;
 			children = (
 				D93AEFE71F7BFD560060FB74 /* SearchViewController.swift */,
+				D9F7BB491F81BE6900013042 /* SearchViewController+Views.swift */,
 			);
 			path = SearchView;
 			sourceTree = "<group>";
@@ -484,6 +492,7 @@
 		D9E3EFD11F29008500B8C2DE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D9F7BB4B1F81C55000013042 /* AutolayoutHelper.framework */,
 				D93AEFDA1F7B2FB60060FB74 /* PINCache.framework */,
 				D93AEFDB1F7B2FB60060FB74 /* PINOperation.framework */,
 				D93AEFD91F7B2FB50060FB74 /* PINRemoteImage.framework */,
@@ -905,6 +914,7 @@
 				D9939DB11F28EEBF00EE9F5A /* ViewController.swift in Sources */,
 				D93AEFE81F7BFD560060FB74 /* SearchViewController.swift in Sources */,
 				D9939DAF1F28EEBF00EE9F5A /* AppDelegate.swift in Sources */,
+				D9F7BB4A1F81BE6900013042 /* SearchViewController+Views.swift in Sources */,
 				D93AEFEA1F7C04EA0060FB74 /* UIScrollView+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
