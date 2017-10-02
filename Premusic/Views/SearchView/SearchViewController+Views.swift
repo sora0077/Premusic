@@ -8,6 +8,7 @@
 
 import UIKit
 import AutolayoutHelper
+import PINRemoteImage
 
 extension SearchViewController {
     final class Cell: UITableViewCell {
@@ -25,6 +26,12 @@ extension SearchViewController {
 
         required init?(coder aDecoder: NSCoder) {
             fatalError("init(coder:) has not been implemented")
+        }
+
+        override func prepareForReuse() {
+            super.prepareForReuse()
+            artworkImageView.pin_cancelImageDownload()
+            artworkImageView.image = nil
         }
     }
 }
