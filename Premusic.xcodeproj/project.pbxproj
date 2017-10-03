@@ -90,6 +90,8 @@
 		D9F7BB4A1F81BE6900013042 /* SearchViewController+Views.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9F7BB491F81BE6900013042 /* SearchViewController+Views.swift */; };
 		D9F7BB4C1F81C55A00013042 /* AutolayoutHelper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9F7BB4B1F81C55000013042 /* AutolayoutHelper.framework */; };
 		D9F7BB4D1F81C55A00013042 /* AutolayoutHelper.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D9F7BB4B1F81C55000013042 /* AutolayoutHelper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		D9F7BB591F83DBBC00013042 /* ReSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9F7BB581F83DBB300013042 /* ReSwift.framework */; };
+		D9F7BB5A1F83DBBC00013042 /* ReSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D9F7BB581F83DBB300013042 /* ReSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DA1EF30C87E8614606EBAEE0 /* Pods_Premusic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 943C73EAE9A367024A7AE278 /* Pods_Premusic.framework */; };
 		E2767CCF297A651E069AD13A /* Pods_iTunesService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 310CC87A01F4165D3F60318C /* Pods_iTunesService.framework */; };
 		E3C25F664361B062EF82586A /* Pods_PremusicCoreTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0166FE39AB0D253D301F1B8 /* Pods_PremusicCoreTests.framework */; };
@@ -136,6 +138,7 @@
 				D93AEFDD1F7B2FE20060FB74 /* PINCache.framework in Embed Frameworks */,
 				D9E3EFE11F2900C300B8C2DE /* Realm.framework in Embed Frameworks */,
 				D9E3EFE31F2900C300B8C2DE /* RealmSwift.framework in Embed Frameworks */,
+				D9F7BB5A1F83DBBC00013042 /* ReSwift.framework in Embed Frameworks */,
 				D92486A01F2F38F9006E1C49 /* RxSwift.framework in Embed Frameworks */,
 				D9E3EFDF1F2900C300B8C2DE /* AppleMusicKit.framework in Embed Frameworks */,
 				D9E3EFE51F2900C300B8C2DE /* Result.framework in Embed Frameworks */,
@@ -230,6 +233,7 @@
 		D9EF01CA1F5B1C8E00271064 /* ChartRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartRepository.swift; sourceTree = "<group>"; };
 		D9F7BB491F81BE6900013042 /* SearchViewController+Views.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchViewController+Views.swift"; sourceTree = "<group>"; };
 		D9F7BB4B1F81C55000013042 /* AutolayoutHelper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AutolayoutHelper.framework; path = Carthage/Build/iOS/AutolayoutHelper.framework; sourceTree = "<group>"; };
+		D9F7BB581F83DBB300013042 /* ReSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReSwift.framework; path = Carthage/Build/iOS/ReSwift.framework; sourceTree = "<group>"; };
 		F6FA9C334C14B489BAC6B6D3 /* Pods-iTunesService.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iTunesService.release.xcconfig"; path = "Pods/Target Support Files/Pods-iTunesService/Pods-iTunesService.release.xcconfig"; sourceTree = "<group>"; };
 		FE0192E15E0E2421A4CE8DCE /* Pods-PremusicCoreTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PremusicCoreTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PremusicCoreTests/Pods-PremusicCoreTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -240,6 +244,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D9E3EFE01F2900C300B8C2DE /* Realm.framework in Frameworks */,
+				D9F7BB591F83DBBC00013042 /* ReSwift.framework in Frameworks */,
 				D9E3EFE21F2900C300B8C2DE /* RealmSwift.framework in Frameworks */,
 				D9F7BB4C1F81C55A00013042 /* AutolayoutHelper.framework in Frameworks */,
 				D924869F1F2F38F9006E1C49 /* RxSwift.framework in Frameworks */,
@@ -492,6 +497,7 @@
 		D9E3EFD11F29008500B8C2DE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D9F7BB581F83DBB300013042 /* ReSwift.framework */,
 				D9F7BB4B1F81C55000013042 /* AutolayoutHelper.framework */,
 				D93AEFDA1F7B2FB60060FB74 /* PINCache.framework */,
 				D93AEFDB1F7B2FB60060FB74 /* PINOperation.framework */,
